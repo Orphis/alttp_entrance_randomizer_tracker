@@ -1,3 +1,7 @@
 .door_text, .cave_text {
   width: 400px;
 }
+
+html body {
+  margin: 15px 15px 15px 15px;
+}

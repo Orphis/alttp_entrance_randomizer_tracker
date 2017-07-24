@@ -59,6 +59,9 @@ $( function() {
     source: [],
     minLength: 0,
   });
+  $("#add_location_text_door").click(function(item) {
+    $(this).autocomplete("search", this.value);
+  });
 
   $("#add_location_text_cave").autocomplete({
     source: caves,

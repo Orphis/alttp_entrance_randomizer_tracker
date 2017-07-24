@@ -80,6 +80,16 @@ $( function() {
     event.preventDefault();
   });
 
+  $('#locations_table').on('click', 'a.editor_remove', function (e) {
+    e.preventDefault();
+    let tr = $(this).closest('tr')[0];
+    let td = tr.firstChild;
+    s = td.textContent;
+    locations = locations.filter(function(item) {
+      return item.door != s;
+    });
+    refreshList();
+  });
   $('#locations_table').DataTable({
     paging: false,
     info: false,
@@ -87,7 +97,25 @@ $( function() {
       { "data": "door"},
       { "data": "cave"},
       { "data": "exit"},
+      {
+        data: null,
+        orderable: false,
+        className: "center",
+        defaultContent: '<a href="" class="editor_remove">Delete</a>'
+      },
     ],
+  });
+  $('#unvisited_doors_table').on('click', 'a.editor_useless', function (e) {
+    e.preventDefault();
+    let tr = $(this).closest('tr')[0];
+    let td = tr.firstChild;
+    let s = td.textContent;
+    locations.push({
+      "door": s,
+      "cave": "Useless",
+      "exit": s,
+    });
+    refreshList();
   });
   $('#unvisited_doors_table').DataTable({
     paging: false,
@@ -95,6 +123,12 @@ $( function() {
     columns: [
       { "data": "name"},
       { "data": "region"},
+      {
+        data: null,
+        orderable: false,
+        className: "center",
+        defaultContent: '<a href="" class="editor_useless">Useless</a>'
+      },
     ],
   });
   $('#unvisited_caves_table').DataTable({

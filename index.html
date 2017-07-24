@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Orphis's door randomizer tracker!</title>
+  <meta name="description" content="Door randomizer tracker">
+  <meta name="author" content="Orphis">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" integrity="sha256-p6xU9YulB7E2Ic62/PX+h59ayb3PBJ0WFTEQxq0EjHw=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <script src="js/script.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+  <div>
+    <form id="add_location_form">
+      Door: <input type="text" autocomplete="off" id="add_location_text_door" class="door_text" /><br />
+      Cave: <input type="text" autocomplete="off" id="add_location_text_cave" class="cave_text" /><br />
+      <input type="submit" value="Go">
+    </form>
+  </div>
+  <table class="table" id="location_table">
+    <thead>
+      <tr>
+        <th>Door name</th>
+        <th>Cave name</th>
+        <th>Exit name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Link's house</td>
+        <td>Link's house</td>
+        <td>Link's house</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table" id="unvisited_doors_table">
+    <thead>
+      <tr>
+        <th>Unvisited doors</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <table class="table" id="unvisited_caves_table">
+    <thead>
+      <tr>
+        <th>Cave</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</body>
+</html>

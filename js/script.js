@@ -10,50 +10,8 @@ $( function() {
   let locations = [];
 
   let randomizer_mode = "normal";
-
-  let door_locations = {
-    "Forest chest game": {
-      "region": "Lost woods",
-    },
-    "Thief's hideout drop": {
-      "region": "Lost woods",
-    },
-    "Thief's hideout door": {
-      "region": "Lost woods",
-    },
-    "Lumberjack cave drop": {
-      "region": "Overworld North",
-    },
-    "Lumberjack cave door": {
-      "region": "Overworld North",
-    },
-    "Lumberjack house": {
-      "region": "Overworld North",
-    },
-    "Death Mountain Door front": {
-      "region": "Overworld North",
-    },
-    "Death Mountain Door back": {
-      "region": "Overworld North",
-    },
-    "Death Mountain Exit front": {
-      "region": "Overworld North",
-    },
-    "Death Mountain Exit back": {
-      "region": "Overworld North",
-    },
-    "Link's house": {
-      "region": "Overworld Center",
-    },
-  };
-
-  let caves = [
-    "Useless",
-    "Link's house",
-    "Thief's hideout",
-    "Death mountain climbing cave",
-    "Lumberjack cave",
-  ]
+  let door_locations = window.door_locations;
+  let caves = window.caves;
 
   $("#add_location_text_door").autocomplete({
     source: [],

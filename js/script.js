@@ -25,6 +25,9 @@ $( function() {
     source: caves,
     minLength: 0,
   });
+  $("#add_location_text_cave").click(function(item) {
+    $(this).autocomplete("search", this.value);
+  });
 
   $( "#add_location_form" ).submit(function(event) {
     let text_door = $("#add_location_text_door").val();

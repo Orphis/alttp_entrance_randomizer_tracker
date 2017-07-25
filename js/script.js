@@ -29,7 +29,7 @@ $( function() {
     $(this).autocomplete("search", this.value);
   });
 
-  $( "#add_location_form" ).submit(function(event) {
+  $("#add_location_form").submit(function(event) {
     let text_door = $("#add_location_text_door").val();
     let text_cave = $("#add_location_text_cave").val();
     locations.push({
@@ -42,6 +42,11 @@ $( function() {
     $("#add_location_text_cave").val("");
     $("#add_location_text_door").focus();
     event.preventDefault();
+  });
+  $("#add_location_clear").click(function(event) {
+    $("#add_location_text_door").val("");
+    $("#add_location_text_cave").val("");
+    $("#add_location_text_door").focus();
   });
 
   $('#locations_table').on('click', 'a.editor_remove', function (e) {

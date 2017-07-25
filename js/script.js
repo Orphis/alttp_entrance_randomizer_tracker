@@ -93,6 +93,11 @@ $( function() {
         className: "center",
         defaultContent: '<a href="" class="editor_useless">Useless</a>'
       },
+      {
+        "data": "tag",
+        "visible": false,
+        "searchable": true,
+      }
     ],
   });
   $('#unvisited_caves_table').DataTable({
@@ -141,9 +146,11 @@ $( function() {
     let unvisited_doors = all_doors.difference(found_door);
     let unvisited_doors_array = [];
     for(let item of unvisited_doors) {
+      let location = door_locations[item];
       unvisited_doors_array.push({
         "name": item,
-        "region": door_locations[item].region,
+        "region": location.region,
+        "tag": "tag" in location ? location.tag : "",
       });
     }
     unvisited_doors_table.clear();

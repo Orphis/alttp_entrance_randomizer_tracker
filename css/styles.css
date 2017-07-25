@@ -11,3 +11,7 @@ body {
 .ui-autocomplete {
   z-index: 1040;
 }
+
+footer {
+  margin: 20px;
+}

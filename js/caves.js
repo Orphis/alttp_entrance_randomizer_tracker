@@ -16,6 +16,7 @@ window.caves = {
   },
   "Kakariko Well": {
     "count": 5,
+    "hasdrop": true,
   },
   "Hookshot Cave": {
     "count": 4,
@@ -25,6 +26,7 @@ window.caves = {
   },
   "Sewer Grave": {
     "count": 3,
+    "hasdrop": true,
   },
   "Fat Fairy": {
     "count": 2,
@@ -35,6 +37,10 @@ window.caves = {
   "Super Bunny Cave": {
     "count": 2,
   },
+  "Uncle": {
+    "count": 2,
+    "hasdrop": true,
+  },
   "Sanctuary": {
     "count": 1,
   },
@@ -43,9 +49,11 @@ window.caves = {
   },
   "Thief's Hideout": {
     "count": 1,
+    "hasdrop": true,
   },
   "Lumberjack Cave": {
     "count": 1,
+    "hasdrop": true,
   },
   "Ice Rod Cave": {
     "count": 1,
@@ -53,7 +61,7 @@ window.caves = {
   "Checkerboard Cave": {
     "count": 1,
   },
-  "Aginah": {
+  "Aginah's Cave": {
     "count": 1,
   },
   "South of Grove": {
@@ -63,6 +71,9 @@ window.caves = {
     "count": 1,
   },
   "Back of Tavern": {
+    "count": 1,
+  },
+  "Dam": {
     "count": 1,
   },
   "Peg Cave": {
@@ -106,6 +117,7 @@ window.caves = {
   },
   "Bat Cave": {
     "count": 1,
+    "hasdrop": true,
   },
   "Sick Kid": {
     "count": 1,
@@ -116,10 +128,102 @@ window.caves = {
   "Witch's Hut": {
     "count": 1,
   },
-  "Dam": {
-    "count": 1,
-  },
   "Bomb Shop": {
     "count": 0,
+  },
+
+  // Multiple Entrances but no chests
+  "Death Mountain upwards": {
+    "count": 0,
+  },
+  "Death Mountain downwards": {
+    "count": 0,
+  },
+  "Old Woman's House": {
+    "count": 0,
+  },
+  "Race Game Brothers": {
+    "count": 0,
+  },
+  "East of Graveyard": {
+    "count": 0,
+  },
+  "Bumper Cave": {
+    "count": 0,
+  },
+  "Old Man's Cave": {
+    "count": 0,
+  },
+  "Turtle Rock Safety Cave": {
+    "count": 0,
+  },
+
+  // Light world dungeons
+  "Hyrule Castle Main Entrance": {
+    "count": 4,
+  },
+  "Hyrule Castle Left": {
+    "count": 4,
+  },
+  "Hyrule Castle Right": {
+    "count": 4,
+  },
+  "Hyrule Castle Aganihm's Tower": {
+    "count": 0,
+  },
+  "Eastern Palace": {
+    "count": 3,
+  },
+  "Desert Front": {
+    "count": 2,
+  },
+  "Desert Back": {
+    "count": 1,
+  },
+  "Tower of Hera": {
+    "count": 2,
+  },
+
+  // Dark world dungeons
+  "Palace of Darkness": {
+    "count": 5,
+  },
+  "Thieve's Town": {
+    "count": 4,
+  },
+  "Skull Woods First Part": {
+    "count": 2,
+    "hasdrop": true,
+  },
+  "Skull Woods Second Part": {
+    "count": 1,
+    "hasdrop": true,
+  },
+  "Skull Woods Boss Part": {
+    "count": 2,
+  },
+  "Ice Palace": {
+    "count": 3,
+  },
+  "Misery Mire": {
+    "count": 2,
+  },
+  "Swamp Palace": {
+    "count": 6,
+  },
+  "Turtle Rock Main Entrance": {
+    "count": 5,
+  },
+  "Turtle Rock Laser Wall": {
+    "count": 5,
+  },
+  "Turtle Rock Big Chest": {
+    "count": 5,
+  },
+  "Turtle Rock Boss Entrance": {
+    "count": 5,
+  },
+  "Ganon's Tower": {
+    "count": 20,
   },
 };

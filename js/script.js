@@ -22,7 +22,7 @@ $( function() {
   });
 
   $("#add_location_text_cave").autocomplete({
-    source: Object.keys(caves).filter(function(item) { return item != "Useless"; }),
+    source: Object.keys(caves).filter(function(item) { return item != "Useless"; }).sort(),
     minLength: 0,
   });
   $("#add_location_text_cave").click(function(item) {
@@ -149,7 +149,7 @@ $( function() {
     unvisited_doors_table.clear();
     unvisited_doors_table.rows.add(unvisited_doors_array);
     unvisited_doors_table.rows().invalidate().draw();
-    $("#add_location_text_door").autocomplete("option", "source", Array.from(unvisited_doors));
+    $("#add_location_text_door").autocomplete("option", "source", Array.from(unvisited_doors).sort());
 
     // Update the unvisited caves model
     let unvisited_caves = all_caves.difference(found_caves);
@@ -163,8 +163,6 @@ $( function() {
     unvisited_caves_table.clear();
     unvisited_caves_table.rows.add(unvisited_caves_array);
     unvisited_caves_table.rows().invalidate().draw();
-    //$("#add_location_text_cave").autocomplete("option", "source", Array.from(unvisited_caves));
-    //$("#add_location_text_cave").autocomplete("option", "source", Array.from(all_caves));
   }
 
   refreshList();

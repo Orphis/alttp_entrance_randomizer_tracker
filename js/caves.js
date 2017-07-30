@@ -226,4 +226,10 @@ window.caves = {
   "Ganon's Tower": {
     "count": 20,
   },
+  "Ganon's Hole": {
+    "count": 0,
+  },
+  "Ganon's Fall": {
+    "count": 0,
+  }
 };

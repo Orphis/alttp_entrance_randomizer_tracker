@@ -1,12 +1,12 @@
 Set.prototype.difference = function(setB) {
-    let difference = new Set(this);
-    for (let elem of setB) {
-        difference.delete(elem);
-    }
-    return difference;
+  let difference = new Set(this);
+  for (let elem of setB) {
+    difference.delete(elem);
+  }
+  return difference;
 }
 
-$( function() {
+$(function() {
   let locations = [];
 
   let randomizer_mode = "normal";

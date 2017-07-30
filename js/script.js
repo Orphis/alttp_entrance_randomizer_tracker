@@ -8,6 +8,9 @@ Set.prototype.difference = function(setB) {
 
 $(function() {
   let locations = [];
+  var config = {
+    show_useless: true,
+  };
 
   let randomizer_mode = "normal";
   let door_locations = window.door_locations;
@@ -59,7 +62,7 @@ $(function() {
     });
     refreshList();
   });
-  $('#locations_table').DataTable({
+  let locations_table = $('#locations_table').DataTable({
     paging: false,
     info: false,
     columns: [
@@ -73,7 +76,22 @@ $(function() {
         defaultContent: '<a href="" class="editor_remove">Delete</a>'
       },
     ],
+    buttons: [
+      {
+        "text": "Hide Useless",
+        "action": function(dt) {
+          config.show_useless = !config.show_useless;
+          refreshList();
+        },
+        "init": function(dt, node, config) {
+          node.attr("data-toggle", "button");
+        },
+      },
+    ],
   });
+  locations_table.buttons().container()
+    .appendTo('#locations_table_wrapper .col-sm-6:eq(0)');
+
   $('#unvisited_doors_table').on('click', 'a.editor_useless', function (e) {
     e.preventDefault();
     let tr = $(this).closest('tr')[0];
@@ -137,11 +155,13 @@ $(function() {
     for(let item of locations) {
       found_door.add(item.door);
       found_caves.add(item.cave);
-      locations_array.push({
-        "door": item.door,
-        "cave": item.cave,
-        "exit": item.exit,
-      });
+      if(config.show_useless || item.cave != "Useless") {
+        locations_array.push({
+          "door": item.door,
+          "cave": item.cave,
+          "exit": item.exit,
+        });
+      }
     }
     locations_table.clear();
     locations_table.rows.add(locations_array);

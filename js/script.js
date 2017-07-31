@@ -60,6 +60,10 @@ $(function() {
     $("#add_location_text_cave").val("");
     $("#add_location_text_door").focus();
   });
+  $("#reset_tracker").click(function(event) {
+    locations = [];
+    refreshList();
+  });
 
   $('#locations_table').on('click', 'a.editor_remove', function (e) {
     e.preventDefault();

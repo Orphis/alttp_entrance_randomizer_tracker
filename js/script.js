@@ -62,6 +62,19 @@ $(function() {
     });
     refreshList();
   });
+  $('#locations_table tbody').on( 'click', 'tr', function () {
+    $(this).toggleClass('selected');
+    let tr = $(this).closest('tr')[0];
+    let td = tr.firstChild;
+    s = td.textContent;
+
+    for(let location of locations) {
+      if(location.door == s) {
+        location.marked = $(this).hasClass('selected');
+      }
+    }
+  });
+
   let locations_table = $('#locations_table').DataTable({
     paging: false,
     info: false,
@@ -88,6 +101,15 @@ $(function() {
         },
       },
     ],
+    rowCallback: function(row, data) {
+      for(let location of locations) {
+        if(location.door == data.door) {
+          if(location.marked)
+            $(row).addClass('selected');
+          break;
+        }
+      }
+    },
   });
   locations_table.buttons().container()
     .appendTo('#locations_table_wrapper .col-sm-6:eq(0)');

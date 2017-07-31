@@ -97,6 +97,12 @@ $(function() {
       { "data": "cave"},
       { "data": "exit"},
       {
+        "data": "time",
+        "render": function (data, type, full, meta) {
+          return new Date(data).toLocaleTimeString();
+        },
+      },
+      {
         data: null,
         orderable: false,
         className: "center",
@@ -137,6 +143,7 @@ $(function() {
       "door": s,
       "cave": "Useless",
       "exit": s,
+      "time": Date.now(),
     });
     refreshList();
   });
@@ -196,6 +203,7 @@ $(function() {
           "door": item.door,
           "cave": item.cave,
           "exit": item.exit,
+          "time": item.time,
         });
       }
     }

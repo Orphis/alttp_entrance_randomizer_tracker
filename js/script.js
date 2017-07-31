@@ -7,7 +7,16 @@ Set.prototype.difference = function(setB) {
 }
 
 $(function() {
+  local_storage = window.localStorage;
   let locations = [];
+  try {
+    let saved_locations = local_storage.getItem("locations");
+    if(saved_locations)
+      locations = JSON.parse(saved_locations);
+  } catch(e) {
+    local_storage.removeItem("locations");
+  }
+
   var config = {
     show_useless: true,
   };
@@ -73,6 +82,7 @@ $(function() {
         location.marked = $(this).hasClass('selected');
       }
     }
+    saveState();
   });
 
   let locations_table = $('#locations_table').DataTable({
@@ -217,6 +227,12 @@ $(function() {
     unvisited_caves_table.clear();
     unvisited_caves_table.rows.add(unvisited_caves_array);
     unvisited_caves_table.rows().invalidate().draw();
+
+    saveState();
+  }
+
+  function saveState() {
+    local_storage.setItem("locations", JSON.stringify(locations));
   }
 
   refreshList();

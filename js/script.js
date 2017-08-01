@@ -48,6 +48,7 @@ $(function() {
       "door": text_door,
       "cave": text_cave,
       "exit": text_door,
+      "time": Date.now(),
     });
     refreshList();
     $("#add_location_text_door").val("");

@@ -107,7 +107,7 @@ $(function() {
         data: null,
         orderable: false,
         className: "center",
-        defaultContent: '<a href="" class="editor_remove">Delete</a>'
+        defaultContent: '<a href="" class="editor_remove"><span class="glyphicon glyphicon-remove"></a>'
       },
     ],
     buttons: [
@@ -158,7 +158,7 @@ $(function() {
         data: null,
         orderable: false,
         className: "center",
-        defaultContent: '<a href="" class="editor_useless">Useless</a>'
+        defaultContent: '<a href="" class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>'
       },
       {
         "data": "tag",

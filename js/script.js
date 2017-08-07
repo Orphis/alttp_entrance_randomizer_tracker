@@ -176,6 +176,34 @@ $(function() {
     ],
   });
 
+  let lw_map = $("#lw_map");
+  let dw_map = $("#dw_map");
+
+  for(let [name, door] of Object.entries(door_locations)) {
+    if(door.x) {
+      console.log("Creating door for " + name);
+      map_div = door.tag.indexOf("lw") !== -1 ? lw_map : dw_map;
+      rect = createSVGRect("large");
+      rect.css("left", door.x);
+      rect.css("top", door.y);
+      rect.data("location", name);
+      rect.mouseup(function(item) {
+        let s = $(this).data("location")
+        $(this).addClass("done");
+        console.log("Clicked on: " + s);
+        locations.push({
+          "door": s,
+          "cave": "Useless",
+          "exit": s,
+          "time": Date.now(),
+        });
+        refreshList();
+      });
+      door.rect = map_div;
+      map_div.append(rect);
+    }
+  }
+
   function refreshList() {
     let locations_table = $("#locations_table").dataTable().api();
     let unvisited_doors_table = $("#unvisited_doors_table").dataTable().api();
@@ -246,6 +274,23 @@ $(function() {
 
   function saveState() {
     local_storage.setItem("locations", JSON.stringify(locations));
+  }
+
+  function createSVGRect(className) {
+    let div = $(document.createElement("div"));
+    div.addClass("location");
+    if(className)
+      div.addClass(className);
+
+    let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    let rectElement = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rectElement.setAttribute("width", "100%");
+    rectElement.setAttribute("height", "100%");
+
+    svgElement.appendChild(rectElement);
+    div.append(svgElement);
+
+    return div;
   }
 
   refreshList();

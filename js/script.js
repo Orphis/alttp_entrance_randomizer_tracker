@@ -7,90 +7,101 @@ Set.prototype.difference = function(setB) {
 }
 
 $(function() {
-  local_storage = window.localStorage;
-  let locations = [];
-  try {
-    let saved_locations = local_storage.getItem("locations");
-    if(saved_locations)
-      locations = JSON.parse(saved_locations);
-  } catch(e) {
-    local_storage.removeItem("locations");
-  }
-
-  var config = {
-    show_useless: true,
+  var state = {
+    showUseless: true,
+    locations: [],
   };
 
-  let randomizer_mode = "normal";
-  let door_locations = window.door_locations;
-  let caves = window.caves;
+  var global = {
+    doorLocations: window.doorLocations,
+    caves: window.caves,
+    ui: {
+      addLocationInputDoor: $("#add_location_text_door"),
+      addLocationInputCave: $("#add_location_text_cave"),
+      addLocationButtonClear: $("#add_location_clear"),
+      addLocationForm: $("#add_location_form"),
+      resetButton: $('reset_tracker'),
 
-  $("#add_location_text_door").autocomplete({
+      tableLocations: $("#locations_table"),
+      tableLocationsDT: null,
+      tableUnvisitedLocations: $("#unvisited_doors_table"),
+      tableUnvisitedLocationsDT: null,
+      tableUnvisitedCaves: $("#unvisited_caves_table"),
+      tableUnvisitedCavesDT: null,
+    }
+  }
+
+  loadState();
+
+  global.ui.addLocationInputDoor.autocomplete({
     source: [],
     minLength: 0,
   });
-  $("#add_location_text_door").click(function(item) {
+  global.ui.addLocationInputDoor.click(function(item) {
     $(this).autocomplete("search", this.value);
   });
 
-  $("#add_location_text_cave").autocomplete({
-    source: Object.keys(caves).filter(function(item) { return item != "Useless"; }).sort(),
+  global.ui.addLocationInputCave.autocomplete({
+    source: Object.keys(global.caves).filter(function(item) { return item != "Useless"; }).sort(),
     minLength: 0,
   });
-  $("#add_location_text_cave").click(function(item) {
+  global.ui.addLocationInputCave.click(function(item) {
     $(this).autocomplete("search", this.value);
   });
 
-  $("#add_location_form").submit(function(event) {
-    let text_door = $("#add_location_text_door").val();
-    let text_cave = $("#add_location_text_cave").val();
-    locations.push({
+  global.ui.addLocationForm.submit(function(event) {
+    let text_door = global.ui.addLocationInputDoor.val();
+    let text_cave = global.ui.addLocationInputCave.val();
+    state.locations.push({
       "door": text_door,
       "cave": text_cave,
       "exit": text_door,
       "time": Date.now(),
     });
     refreshList();
-    $("#add_location_text_door").val("");
-    $("#add_location_text_cave").val("");
-    $("#add_location_text_door").focus();
+    clearForm();
     event.preventDefault();
   });
-  $("#add_location_clear").click(function(event) {
-    $("#add_location_text_door").val("");
-    $("#add_location_text_cave").val("");
-    $("#add_location_text_door").focus();
+  global.ui.addLocationButtonClear.click(function(event) {
+    clearForm();
   });
-  $("#reset_tracker").click(function(event) {
-    locations = [];
+  global.ui.resetButton.click(function(event) {
+    state.locations = [];
     refreshList();
   });
 
-  $('#locations_table').on('click', 'a.editor_remove', function (e) {
+  function clearForm() {
+    global.ui.addLocationInputDoor.val("");
+    global.ui.addLocationInputCave.val("");
+    global.ui.addLocationInputDoor.focus();
+  }
+
+  global.ui.tableLocations.on('click', 'a.editor_remove', function (e) {
     e.preventDefault();
     let tr = $(this).closest('tr')[0];
     let td = tr.firstChild;
     s = td.textContent;
-    locations = locations.filter(function(item) {
+    state.locations = state.locations.filter(function(item) {
       return item.door != s;
     });
     refreshList();
   });
-  $('#locations_table tbody').on( 'click', 'tr', function () {
-    $(this).toggleClass('selected');
+  global.ui.tableLocations.find("tbody").on( 'click', 'tr', function () {
     let tr = $(this).closest('tr')[0];
     let td = tr.firstChild;
     s = td.textContent;
 
-    for(let location of locations) {
+    for(let location of state.locations) {
       if(location.door == s) {
         location.marked = $(this).hasClass('selected');
+        $(this).toggleClass('selected');
+        break;
       }
     }
     saveState();
   });
 
-  let locations_table = $('#locations_table').DataTable({
+  global.ui.tableLocationsDT = global.ui.tableLocations.DataTable({
     paging: false,
     info: false,
     columns: [
@@ -114,7 +125,7 @@ $(function() {
       {
         "text": "Hide Useless",
         "action": function(dt) {
-          config.show_useless = !config.show_useless;
+          state.showUseless = !state.showUseless;
           refreshList();
         },
         "init": function(dt, node, config) {
@@ -123,7 +134,7 @@ $(function() {
       },
     ],
     rowCallback: function(row, data) {
-      for(let location of locations) {
+      for(let location of state.locations) {
         if(location.door == data.door) {
           if(location.marked)
             $(row).addClass('selected');
@@ -132,15 +143,15 @@ $(function() {
       }
     },
   });
-  locations_table.buttons().container()
+  global.ui.tableLocationsDT.buttons().container()
     .appendTo('#locations_table_wrapper .col-sm-6:eq(0)');
 
-  $('#unvisited_doors_table').on('click', 'a.editor_useless', function (e) {
+  global.ui.tableUnvisitedLocations.on('click', 'a.editor_useless', function (e) {
     e.preventDefault();
     let tr = $(this).closest('tr')[0];
     let td = tr.firstChild;
     let s = td.textContent;
-    locations.push({
+    state.locations.push({
       "door": s,
       "cave": "Useless",
       "exit": s,
@@ -148,7 +159,7 @@ $(function() {
     });
     refreshList();
   });
-  $('#unvisited_doors_table').DataTable({
+  global.ui.tableUnvisitedLocationsDT = global.ui.tableUnvisitedLocations.DataTable({
     paging: false,
     info: false,
     columns: [
@@ -167,7 +178,7 @@ $(function() {
       }
     ],
   });
-  $('#unvisited_caves_table').DataTable({
+  global.ui.tableUnvisitedCavesDT = global.ui.tableUnvisitedCaves.DataTable({
     paging: false,
     info: false,
     columns: [
@@ -179,7 +190,7 @@ $(function() {
   let lw_map = $("#lw_map");
   let dw_map = $("#dw_map");
 
-  for(let [name, door] of Object.entries(door_locations)) {
+  for(let [name, door] of Object.entries(global.doorLocations)) {
     if(door.x) {
       console.log("Creating door for " + name);
       map_div = door.tag.indexOf("lw") !== -1 ? lw_map : dw_map;
@@ -191,7 +202,7 @@ $(function() {
         let s = $(this).data("location")
         $(this).addClass("done");
         console.log("Clicked on: " + s);
-        locations.push({
+        state.locations.push({
           "door": s,
           "cave": "Useless",
           "exit": s,
@@ -205,29 +216,25 @@ $(function() {
   }
 
   function refreshList() {
-    let locations_table = $("#locations_table").dataTable().api();
-    let unvisited_doors_table = $("#unvisited_doors_table").dataTable().api();
-    let unvisited_caves_table = $("#unvisited_caves_table").dataTable().api();
-
     let all_doors = new Set();
-    for(let name of Object.keys(door_locations)) {
+    for(let name of Object.keys(global.doorLocations)) {
       all_doors.add(name);
     }
     let found_door = new Set();
 
     let all_caves = new Set();
-    for(let name of Object.keys(caves)) {
+    for(let name of Object.keys(global.caves)) {
       if(name != "Useless")
         all_caves.add(name);
     }
     let found_caves = new Set();
-    all_caves.delete(caves[0]);
+    all_caves.delete(global.caves[0]);
 
     let locations_array = [];
-    for(let item of locations) {
+    for(let item of state.locations) {
       found_door.add(item.door);
       found_caves.add(item.cave);
-      if(config.show_useless || item.cave != "Useless") {
+      if(state.showUseless || item.cave != "Useless") {
         locations_array.push({
           "door": item.door,
           "cave": item.cave,
@@ -236,25 +243,25 @@ $(function() {
         });
       }
     }
-    locations_table.clear();
-    locations_table.rows.add(locations_array);
-    locations_table.rows().invalidate().draw();
+    global.ui.tableLocationsDT.clear();
+    global.ui.tableLocationsDT.rows.add(locations_array);
+    global.ui.tableLocationsDT.rows().invalidate().draw();
 
     // Update the unvisited doors model
     let unvisited_doors = all_doors.difference(found_door);
     let unvisited_doors_array = [];
     for(let item of unvisited_doors) {
-      let location = door_locations[item];
+      let location = global.doorLocations[item];
       unvisited_doors_array.push({
         "name": item,
         "region": location.region,
         "tag": "tag" in location ? location.tag : "",
       });
     }
-    unvisited_doors_table.clear();
-    unvisited_doors_table.rows.add(unvisited_doors_array);
-    unvisited_doors_table.rows().invalidate().draw();
-    $("#add_location_text_door").autocomplete("option", "source", Array.from(unvisited_doors).sort());
+    global.ui.tableUnvisitedLocationsDT.clear();
+    global.ui.tableUnvisitedLocationsDT.rows.add(unvisited_doors_array);
+    global.ui.tableUnvisitedLocationsDT.rows().invalidate().draw();
+    global.ui.addLocationInputDoor.autocomplete("option", "source", Array.from(unvisited_doors).sort());
 
     // Update the unvisited caves model
     let unvisited_caves = all_caves.difference(found_caves);
@@ -262,18 +269,29 @@ $(function() {
     for(let item of unvisited_caves) {
       unvisited_caves_array.push({
         "name": item,
-        "count": caves[item].count,
+        "count": global.caves[item].count,
       });
     }
-    unvisited_caves_table.clear();
-    unvisited_caves_table.rows.add(unvisited_caves_array);
-    unvisited_caves_table.rows().invalidate().draw();
+    global.ui.tableUnvisitedCavesDT.clear();
+    global.ui.tableUnvisitedCavesDT.rows.add(unvisited_caves_array);
+    global.ui.tableUnvisitedCavesDT.rows().invalidate().draw();
 
     saveState();
   }
 
+  function loadState() {
+    local_storage = window.localStorage;
+    try {
+      let savedState = local_storage.getItem("state");
+      if(savedState)
+        state = JSON.parse(savedState);
+    } catch(e) {
+      local_storage.removeItem("state");
+    }
+  }
+
   function saveState() {
-    local_storage.setItem("locations", JSON.stringify(locations));
+    local_storage.setItem("state", JSON.stringify(state));
   }
 
   function createSVGRect(className) {

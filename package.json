@@ -1,0 +1,26 @@
+{
+  "name": "alttp_entrance_tracker",
+  "version": "1.0.0",
+  "description": "Tracker for ALttP",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0"
+  },
+  "scripts": {
+    "lint": "eslint **/*.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orphis/alttp_entrance_randomizer_tracker.git"
+  },
+  "author": "Florent Castelli",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Orphis/alttp_entrance_randomizer_tracker/issues"
+  },
+  "homepage": "https://github.com/Orphis/alttp_entrance_randomizer_tracker#readme"
+}

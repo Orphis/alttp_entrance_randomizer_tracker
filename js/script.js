@@ -1,3 +1,5 @@
+"use strict";
+
 Set.prototype.difference = function(setB) {
   let difference = new Set(this);
   for (let elem of setB) {
@@ -28,47 +30,50 @@ $(function() {
       tableUnvisitedLocationsDT: null,
       tableUnvisitedCaves: $("#unvisited_caves_table"),
       tableUnvisitedCavesDT: null,
+
+      mapLW: $('#lw_map'),
+      mapDW: $('#dw_map'),
     }
   }
 
-  loadState();
-
-  global.ui.addLocationInputDoor.autocomplete({
-    source: [],
-    minLength: 0,
-  });
-  global.ui.addLocationInputDoor.click(function(item) {
-    $(this).autocomplete("search", this.value);
-  });
-
-  global.ui.addLocationInputCave.autocomplete({
-    source: Object.keys(global.caves).filter(function(item) { return item != "Useless"; }).sort(),
-    minLength: 0,
-  });
-  global.ui.addLocationInputCave.click(function(item) {
-    $(this).autocomplete("search", this.value);
-  });
-
-  global.ui.addLocationForm.submit(function(event) {
-    let text_door = global.ui.addLocationInputDoor.val();
-    let text_cave = global.ui.addLocationInputCave.val();
-    state.locations.push({
-      "door": text_door,
-      "cave": text_cave,
-      "exit": text_door,
-      "time": Date.now(),
+  const initForm = function initForm() {
+    global.ui.addLocationInputDoor.autocomplete({
+      source: [],
+      minLength: 0,
     });
-    refreshList();
-    clearForm();
-    event.preventDefault();
-  });
-  global.ui.addLocationButtonClear.click(function(event) {
-    clearForm();
-  });
-  global.ui.resetButton.click(function(event) {
-    state.locations = [];
-    refreshList();
-  });
+    global.ui.addLocationInputDoor.click((event) => {
+      $(event.target).autocomplete("search", event.target.value);
+    });
+
+    global.ui.addLocationInputCave.autocomplete({
+      source: Object.keys(global.caves).filter(function(item) { return item != "Useless"; }).sort(),
+      minLength: 0,
+    });
+    global.ui.addLocationInputCave.click(function(item) {
+      $(this).autocomplete("search", this.value);
+    });
+
+    global.ui.addLocationForm.submit(function(event) {
+      let text_door = global.ui.addLocationInputDoor.val();
+      let text_cave = global.ui.addLocationInputCave.val();
+      state.locations.push({
+        "door": text_door,
+        "cave": text_cave,
+        "exit": text_door,
+        "time": Date.now(),
+      });
+      refreshList();
+      clearForm();
+      event.preventDefault();
+    });
+    global.ui.addLocationButtonClear.click(function(event) {
+      clearForm();
+    });
+    global.ui.resetButton.click(function(event) {
+      state.locations = [];
+      refreshList();
+    });
+  }
 
   function clearForm() {
     global.ui.addLocationInputDoor.val("");
@@ -76,142 +81,144 @@ $(function() {
     global.ui.addLocationInputDoor.focus();
   }
 
-  global.ui.tableLocations.on('click', 'a.editor_remove', function (e) {
-    e.preventDefault();
-    let tr = $(this).closest('tr')[0];
-    let td = tr.firstChild;
-    s = td.textContent;
-    state.locations = state.locations.filter(function(item) {
-      return item.door != s;
+  function initTables() {
+    global.ui.tableLocations.on('click', 'a.editor_remove', function (e) {
+      e.preventDefault();
+      let tr = $(this).closest('tr')[0];
+      let td = tr.firstChild;
+      let s = td.textContent;
+      state.locations = state.locations.filter(function(item) {
+        return item.door != s;
+      });
+      refreshList();
     });
-    refreshList();
-  });
-  global.ui.tableLocations.find("tbody").on( 'click', 'tr', function () {
-    let tr = $(this).closest('tr')[0];
-    let td = tr.firstChild;
-    s = td.textContent;
+    global.ui.tableLocations.find("tbody").on( 'click', 'tr', function () {
+      let tr = $(this).closest('tr')[0];
+      let td = tr.firstChild;
+      let s = td.textContent;
 
-    for(let location of state.locations) {
-      if(location.door == s) {
-        location.marked = $(this).hasClass('selected');
-        $(this).toggleClass('selected');
-        break;
-      }
-    }
-    saveState();
-  });
-
-  global.ui.tableLocationsDT = global.ui.tableLocations.DataTable({
-    paging: false,
-    info: false,
-    columns: [
-      { "data": "door"},
-      { "data": "cave"},
-      { "data": "exit"},
-      {
-        "data": "time",
-        "render": function (data, type, full, meta) {
-          return new Date(data).toLocaleTimeString();
-        },
-      },
-      {
-        data: null,
-        orderable: false,
-        className: "center",
-        defaultContent: '<a href="" class="editor_remove"><span class="glyphicon glyphicon-remove"></a>'
-      },
-    ],
-    buttons: [
-      {
-        "text": "Hide Useless",
-        "action": function(dt) {
-          state.showUseless = !state.showUseless;
-          refreshList();
-        },
-        "init": function(dt, node, config) {
-          node.attr("data-toggle", "button");
-        },
-      },
-    ],
-    rowCallback: function(row, data) {
       for(let location of state.locations) {
-        if(location.door == data.door) {
-          if(location.marked)
-            $(row).addClass('selected');
+        if(location.door == s) {
+          location.marked = $(this).hasClass('selected');
+          $(this).toggleClass('selected');
           break;
         }
       }
-    },
-  });
-  global.ui.tableLocationsDT.buttons().container()
-    .appendTo('#locations_table_wrapper .col-sm-6:eq(0)');
-
-  global.ui.tableUnvisitedLocations.on('click', 'a.editor_useless', function (e) {
-    e.preventDefault();
-    let tr = $(this).closest('tr')[0];
-    let td = tr.firstChild;
-    let s = td.textContent;
-    state.locations.push({
-      "door": s,
-      "cave": "Useless",
-      "exit": s,
-      "time": Date.now(),
+      saveState();
     });
-    refreshList();
-  });
-  global.ui.tableUnvisitedLocationsDT = global.ui.tableUnvisitedLocations.DataTable({
-    paging: false,
-    info: false,
-    columns: [
-      { "data": "name"},
-      { "data": "region"},
-      {
-        data: null,
-        orderable: false,
-        className: "center",
-        defaultContent: '<a href="" class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>'
+
+    global.ui.tableLocationsDT = global.ui.tableLocations.DataTable({
+      paging: false,
+      info: false,
+      columns: [
+        { "data": "door"},
+        { "data": "cave"},
+        { "data": "exit"},
+        {
+          "data": "time",
+          "render": function (data, type, full, meta) {
+            return new Date(data).toLocaleTimeString();
+          },
+        },
+        {
+          data: null,
+          orderable: false,
+          className: "center",
+          defaultContent: '<a href="" class="editor_remove"><span class="glyphicon glyphicon-remove"></a>'
+        },
+      ],
+      buttons: [
+        {
+          "text": "Hide Useless",
+          "action": function(dt) {
+            state.showUseless = !state.showUseless;
+            refreshList();
+          },
+          "init": function(dt, node, config) {
+            node.attr("data-toggle", "button");
+          },
+        },
+      ],
+      rowCallback: function(row, data) {
+        for(let location of state.locations) {
+          if(location.door == data.door) {
+            if(location.marked)
+              $(row).addClass('selected');
+            break;
+          }
+        }
       },
-      {
-        "data": "tag",
-        "visible": false,
-        "searchable": true,
-      }
-    ],
-  });
-  global.ui.tableUnvisitedCavesDT = global.ui.tableUnvisitedCaves.DataTable({
-    paging: false,
-    info: false,
-    columns: [
-      { "data": "name"},
-      { "data": "count"},
-    ],
-  });
+    });
+    global.ui.tableLocationsDT.buttons().container()
+      .appendTo('#locations_table_wrapper .col-sm-6:eq(0)');
 
-  let lw_map = $("#lw_map");
-  let dw_map = $("#dw_map");
-
-  for(let [name, door] of Object.entries(global.doorLocations)) {
-    if(door.x) {
-      console.log("Creating door for " + name);
-      map_div = door.tag.indexOf("lw") !== -1 ? lw_map : dw_map;
-      rect = createSVGRect("large");
-      rect.css("left", door.x);
-      rect.css("top", door.y);
-      rect.data("location", name);
-      rect.mouseup(function(item) {
-        let s = $(this).data("location")
-        $(this).addClass("done");
-        console.log("Clicked on: " + s);
-        state.locations.push({
-          "door": s,
-          "cave": "Useless",
-          "exit": s,
-          "time": Date.now(),
-        });
-        refreshList();
+    global.ui.tableUnvisitedLocations.on('click', 'a.editor_useless', function (e) {
+      e.preventDefault();
+      let tr = $(this).closest('tr')[0];
+      let td = tr.firstChild;
+      let s = td.textContent;
+      state.locations.push({
+        "door": s,
+        "cave": "Useless",
+        "exit": s,
+        "time": Date.now(),
       });
-      door.rect = map_div;
-      map_div.append(rect);
+      refreshList();
+    });
+    global.ui.tableUnvisitedLocationsDT = global.ui.tableUnvisitedLocations.DataTable({
+      paging: false,
+      info: false,
+      columns: [
+        { "data": "name"},
+        { "data": "region"},
+        {
+          data: null,
+          orderable: false,
+          className: "center",
+          defaultContent: '<a href="" class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>'
+        },
+        {
+          "data": "tag",
+          "visible": false,
+          "searchable": true,
+        }
+      ],
+    });
+    global.ui.tableUnvisitedCavesDT = global.ui.tableUnvisitedCaves.DataTable({
+      paging: false,
+      info: false,
+      columns: [
+        { "data": "name"},
+        { "data": "count"},
+      ],
+    });
+  }
+
+  function initMap() {
+    for(let [name, door] of Object.entries(global.doorLocations)) {
+      if(door.x) {
+        console.log("Creating door for " + name);
+        let map_div = door.tag.indexOf("lw") !== -1 ? global.ui.mapLW : global.ui.mapDW;
+        let rect = createSVGRect("large");
+        rect.css("left", door.x);
+        rect.css("top", door.y);
+        rect.data("location", name);
+        rect.mouseup(function(item) {
+          let s = $(this).data("location");
+          let isDone = $(this).hasClass("done");
+          $(this).toggleClass("done");
+          console.log("Clicked on: " + s);
+          state.locations.push({
+            "door": s,
+            "cave": "Useless",
+            "exit": s,
+            "time": Date.now(),
+          });
+          refreshList();
+        });
+        door.rect = map_div;
+        map_div.append(rect);
+      }
     }
   }
 
@@ -280,18 +287,17 @@ $(function() {
   }
 
   function loadState() {
-    local_storage = window.localStorage;
     try {
-      let savedState = local_storage.getItem("state");
+      let savedState = window.localStorage.getItem("state");
       if(savedState)
         state = JSON.parse(savedState);
     } catch(e) {
-      local_storage.removeItem("state");
+      window.localStorage.removeItem("state");
     }
   }
 
   function saveState() {
-    local_storage.setItem("state", JSON.stringify(state));
+    window.localStorage.setItem("state", JSON.stringify(state));
   }
 
   function createSVGRect(className) {
@@ -311,5 +317,9 @@ $(function() {
     return div;
   }
 
+  loadState();
+  initForm();
+  initTables();
+  initMap();
   refreshList();
 });

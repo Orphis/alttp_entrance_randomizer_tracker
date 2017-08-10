@@ -1,4 +1,5 @@
-.door_text, .cave_text {
+.door_text,
+.cave_text {
   width: 400px;
 }
 
@@ -12,8 +13,13 @@ body {
   z-index: 1040;
 }
 
-.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
-    padding: 2px;
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+  padding: 2px;
 }
 
 footer {
@@ -41,7 +47,7 @@ footer {
 }
 .done {
   --location-fill: #808080;
-  --location-fill-hover: #A0A0A0;
+  --location-fill-hover: #a0a0a0;
 }
 
 .location {

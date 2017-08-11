@@ -166,10 +166,10 @@ $(() => {
         buttons: [
           {
             text: 'Hide Useless',
-            action() {
+            action: function toggleUseless() {
               this.state.showUseless = !this.state.showUseless;
               this.refreshList();
-            },
+            }.bind(this),
             init(dt, node) {
               node.attr('data-toggle', 'button');
             },

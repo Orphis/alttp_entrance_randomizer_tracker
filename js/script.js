@@ -234,6 +234,11 @@ $(() => {
     }
 
     initMap() {
+      const showMaps = false;
+      if (showMaps) {
+        this.ui.mapLW.toggleClass('hidden');
+        this.ui.mapDW.toggleClass('hidden');
+      }
       for (const [name, door] of Object.entries(this.doorLocations)) {
         if (door.x) {
           const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;

@@ -27,8 +27,8 @@ $(() => {
       return this.state.locations;
     }
 
-    set locations(value) {
-      this.state.locations = value;
+    reset() {
+      this.state.locations = [];
     }
 
     load() {
@@ -55,7 +55,7 @@ $(() => {
         addLocationInputCave: $('#add_location_text_cave'),
         addLocationButtonClear: $('#add_location_clear'),
         addLocationForm: $('#add_location_form'),
-        resetButton: $('reset_tracker'),
+        resetButton: $('#reset_tracker'),
 
         tableLocations: $('#locations_table'),
         tableLocationsDT: null,
@@ -107,7 +107,8 @@ $(() => {
         this.clearForm();
       });
       this.ui.resetButton.click(() => {
-        this.state.locations = [];
+        console.log('Reset!');
+        this.state.reset();
         this.refreshList();
       });
     }

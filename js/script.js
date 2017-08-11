@@ -1,12 +1,12 @@
-Set.prototype.difference = function (setB) {
-  const difference = new Set(this);
-  for (const elem of setB) {
-    difference.delete(elem);
-  }
-  return difference;
-};
-
 $(() => {
+  const setDifference = function setDifference(A, B) {
+    const difference = new Set(A);
+    for (const elem of B) {
+      difference.delete(elem);
+    }
+    return difference;
+  };
+
   class State {
     constructor() {
       this.state = {
@@ -296,7 +296,7 @@ $(() => {
       this.ui.tableLocationsDT.rows().invalidate().draw();
 
       // Update the unvisited doors model
-      const unvisitedDoors = allDoors.difference(foundDoor);
+      const unvisitedDoors = setDifference(allDoors, foundDoor);
       const unvisitedDoorsArray = [];
       for (const item of unvisitedDoors) {
         const location = this.doorLocations[item];
@@ -316,7 +316,7 @@ $(() => {
       );
 
       // Update the unvisited caves model
-      const unvisitedCaves = allCaves.difference(foundCaves);
+      const unvisitedCaves = setDifference(allCaves, foundCaves);
       const unvisitedCavesArray = [];
       for (const item of unvisitedCaves) {
         unvisitedCavesArray.push({

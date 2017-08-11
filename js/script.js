@@ -31,6 +31,25 @@ $(() => {
       this.state.locations = [];
     }
 
+    findLocation(door) {
+      return this.state.locations.find(item => item.door === door);
+    }
+
+    addLocation(door, cave, exit) {
+      if (this.findLocation(door)) return;
+
+      this.state.locations.push({
+        door,
+        cave,
+        exit,
+        time: Date.now(),
+      });
+    }
+
+    removeLocation(location) {
+      this.state.locations = this.state.locations.filter(item => item.door !== location);
+    }
+
     load() {
       try {
         const savedState = window.localStorage.getItem('state');
@@ -93,12 +112,7 @@ $(() => {
       this.ui.addLocationForm.submit((event) => {
         const textDoor = this.ui.addLocationInputDoor.val();
         const textCave = this.ui.addLocationInputCave.val();
-        this.state.locations.push({
-          door: textDoor,
-          cave: textCave,
-          exit: textDoor,
-          time: Date.now(),
-        });
+        this.state.addLocation(textDoor, textCave, textDoor);
         this.refreshList();
         this.clearForm();
         event.preventDefault();
@@ -107,7 +121,6 @@ $(() => {
         this.clearForm();
       });
       this.ui.resetButton.click(() => {
-        console.log('Reset!');
         this.state.reset();
         this.refreshList();
       });
@@ -125,7 +138,7 @@ $(() => {
         const tr = $(event.currentTarget).closest('tr')[0];
         const td = tr.firstChild;
         const s = td.textContent;
-        this.state.locations = this.state.locations.filter(item => item.door !== s);
+        this.state.removeLocation(s);
         this.refreshList();
       });
       this.ui.tableLocations.find('tbody').on('click', 'tr', (event) => {
@@ -190,12 +203,7 @@ $(() => {
         const tr = $(event.target).closest('tr')[0];
         const td = tr.firstChild;
         const s = td.textContent;
-        this.state.locations.push({
-          door: s,
-          cave: 'Useless',
-          exit: s,
-          time: Date.now(),
-        });
+        this.state.addLocation(s, 'Useless', s);
         this.refreshList();
       });
       this.ui.tableUnvisitedLocationsDT = this.ui.tableUnvisitedLocations.DataTable({
@@ -228,7 +236,6 @@ $(() => {
     initMap() {
       for (const [name, door] of Object.entries(this.doorLocations)) {
         if (door.x) {
-          console.log(`Creating door for ${name}`);
           const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;
           const rect = Tracker.createSVGRect('large');
           rect.css('left', door.x);
@@ -236,18 +243,21 @@ $(() => {
           rect.data('location', name);
           rect.mouseup((event) => {
             const s = $(event.currentTarget).data('location');
-            const isDone = $(event.currentTarget).hasClass('done');
-            if (isDone) $(event.currentTarget).removeClass('done');
-            else $(event.currentTarget).addClass('done');
+            const wasDone = $(event.currentTarget).hasClass('done');
+
             console.log(`Clicked on: ${s}`);
-            this.state.locations.push({
-              door: s,
-              cave: 'Useless',
-              exit: s,
-              time: Date.now(),
-            });
+            if (wasDone) {
+              $(event.currentTarget).removeClass('done');
+              this.state.removeLocation(s);
+            } else {
+              $(event.currentTarget).addClass('done');
+              this.state.addLocation(s, 'Useless', s);
+            }
             this.refreshList();
           });
+          if (this.state.findLocation(name)) {
+            rect.addClass('done');
+          }
           door.rect = mapDiv;
           mapDiv.append(rect);
         }

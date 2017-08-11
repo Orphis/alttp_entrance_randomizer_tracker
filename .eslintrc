@@ -7,6 +7,8 @@
   },
 
   rules:{
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"],
+    "no-console": "off"
   }
 }

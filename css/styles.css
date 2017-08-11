@@ -29,6 +29,7 @@ footer {
 .map {
   position: relative;
   display: inline-block;
+  user-select: none;
 }
 
 :root {
@@ -53,6 +54,7 @@ footer {
 .location {
   position: absolute;
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .location svg {

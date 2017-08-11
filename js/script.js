@@ -15,8 +15,20 @@ $(() => {
       };
     }
 
-    get get() {
-      return this.state;
+    get showUseless() {
+      return this.state.showUseless;
+    }
+
+    set showUseless(value) {
+      this.state.showUseless = value;
+    }
+
+    get locations() {
+      return this.state.locations;
+    }
+
+    set locations(value) {
+      this.state.locations = value;
     }
 
     load() {
@@ -33,10 +45,9 @@ $(() => {
     }
   }
 
-  const state = new State();
-
   class Tracker {
-    constructor() {
+    constructor(state) {
+      this.state = state;
       this.doorLocations = window.doorLocations;
       this.caves = window.caves;
       this.ui = {
@@ -82,7 +93,7 @@ $(() => {
       this.ui.addLocationForm.submit((event) => {
         const textDoor = this.ui.addLocationInputDoor.val();
         const textCave = this.ui.addLocationInputCave.val();
-        state.get.locations.push({
+        this.state.locations.push({
           door: textDoor,
           cave: textCave,
           exit: textDoor,
@@ -96,7 +107,7 @@ $(() => {
         this.clearForm();
       });
       this.ui.resetButton.click(() => {
-        state.get.locations = [];
+        this.state.locations = [];
         this.refreshList();
       });
     }
@@ -113,7 +124,7 @@ $(() => {
         const tr = $(event.currentTarget).closest('tr')[0];
         const td = tr.firstChild;
         const s = td.textContent;
-        state.get.locations = state.get.locations.filter(item => item.door !== s);
+        this.state.locations = this.state.locations.filter(item => item.door !== s);
         this.refreshList();
       });
       this.ui.tableLocations.find('tbody').on('click', 'tr', (event) => {
@@ -121,14 +132,14 @@ $(() => {
         const td = tr.firstChild;
         const s = td.textContent;
 
-        for (const location of state.get.locations) {
+        for (const location of this.state.locations) {
           if (location.door === s) {
             location.marked = $(event.currentTarget).hasClass('selected');
             $(event.currentTarget).toggleClass('selected');
             break;
           }
         }
-        state.save();
+        this.state.save();
       });
 
       this.ui.tableLocationsDT = this.ui.tableLocations.DataTable({
@@ -156,7 +167,7 @@ $(() => {
           {
             text: 'Hide Useless',
             action() {
-              state.get.showUseless = !state.get.showUseless;
+              this.state.showUseless = !this.state.showUseless;
               this.refreshList();
             },
             init(dt, node) {
@@ -164,13 +175,8 @@ $(() => {
             },
           },
         ],
-        rowCallback(row, data) {
-          for (const location of state.get.locations) {
-            if (location.door === data.door) {
-              if (location.marked) $(row).addClass('selected');
-              break;
-            }
-          }
+        rowCallback: function rowCallback(row, data) {
+          if (data.marked) $(row).addClass('selected');
         },
       });
       this.ui.tableLocationsDT
@@ -183,7 +189,7 @@ $(() => {
         const tr = $(event.target).closest('tr')[0];
         const td = tr.firstChild;
         const s = td.textContent;
-        state.get.locations.push({
+        this.state.locations.push({
           door: s,
           cave: 'Useless',
           exit: s,
@@ -233,7 +239,7 @@ $(() => {
             if (isDone) $(event.currentTarget).removeClass('done');
             else $(event.currentTarget).addClass('done');
             console.log(`Clicked on: ${s}`);
-            state.get.locations.push({
+            this.state.locations.push({
               door: s,
               cave: 'Useless',
               exit: s,
@@ -262,16 +268,11 @@ $(() => {
       allCaves.delete(this.caves[0]);
 
       const locationsArray = [];
-      for (const item of state.get.locations) {
+      for (const item of this.state.locations) {
         foundDoor.add(item.door);
         foundCaves.add(item.cave);
-        if (state.get.showUseless || item.cave !== 'Useless') {
-          locationsArray.push({
-            door: item.door,
-            cave: item.cave,
-            exit: item.exit,
-            time: item.time,
-          });
+        if (this.state.showUseless || item.cave !== 'Useless') {
+          locationsArray.push(item);
         }
       }
       this.ui.tableLocationsDT.clear();
@@ -311,7 +312,7 @@ $(() => {
       this.ui.tableUnvisitedCavesDT.rows.add(unvisitedCavesArray);
       this.ui.tableUnvisitedCavesDT.rows().invalidate().draw();
 
-      state.save();
+      this.state.save();
     }
 
     static createSVGRect(className) {
@@ -331,8 +332,9 @@ $(() => {
     }
   }
 
+  const state = new State();
   state.load();
 
-  const tracker = new Tracker();
+  const tracker = new Tracker(state);
   tracker.refreshList();
 });

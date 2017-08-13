@@ -11,8 +11,10 @@ $(() => {
     constructor() {
       this.state = {
         showUseless: true,
+        showMaps: false,
         locations: [],
       };
+      this.listeners = [];
     }
 
     get showUseless() {
@@ -21,6 +23,16 @@ $(() => {
 
     set showUseless(value) {
       this.state.showUseless = value;
+      this.save();
+    }
+
+    get showMaps() {
+      return this.state.showMaps;
+    }
+
+    set showMaps(value) {
+      this.state.showMaps = value;
+      this.save();
     }
 
     get locations() {
@@ -29,31 +41,74 @@ $(() => {
 
     reset() {
       this.state.locations = [];
+      this.save();
     }
 
     findLocation(door) {
       return this.state.locations.find(item => item.door === door);
     }
 
-    addLocation(door, cave, exit) {
-      if (this.findLocation(door)) return;
+    addLocation(door, cave, exit, isDone, annotation) {
+      const location = this.findLocation(door);
+      if (location) return location;
 
       this.state.locations.push({
         door,
         cave,
         exit,
         time: Date.now(),
+        isDone,
+        annotation,
       });
+      this.triggerLocationChanged(door, 'add');
+      return this.state.locations[this.state.locations.length - 1];
     }
 
     removeLocation(location) {
       this.state.locations = this.state.locations.filter(item => item.door !== location);
+      this.triggerLocationChanged(location, 'delete');
+    }
+
+    doLocation(locationName, value) {
+      const location = this.findLocation(locationName);
+      if (!location) return;
+      location.isDone = value;
+
+      this.triggerLocationChanged(location.door, 'done');
+    }
+
+    annotateLocation(locationName, value) {
+      const location = this.findLocation(locationName);
+      if (location) location.annotation = value;
+      console.log(`Annotate location ${locationName} ${value}`);
+      this.triggerLocationChanged(location.door, 'annotate');
+    }
+
+    addOnLocationChanged(listener) {
+      this.listeners.push(listener);
+    }
+
+    triggerLocationChanged(locationName, what) {
+      const location = this.findLocation(locationName);
+
+      for (const listener of this.listeners) {
+        listener({
+          location: locationName,
+          what,
+          value: location,
+        });
+      }
     }
 
     load() {
       try {
         const savedState = window.localStorage.getItem('state');
-        if (savedState) this.state = JSON.parse(savedState);
+        if (savedState) {
+          const newState = JSON.parse(savedState);
+          this.state.showUseless = newState.showUseless;
+          this.state.showMaps = newState.showMaps;
+          this.state.locations = newState.locations;
+        }
       } catch (e) {
         window.localStorage.removeItem('state');
       }
@@ -75,6 +130,7 @@ $(() => {
         addLocationButtonClear: $('#add_location_clear'),
         addLocationForm: $('#add_location_form'),
         resetButton: $('#reset_tracker'),
+        enableMapsButton: $('#enable_maps'),
 
         tableLocations: $('#locations_table'),
         tableLocationsDT: null,
@@ -90,6 +146,10 @@ $(() => {
       this.initForm();
       this.initTables();
       this.initMap();
+
+      this.state.addOnLocationChanged(() => {
+        this.state.save();
+      });
     }
 
     initForm() {
@@ -112,7 +172,7 @@ $(() => {
       this.ui.addLocationForm.submit((event) => {
         const textDoor = this.ui.addLocationInputDoor.val();
         const textCave = this.ui.addLocationInputCave.val();
-        this.state.addLocation(textDoor, textCave, textDoor);
+        this.state.addLocation(textDoor, textCave, textDoor, true);
         this.refreshList();
         this.clearForm();
         event.preventDefault();
@@ -144,16 +204,14 @@ $(() => {
       this.ui.tableLocations.find('tbody').on('click', 'tr', (event) => {
         const tr = event.currentTarget;
         const td = tr.firstChild;
-        const s = td.textContent;
+        const locationName = td.textContent;
 
-        for (const location of this.state.locations) {
-          if (location.door === s) {
-            location.marked = $(event.currentTarget).hasClass('selected');
-            $(event.currentTarget).toggleClass('selected');
-            break;
-          }
-        }
-        this.state.save();
+        const location = this.state.findLocation(locationName);
+        if (location.annotation) this.state.annotateLocation(locationName, null);
+        else this.state.annotateLocation(locationName, 'Marked');
+
+        if (location.annotation) $(event.currentTarget).addClass('selected');
+        else $(event.currentTarget).removeClass('selected');
       });
 
       this.ui.tableLocationsDT = this.ui.tableLocations.DataTable({
@@ -190,7 +248,7 @@ $(() => {
           },
         ],
         rowCallback: function rowCallback(row, data) {
-          if (data.marked) $(row).addClass('selected');
+          if (data.annotation) $(row).addClass('selected');
         },
       });
       this.ui.tableLocationsDT
@@ -203,7 +261,7 @@ $(() => {
         const tr = $(event.target).closest('tr')[0];
         const td = tr.firstChild;
         const s = td.textContent;
-        this.state.addLocation(s, 'Useless', s);
+        this.state.addLocation(s, 'Useless', s, true);
         this.refreshList();
       });
       this.ui.tableUnvisitedLocationsDT = this.ui.tableUnvisitedLocations.DataTable({
@@ -233,40 +291,105 @@ $(() => {
       });
     }
 
-    initMap() {
-      const showMaps = false;
-      if (showMaps) {
-        this.ui.mapLW.toggleClass('hidden');
-        this.ui.mapDW.toggleClass('hidden');
+    refreshMapsVisibility() {
+      if (this.state.showMaps) {
+        this.ui.mapLW.removeClass('hidden');
+        this.ui.mapDW.removeClass('hidden');
+      } else {
+        this.ui.mapLW.addClass('hidden');
+        this.ui.mapDW.addClass('hidden');
       }
-      for (const [name, door] of Object.entries(this.doorLocations)) {
-        if (door.x) {
-          const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;
-          const rect = Tracker.createSVGRect('large');
-          rect.css('left', door.x);
-          rect.css('top', door.y);
-          rect.data('location', name);
-          rect.mouseup((event) => {
-            const s = $(event.currentTarget).data('location');
-            const wasDone = $(event.currentTarget).hasClass('done');
+    }
 
-            console.log(`Clicked on: ${s}`);
-            if (wasDone) {
-              $(event.currentTarget).removeClass('done');
-              this.state.removeLocation(s);
-            } else {
-              $(event.currentTarget).addClass('done');
-              this.state.addLocation(s, 'Useless', s);
-            }
-            this.refreshList();
-          });
-          if (this.state.findLocation(name)) {
-            rect.addClass('done');
-          }
-          door.rect = mapDiv;
-          mapDiv.append(rect);
-        }
+    initMap() {
+      this.ui.enableMapsButton.click(() => {
+        this.state.showMaps = !this.state.showMaps;
+        this.refreshMapsVisibility();
+      });
+
+      if (this.state.showMaps) {
+        this.ui.enableMapsButton.button('toggle');
       }
+      this.refreshMapsVisibility();
+
+      for (const [name, door] of Object.entries(this.doorLocations)) {
+        if (!door.x) continue;
+
+        const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;
+        let rectSize = '';
+        if (door.tag.indexOf('large') !== -1) rectSize = 'large';
+        else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
+        const rect = Tracker.createSVGRect(rectSize);
+        rect.css('left', door.x);
+        rect.css('top', door.y);
+        rect.data('location', name);
+        rect.click((event) => {
+          event.preventDefault();
+
+          const locationName = $(event.currentTarget).data('location');
+          console.log(`Clicked on: ${locationName}`);
+          let location = this.state.findLocation(locationName);
+
+          if (!location) {
+            location = this.state.addLocation(locationName, 'Useless', locationName, false);
+          }
+
+          if (location.isDone && !location.annotation) {
+            this.state.removeLocation(locationName);
+            location = null;
+          } else this.state.doLocation(locationName, !location.isDone);
+          Tracker.refreshRect($(event.currentTarget), location);
+          this.refreshList();
+        });
+        rect.contextmenu((event) => {
+          event.preventDefault();
+
+          const locationName = $(event.currentTarget).data('location');
+          let location = this.state.findLocation(locationName);
+          if (!location) {
+            location = this.state.addLocation(locationName, 'Something?', locationName, false);
+          }
+          if (location.annotation) {
+            if (location.isDone) this.state.annotateLocation(locationName, null);
+            else this.state.removeLocation(locationName);
+          } else this.state.annotateLocation(locationName, 'Marked');
+
+          this.refreshList();
+        });
+
+        const location = this.state.findLocation(name);
+        if (location) {
+          Tracker.refreshRect(rect, location);
+        }
+
+        this.state.addOnLocationChanged(
+          function locationChangedEvent(event) {
+            const dataLocation = this.data('location');
+            console.log(`Rect ${dataLocation} saw a change for ${event.location} ${event.what}`);
+            if (event.location !== dataLocation) {
+              return;
+            }
+            console.log(`Update rect ${dataLocation}`);
+            Tracker.refreshRect(this, event.value);
+          }.bind(rect),
+        );
+
+        door.rect = mapDiv;
+        mapDiv.append(rect);
+      }
+    }
+
+    static refreshRect(rect, location) {
+      if (!location) {
+        rect.removeClass('marked');
+        rect.removeClass('done');
+        return;
+      }
+
+      if (location.annotation) rect.addClass('marked');
+      else rect.removeClass('marked');
+      if (location.isDone) rect.addClass('done');
+      else rect.removeClass('done');
     }
 
     refreshList() {
@@ -327,8 +450,6 @@ $(() => {
       this.ui.tableUnvisitedCavesDT.clear();
       this.ui.tableUnvisitedCavesDT.rows.add(unvisitedCavesArray);
       this.ui.tableUnvisitedCavesDT.rows().invalidate().draw();
-
-      this.state.save();
     }
 
     static createSVGRect(className) {

@@ -3,42 +3,52 @@ window.doorLocations = {
   'Forest Chest Game': {
     region: 'Lost Woods',
     tag: 'lw',
-    x: '50%',
-    y: '50%',
+    x: '19.18%',
+    y: '3.17%',
   },
   "Thief's Hideout Drop": {
     region: 'Lost Woods',
     drop: true,
     tag: 'lw',
-    x: '0%',
-    y: '0%',
+    x: '19.41%',
+    y: '13.12%',
   },
   "Thief's Hideout Door": {
     region: 'Lost Woods',
     tag: 'lw',
-    x: '100%',
-    y: '100%',
+    x: '17.12%',
+    y: '16.74%',
   },
   'Lumberjack Cave Drop': {
     region: 'Light World North',
     drop: true,
     tag: 'lw',
+    x: '30.37%',
+    y: '7.92%',
   },
   'Lumberjack Cave Door': {
     region: 'Light World North',
     tag: 'lw',
+    x: '34.25%',
+    y: '3.62%',
   },
   'Lumberjack House': {
     region: 'Light World North',
     tag: 'lw',
+    x: '34.25%',
+    y: '7%',
   },
   'Death Mountain Entrance Front': {
     region: 'Light World North',
     tag: 'lw',
+    x: '35.16%',
+    y: '19.23%',
   },
   'Death Mountain Exit Back': {
     region: 'Light World North',
     tag: 'lw',
+    x: '35.16%',
+    y: '15.38%',
   },
   'Sanctuary Bonk Rocks': {
     region: 'Light World North',
@@ -358,6 +368,8 @@ window.doorLocations = {
   "DW Witch's Hut": {
     region: 'Dark World East',
     tag: 'dw',
+    x: '90%',
+    y: '10%',
   },
   'Tree Cave by Palace of Darkness': {
     // maybe

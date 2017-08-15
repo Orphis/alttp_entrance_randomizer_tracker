@@ -315,11 +315,26 @@ $(() => {
       }
       this.refreshMapsVisibility();
 
+      this.ui.mapLW.mousemove((event) => {
+        let x = (event.pageX - this.ui.mapLW.offset().left) / this.ui.mapLW.width();
+        let y = (event.pageY - this.ui.mapLW.offset().top) / this.ui.mapLW.height();
+        x = (x * 100).toFixed(2);
+        y = (y * 100).toFixed(2);
+        $('#lw_coord').text(`(${x}, ${y})`);
+      });
+      this.ui.mapDW.mousemove((event) => {
+        let x = (event.pageX - this.ui.mapDW.offset().left) / this.ui.mapDW.width();
+        let y = (event.pageY - this.ui.mapDW.offset().top) / this.ui.mapDW.height();
+        x = (x * 100).toFixed(2);
+        y = (y * 100).toFixed(2);
+        $('#dw_coord').text(`(${x}, ${y})`);
+      });
+
       for (const [name, door] of Object.entries(this.doorLocations)) {
         if (!door.x) continue;
 
         const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;
-        let rectSize = '';
+        let rectSize = 'small';
         if (door.tag.indexOf('large') !== -1) rectSize = 'large';
         else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
         const rect = Tracker.createSVGRect(rectSize);

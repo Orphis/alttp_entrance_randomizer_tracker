@@ -207,8 +207,11 @@ $(() => {
         const locationName = td.textContent;
 
         const location = this.state.findLocation(locationName);
-        if (location.annotation) this.state.annotateLocation(locationName, null);
-        else this.state.annotateLocation(locationName, 'Marked');
+        if (location.annotation) {
+          this.state.annotateLocation(locationName, null);
+        } else {
+          this.state.annotateLocation(locationName, 'Marked');
+        }
 
         if (location.annotation) $(event.currentTarget).addClass('selected');
         else $(event.currentTarget).removeClass('selected');
@@ -350,9 +353,14 @@ $(() => {
             location = this.state.addLocation(locationName, 'Something?', locationName, false);
           }
           if (location.annotation) {
-            if (location.isDone) this.state.annotateLocation(locationName, null);
-            else this.state.removeLocation(locationName);
-          } else this.state.annotateLocation(locationName, 'Marked');
+            if (location.isDone) {
+              this.state.annotateLocation(locationName, null);
+            } else {
+              this.state.removeLocation(locationName);
+            }
+          } else {
+            this.state.annotateLocation(locationName, 'Marked');
+          }
 
           this.refreshList();
         });

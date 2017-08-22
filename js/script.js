@@ -40,7 +40,11 @@ $(() => {
     }
 
     reset() {
+      const oldLocations = this.state.locations;
       this.state.locations = [];
+      for (const location of oldLocations) {
+        this.triggerLocationChanged(location.door, 'delete');
+      }
       this.save();
     }
 

@@ -341,7 +341,10 @@ $(() => {
       });
 
       for (const [name, door] of Object.entries(this.doorLocations)) {
-        if (!door.x) continue;
+        if (!door.x || !door.y) {
+          console.log(`Location "${name}" is missing coordinates`);
+          continue;
+        }
 
         const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;
         let rectSize = 'small';

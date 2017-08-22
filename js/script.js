@@ -122,7 +122,13 @@ $(() => {
   class Tracker {
     constructor(state) {
       this.state = state;
-      this.doorLocations = window.doorLocations;
+      this.doorLocations = {};
+      for (const name of Object.keys(window.doorLocations)) {
+        this.doorLocations[name] = window.doorLocations[name];
+      }
+      for (const name of Object.keys(window.overworldLocations)) {
+        this.doorLocations[name] = window.overworldLocations[name];
+      }
       this.caves = window.caves;
       this.ui = {
         addLocationInputDoor: $('#add_location_text_door'),

@@ -26,12 +26,6 @@ footer {
   margin: 20px;
 }
 
-.map {
-  position: relative;
-  display: inline-block;
-  user-select: none;
-}
-
 :root {
   --location-size: 24px;
   --location-border-width: 5px;
@@ -59,6 +53,22 @@ footer {
   --location-fill: #808080;
   --location-fill-hover: #a0a0a0;
   --location-stroke: #0080ff;
+}
+
+.map {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  width: 438px;
+  height: 442px;
+  background-image: var(--map-url);
+}
+
+#lw_map {
+  --map-url: url("../img/lightworld.png");
+}
+#dw_map {
+  --map-url: url("../img/darkworld.png");
 }
 
 .location {

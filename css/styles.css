@@ -62,6 +62,7 @@ footer {
   width: 438px;
   height: 442px;
   background-image: var(--map-url);
+  background-size: contain;
 }
 
 #lw_map {

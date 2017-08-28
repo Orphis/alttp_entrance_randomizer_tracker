@@ -123,7 +123,7 @@ $(() => {
     }
   }
 
-  class Tracker {
+  class LocationTracker {
     constructor(state) {
       this.state = state;
       this.doorLocations = {};
@@ -352,7 +352,7 @@ $(() => {
         let rectSize = 'small';
         if (door.tag.indexOf('large') !== -1) rectSize = 'large';
         else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
-        const rect = Tracker.createSVGRect(rectSize);
+        const rect = LocationTracker.createSVGRect(rectSize);
         rect.css('left', door.x);
         rect.css('top', door.y);
         rect.data('location', name);
@@ -371,7 +371,7 @@ $(() => {
             this.state.removeLocation(locationName);
             location = null;
           } else this.state.doLocation(locationName, !location.isDone);
-          Tracker.refreshRect($(event.currentTarget), location);
+          LocationTracker.refreshRect($(event.currentTarget), location);
           this.refreshList();
         });
         rect.contextmenu((event) => {
@@ -397,7 +397,7 @@ $(() => {
 
         const location = this.state.findLocation(name);
         if (location) {
-          Tracker.refreshRect(rect, location);
+          LocationTracker.refreshRect(rect, location);
         }
 
         this.state.addOnLocationChanged(
@@ -408,7 +408,7 @@ $(() => {
               return;
             }
             console.log(`Update rect ${dataLocation}`);
-            Tracker.refreshRect(this, event.value);
+            LocationTracker.refreshRect(this, event.value);
           }.bind(rect),
         );
 
@@ -510,6 +510,6 @@ $(() => {
   const state = new State();
   state.load();
 
-  const tracker = new Tracker(state);
-  tracker.refreshList();
+  const locationTracker = new LocationTracker(state);
+  locationTracker.refreshList();
 });

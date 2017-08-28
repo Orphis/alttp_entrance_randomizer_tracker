@@ -32,6 +32,8 @@ footer {
   --location-fill: #ff0000;
   --location-fill-hover: #ff8000;
   --location-stroke: #000000;
+
+  --item-opacity: 1;
 }
 .large {
   --location-size: 48px;
@@ -94,4 +96,51 @@ footer {
 
 .location:hover rect {
   fill: var(--location-fill-hover);
+}
+
+.item-tracker {
+  width: 442px;
+  height: 442px;
+  background-color: black;
+
+  position: relative;
+  display: inline-block;
+}
+
+.item {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  z-index: 1;
+  opacity: var(--item-opacity);
+  background-image: var(--item-image);
+  background-size: contain;
+}
+
+.bow_none {
+  --item-image: url('../img/bow.png');
+  --item-opacity: 0.3;
+}
+.silverarrows {
+  --item-image: url('../img/bow1.png');
+}
+.bow {
+  --item-image: url('../img/bow2.png');
+}
+.bow_silverarrows {
+  --item-image: url('../img/bow3.png');
+}
+
+.boomerang_none {
+  --item-image: url('../img/boomerang.png');
+  --item-opacity: 0.3;
+}
+.boomerang {
+  --item-image: url('../img/boomerang.png');
+}
+.boomerang_red {
+  --item-image: url('../img/boomerang2.png');
+}
+.boomerang_both {
+  --item-image: url('../img/boomerang3.png');
 }

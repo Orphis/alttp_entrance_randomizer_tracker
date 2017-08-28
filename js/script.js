@@ -13,8 +13,10 @@ $(() => {
         showUseless: true,
         showMaps: false,
         locations: [],
+        items: {},
       };
-      this.listeners = [];
+      this.locationListeners = [];
+      this.itemListeners = [];
     }
 
     get showUseless() {
@@ -45,6 +47,13 @@ $(() => {
       for (const location of oldLocations) {
         this.triggerLocationChanged(location.door, 'delete');
       }
+
+      const oldItems = this.state.items;
+      this.state.items = {};
+      for (const item of Object.keys(oldItems)) {
+        this.triggerItemChanged(item);
+      }
+
       this.save();
     }
 
@@ -89,18 +98,41 @@ $(() => {
     }
 
     addOnLocationChanged(listener) {
-      this.listeners.push(listener);
+      this.locationListeners.push(listener);
     }
 
     triggerLocationChanged(locationName, what) {
       const location = this.findLocation(locationName);
 
-      for (const listener of this.listeners) {
+      for (const listener of this.locationListeners) {
         listener({
           location: locationName,
           what,
           value: location,
         });
+      }
+    }
+
+    getItem(item) {
+      if (!this.state.items[item]) {
+        this.state.items[item] = 'none';
+      }
+      return this.state.items[item];
+    }
+
+    setItem(item, value) {
+      this.state.items[item] = value;
+      this.triggerItemChanged(item);
+      this.save();
+    }
+
+    addOnItemChanged(listener) {
+      this.itemListeners.push(listener);
+    }
+
+    triggerItemChanged(item) {
+      for (const listener of this.itemListeners) {
+        listener({ item });
       }
     }
 
@@ -124,8 +156,9 @@ $(() => {
   }
 
   class LocationTracker {
-    constructor(state) {
+    constructor(state, itemTracker) {
       this.state = state;
+      this.itemTracker = itemTracker;
       this.doorLocations = {};
       for (const name of Object.keys(window.doorLocations)) {
         this.doorLocations[name] = window.doorLocations[name];
@@ -507,8 +540,100 @@ $(() => {
     }
   }
 
+  class ItemTracker {
+    constructor(state) {
+      this.state = state;
+
+      this.ui = {
+        tracker: $('#item_tracker'),
+        items: {},
+      };
+
+      this.items = {
+        bow: {
+          values: ['none', 'silverarrows', 'bow', 'bow_silverarrows'],
+        },
+        boomerang: {
+          values: ['none', 'boomerang', 'boomerang_red', 'boomerang_both'],
+        },
+        hookshot: {
+          values: ['none', 'hookshot'],
+        },
+        bomb: {
+          values: ['none', 'bomb'],
+        },
+      };
+
+      this.initItems();
+    }
+
+    initItems() {
+      this.ui.tracker.resizable({ aspectRatio: 1, alsoResize: '.resizable' });
+      let x = 0;
+      let y = 0;
+      for (const itemName of Object.keys(this.items)) {
+        const div = $(document.createElement('div'));
+        this.ui.items[itemName] = div;
+        this.ui.tracker.append(div);
+
+        div.addClass('item');
+        div.css('left', `${x * (100 / 5)}%`);
+        div.css('top', `${y * (100 / 5)}%`);
+        div.data('item', itemName);
+        div.data('item-state', this.state.getItem(itemName));
+        this.refreshItem(itemName);
+        div.click((event) => {
+          event.preventDefault();
+
+          const clickedItemName = $(event.currentTarget).data('item');
+          const clickedItemState = this.state.getItem(clickedItemName);
+          console.log(`Clicked on item: ${clickedItemName}`);
+          console.log(this.items[clickedItemName].values);
+
+          const itemStates = this.items[clickedItemName].values;
+          const newItemState =
+            itemStates[(itemStates.indexOf(clickedItemState) + 1) % itemStates.length];
+          this.state.setItem(clickedItemName, newItemState);
+        });
+        this.state.addOnItemChanged(
+          function itemChanged(itemTracker, event) {
+            const changedItemName = this.data('item');
+            if (event.item !== changedItemName) {
+              return;
+            }
+            itemTracker.refreshItem(changedItemName);
+          }.bind(div, this),
+        );
+
+        x += 1;
+        if (x === 5) {
+          x = 0;
+          y += 1;
+        }
+      }
+    }
+
+    refreshItem(item) {
+      const div = this.ui.items[item];
+      const itemState = this.state.getItem(item);
+
+      for (const value of this.items[item].values) {
+        div.removeClass(value);
+      }
+
+      if (itemState === 'none') {
+        div.addClass(`${item}_none`);
+      } else {
+        div.removeClass(`${item}_none`);
+        div.addClass(itemState);
+      }
+    }
+  }
+
   const state = new State();
   state.load();
+
+  const itemTracker = new ItemTracker(state);
 
   const locationTracker = new LocationTracker(state);
   locationTracker.refreshList();

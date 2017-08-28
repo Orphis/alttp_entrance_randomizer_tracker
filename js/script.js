@@ -109,9 +109,9 @@ $(() => {
         const savedState = window.localStorage.getItem('state');
         if (savedState) {
           const newState = JSON.parse(savedState);
-          this.state.showUseless = newState.showUseless;
-          this.state.showMaps = newState.showMaps;
-          this.state.locations = newState.locations;
+          for (const key of Object.keys(this.state)) {
+            if (newState[key]) this.state[key] = newState[key];
+          }
         }
       } catch (e) {
         window.localStorage.removeItem('state');

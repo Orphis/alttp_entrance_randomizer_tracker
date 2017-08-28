@@ -551,16 +551,76 @@ $(() => {
 
       this.items = {
         bow: {
-          values: ['none', 'silverarrows', 'bow', 'bow_silverarrows'],
+          values: ['none', 'silverarrows', 'bow', 'bow-silverarrows'],
         },
         boomerang: {
-          values: ['none', 'boomerang', 'boomerang_red', 'boomerang_both'],
+          values: ['none', 'boomerang', 'boomerang-red', 'boomerang-both'],
         },
         hookshot: {
           values: ['none', 'hookshot'],
         },
         bomb: {
           values: ['none', 'bomb'],
+        },
+        'mushroom-powder': {
+          values: ['none', 'mushroom', 'powder', 'mushroom-powder'],
+        },
+        firerod: {
+          values: ['none', 'firerod'],
+        },
+        icerod: {
+          values: ['none', 'icerod'],
+        },
+        bombos: {
+          values: ['none', 'bombos'],
+        },
+        ether: {
+          values: ['none', 'ether'],
+        },
+        quake: {
+          values: ['none', 'quake'],
+        },
+        lantern: {
+          values: ['none', 'lantern'],
+        },
+        hammer: {
+          values: ['none', 'hammer'],
+        },
+        'shovel-flute': {
+          values: ['none', 'shovel', 'flute', 'shovel-flute'],
+        },
+        net: {
+          values: ['none', 'net'],
+        },
+        book: {
+          values: ['none', 'book'],
+        },
+        bottle: {
+          values: ['none', 'bottle'],
+        },
+        somaria: {
+          values: ['none', 'somaria'],
+        },
+        byrna: {
+          values: ['none', 'byrna'],
+        },
+        cape: {
+          values: ['none', 'cape'],
+        },
+        mirror: {
+          values: ['none', 'mirror'],
+        },
+        boots: {
+          values: ['none', 'boots'],
+        },
+        glove: {
+          values: ['none', 'glove', 'glove2'],
+        },
+        flippers: {
+          values: ['none', 'flippers'],
+        },
+        moonpearl: {
+          values: ['none', 'moonpearl'],
         },
       };
 
@@ -577,6 +637,7 @@ $(() => {
         this.ui.tracker.append(div);
 
         div.addClass('item');
+        div.addClass('item-pretty');
         div.css('left', `${x * (100 / 5)}%`);
         div.css('top', `${y * (100 / 5)}%`);
         div.data('item', itemName);
@@ -622,9 +683,10 @@ $(() => {
       }
 
       if (itemState === 'none') {
-        div.addClass(`${item}_none`);
+        div.addClass('item_missing');
+        div.addClass(item);
       } else {
-        div.removeClass(`${item}_none`);
+        div.removeClass('item_missing');
         div.addClass(itemState);
       }
     }
@@ -635,6 +697,6 @@ $(() => {
 
   const itemTracker = new ItemTracker(state);
 
-  const locationTracker = new LocationTracker(state);
+  const locationTracker = new LocationTracker(state, itemTracker);
   locationTracker.refreshList();
 });

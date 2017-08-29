@@ -388,7 +388,7 @@ $(() => {
         }.bind(this),
       });
 
-      this.ui.mapLW.mousemove((event) => {
+      /* this.ui.mapLW.mousemove((event) => {
         let x = (event.pageX - this.ui.mapLW.offset().left) / this.ui.mapLW.width();
         let y = (event.pageY - this.ui.mapLW.offset().top) / this.ui.mapLW.height();
         x = (x * 100).toFixed(2);
@@ -401,7 +401,7 @@ $(() => {
         x = (x * 100).toFixed(2);
         y = (y * 100).toFixed(2);
         $('#dw_coord').text(`(${x}, ${y})`);
-      });
+      }); */
 
       for (const [name, door] of Object.entries(this.doorLocations)) {
         if (!door.x || !door.y) {

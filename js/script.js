@@ -14,6 +14,7 @@ $(() => {
         showMaps: false,
         locations: [],
         items: {},
+        mapHeight: -1,
       };
       this.locationListeners = [];
       this.itemListeners = [];
@@ -39,6 +40,15 @@ $(() => {
 
     get locations() {
       return this.state.locations;
+    }
+
+    get mapHeight() {
+      return this.state.mapHeight;
+    }
+
+    set mapHeight(value) {
+      this.state.mapHeight = value;
+      this.save();
     }
 
     reset() {
@@ -357,8 +367,26 @@ $(() => {
         this.ui.enableMapsButton.button('toggle');
       }
       this.refreshMapsVisibility();
-      this.ui.mapLW.resizable({ aspectRatio: 438 / 442, alsoResize: '.resizable' });
-      this.ui.mapDW.resizable({ aspectRatio: 438 / 442, alsoResize: '.resizable' });
+      if (this.state.mapHeight > 0) {
+        this.ui.mapLW.width(this.state.mapHeight * (438 / 442));
+        this.ui.mapLW.height(this.state.mapHeight);
+        this.ui.mapDW.width(this.state.mapHeight * (438 / 442));
+        this.ui.mapDW.height(this.state.mapHeight);
+      }
+      this.ui.mapLW.resizable({
+        aspectRatio: 438 / 442,
+        alsoResize: '.resizable',
+        stop: function resizeEvent(event, ui) {
+          this.state.mapHeight = ui.size.height;
+        }.bind(this),
+      });
+      this.ui.mapDW.resizable({
+        aspectRatio: 438 / 442,
+        alsoResize: '.resizable',
+        stop: function resizeEvent(event, ui) {
+          this.state.mapHeight = ui.size.height;
+        }.bind(this),
+      });
 
       this.ui.mapLW.mousemove((event) => {
         let x = (event.pageX - this.ui.mapLW.offset().left) / this.ui.mapLW.width();
@@ -628,7 +656,17 @@ $(() => {
     }
 
     initItems() {
-      this.ui.tracker.resizable({ aspectRatio: 1, alsoResize: '.resizable' });
+      if (this.state.mapHeight > 0) {
+        this.ui.tracker.width(this.state.mapHeight);
+        this.ui.tracker.height(this.state.mapHeight);
+      }
+      this.ui.tracker.resizable({
+        aspectRatio: 1,
+        alsoResize: '.resizable',
+        stop: function resizeEvent(event, ui) {
+          this.state.mapHeight = ui.size.height;
+        }.bind(this),
+      });
       let x = 0;
       let y = 0;
       for (const itemName of Object.keys(this.items)) {

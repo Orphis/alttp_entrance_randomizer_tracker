@@ -357,8 +357,8 @@ $(() => {
         this.ui.enableMapsButton.button('toggle');
       }
       this.refreshMapsVisibility();
-      this.ui.mapLW.resizable({ aspectRatio: 1, alsoResize: '.resizable' });
-      this.ui.mapDW.resizable({ aspectRatio: 1, alsoResize: '.resizable' });
+      this.ui.mapLW.resizable({ aspectRatio: 438 / 442, alsoResize: '.resizable' });
+      this.ui.mapDW.resizable({ aspectRatio: 438 / 442, alsoResize: '.resizable' });
 
       this.ui.mapLW.mousemove((event) => {
         let x = (event.pageX - this.ui.mapLW.offset().left) / this.ui.mapLW.width();

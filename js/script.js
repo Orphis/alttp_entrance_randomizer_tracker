@@ -184,6 +184,7 @@ $(() => {
       }
       for (const name of Object.keys(window.overworldLocations)) {
         this.doorLocations[name] = window.overworldLocations[name];
+        this.doorLocations[name].overworld = true;
       }
       this.ui = {
         addLocationInputDoor: $('#add_location_text_door'),
@@ -439,7 +440,9 @@ $(() => {
         let rectSize = 'small';
         if (door.tag.indexOf('large') !== -1) rectSize = 'large';
         else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
-        const rect = LocationTracker.createSVGRect(rectSize);
+        let rect;
+        if (door.overworld) rect = LocationTracker.createSVGCircle(rectSize);
+        else rect = LocationTracker.createSVGRect(rectSize);
         rect.css('left', door.x);
         rect.css('top', door.y);
         rect.data('location', name);
@@ -478,7 +481,13 @@ $(() => {
           }
 
           if (!location) {
-            this.annotateLocationName = locationName;
+            if (this.doorLocations[locationName].overworld) {
+              this.state.addLocation(locationName, locationName, locationName, false);
+              this.state.annotateLocation(locationName, 'Marked');
+              this.refreshList();
+            } else {
+              this.annotateLocationName = locationName;
+            }
             return;
           }
           if (location.annotation) {
@@ -611,6 +620,23 @@ $(() => {
       const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       rectElement.setAttribute('width', '100%');
       rectElement.setAttribute('height', '100%');
+
+      svgElement.appendChild(rectElement);
+      div.append(svgElement);
+
+      return div;
+    }
+
+    static createSVGCircle(className) {
+      const div = $(document.createElement('div'));
+      div.addClass('location');
+      if (className) div.addClass(className);
+
+      const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      rectElement.setAttribute('cx', '50%');
+      rectElement.setAttribute('cy', '50%');
+      rectElement.setAttribute('r', '40%');
 
       svgElement.appendChild(rectElement);
       div.append(svgElement);

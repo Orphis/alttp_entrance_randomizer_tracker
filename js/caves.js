@@ -112,7 +112,7 @@ window.caves = {
   Library: {
     count: 1,
   },
-  Smiths: {
+  Blacksmiths: {
     count: 1,
   },
   'Bat Cave': {
@@ -122,7 +122,7 @@ window.caves = {
   'Sick Kid': {
     count: 1,
   },
-  'Old Man': {
+  'Death Mountain upwards': {
     count: 1,
   },
   "Witch's Hut": {
@@ -133,9 +133,7 @@ window.caves = {
   },
 
   // Multiple Entrances but no chests
-  'Death Mountain upwards': {
-    count: 0,
-  },
+
   'Death Mountain downwards': {
     count: 0,
   },
@@ -159,13 +157,7 @@ window.caves = {
   },
 
   // Light world dungeons
-  'Hyrule Castle Main Entrance': {
-    count: 4,
-  },
-  'Hyrule Castle Left': {
-    count: 4,
-  },
-  'Hyrule Castle Right': {
+  'Hyrule Castle': {
     count: 4,
   },
   "Hyrule Castle Aganihm's Tower": {
@@ -174,10 +166,10 @@ window.caves = {
   'Eastern Palace': {
     count: 3,
   },
-  'Desert Front': {
+  'Desert Palace Front': {
     count: 2,
   },
-  'Desert Back': {
+  'Desert Palace Back': {
     count: 1,
   },
   'Tower of Hera': {
@@ -188,8 +180,8 @@ window.caves = {
   'Palace of Darkness': {
     count: 5,
   },
-  "Thieve's Town": {
-    count: 4,
+  'Swamp Palace': {
+    count: 6,
   },
   'Skull Woods First Part': {
     count: 2,
@@ -202,14 +194,14 @@ window.caves = {
   'Skull Woods Boss Part': {
     count: 2,
   },
+  "Thieve's Town": {
+    count: 4,
+  },
   'Ice Palace': {
     count: 3,
   },
   'Misery Mire': {
     count: 2,
-  },
-  'Swamp Palace': {
-    count: 6,
   },
   'Turtle Rock Main Entrance': {
     count: 5,
@@ -226,10 +218,10 @@ window.caves = {
   "Ganon's Tower": {
     count: 20,
   },
-  "Ganon's Drop Arena": {
+  "Ganon's Arena": {
     count: 0,
   },
-  "Ganon's Fall": {
+  "Ganon's Fall Escape": {
     count: 0,
     hasdrop: true,
   },

@@ -367,12 +367,20 @@ $(() => {
       }
     }
 
-    get annotateLocation() {
-      return this.annotateLocationName;
-    }
-
-    setAnnotateLocation(value) {
-      this.annotateLocationName = value;
+    annotateLocation(locationName) {
+      if (!this.doorLocations[locationName].cave) {
+        this.annotateLocationName = null;
+        return;
+      }
+      this.state.addLocation(
+        this.annotateLocationName,
+        this.doorLocations[locationName].cave,
+        locationName,
+        false,
+      );
+      this.state.annotateLocation(this.annotateLocationName, 'Marked');
+      this.annotateLocationName = null;
+      this.refreshList();
     }
 
     initMap() {
@@ -442,6 +450,11 @@ $(() => {
           console.log(`Clicked on: ${locationName}`);
           let location = this.state.findLocation(locationName);
 
+          if (this.annotateLocationName) {
+            this.annotateLocation(locationName);
+            return;
+          }
+
           if (!location) {
             location = this.state.addLocation(locationName, 'Useless', locationName, false);
           }
@@ -459,21 +472,13 @@ $(() => {
           const locationName = $(event.currentTarget).data('location');
           const location = this.state.findLocation(locationName);
 
-          if (this.annotateLocation) {
-            this.state.addLocation(
-              this.annotateLocation,
-              this.doorLocations[locationName].cave,
-              locationName,
-              false,
-            );
-            this.state.annotateLocation(this.annotateLocation, 'Marked');
-            this.setAnnotateLocation(null);
-            this.refreshList();
+          if (this.annotateLocationName) {
+            this.annotateLocation(locationName);
             return;
           }
 
           if (!location) {
-            this.setAnnotateLocation(locationName);
+            this.annotateLocationName = locationName;
             return;
           }
           if (location.annotation) {

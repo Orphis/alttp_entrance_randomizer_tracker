@@ -111,11 +111,21 @@ footer {
   fill: var(--location-fill);
 }
 
+.location polygon {
+  stroke-width: calc(var(--location-border-width) * 2);
+  stroke: var(--location-stroke);
+  fill: var(--location-fill);
+}
+
 .location:hover rect {
   fill: var(--location-fill-hover);
 }
 
 .location:hover circle {
+  fill: var(--location-fill-hover);
+}
+
+.location:hover polygon {
   fill: var(--location-fill-hover);
 }
 

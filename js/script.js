@@ -442,6 +442,7 @@ $(() => {
         else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
         let rect;
         if (door.overworld) rect = LocationTracker.createSVGCircle(rectSize);
+        else if (door.drop) rect = LocationTracker.createSVGTriangle(rectSize);
         else rect = LocationTracker.createSVGRect(rectSize);
         rect.css('left', door.x);
         rect.css('top', door.y);
@@ -637,6 +638,22 @@ $(() => {
       rectElement.setAttribute('cx', '50%');
       rectElement.setAttribute('cy', '50%');
       rectElement.setAttribute('r', '40%');
+
+      svgElement.appendChild(rectElement);
+      div.append(svgElement);
+
+      return div;
+    }
+
+    static createSVGTriangle(className) {
+      const div = $(document.createElement('div'));
+      div.addClass('location');
+      if (className) div.addClass(className);
+
+      const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgElement.setAttribute('viewBox', '0 0 100 100');
+      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      rectElement.setAttribute('points', '0,0 100,0 50,100');
 
       svgElement.appendChild(rectElement);
       div.append(svgElement);

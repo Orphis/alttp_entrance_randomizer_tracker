@@ -55,6 +55,10 @@ footer {
   --location-stroke: #0080ff;
 }
 
+.map_container {
+  display: inline-block;
+}
+
 .map {
   position: relative;
   display: inline-block;

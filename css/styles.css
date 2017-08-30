@@ -59,7 +59,7 @@ footer {
   position: relative;
   display: inline-block;
   user-select: none;
-  width: 438px;
+  width: 442px;
   height: 442px;
   background-image: var(--map-url);
   background-size: contain;

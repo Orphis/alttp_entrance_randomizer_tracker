@@ -368,20 +368,20 @@ $(() => {
       }
       this.refreshMapsVisibility();
       if (this.state.mapHeight > 0) {
-        this.ui.mapLW.width(this.state.mapHeight * (438 / 442));
+        this.ui.mapLW.width(this.state.mapHeight);
         this.ui.mapLW.height(this.state.mapHeight);
-        this.ui.mapDW.width(this.state.mapHeight * (438 / 442));
+        this.ui.mapDW.width(this.state.mapHeight);
         this.ui.mapDW.height(this.state.mapHeight);
       }
       this.ui.mapLW.resizable({
-        aspectRatio: 438 / 442,
+        aspectRatio: 1,
         alsoResize: '.resizable',
         stop: function resizeEvent(event, ui) {
           this.state.mapHeight = ui.size.height;
         }.bind(this),
       });
       this.ui.mapDW.resizable({
-        aspectRatio: 438 / 442,
+        aspectRatio: 1,
         alsoResize: '.resizable',
         stop: function resizeEvent(event, ui) {
           this.state.mapHeight = ui.size.height;

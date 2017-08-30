@@ -57,6 +57,15 @@ footer {
 
 .map_container {
   display: inline-block;
+  position: relative;
+}
+
+.map_footer {
+  background: black;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 
 .map {

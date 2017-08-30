@@ -202,6 +202,7 @@ $(() => {
 
         mapLW: $('#lw_map'),
         mapDW: $('#dw_map'),
+        mapFooter: $('#map_footer'),
       };
 
       this.initForm();
@@ -486,6 +487,21 @@ $(() => {
           }
 
           this.refreshList();
+        });
+        rect.mouseenter((event) => {
+          const locationName = $(event.currentTarget).data('location');
+          let text;
+          if (this.annotateLocationName) {
+            text = `Connect <span style="color: green">${this
+              .annotateLocationName}</span> ➜ <span style="color: red">${locationName}</span>`;
+          } else {
+            text = locationName;
+            const location = this.state.findLocation(locationName);
+            if (location) {
+              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${location.cave}</span>`;
+            }
+          }
+          this.ui.mapFooter.html(text);
         });
 
         const location = this.state.findLocation(name);

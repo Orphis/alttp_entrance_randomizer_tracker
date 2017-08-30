@@ -6,135 +6,135 @@
   background-image: url('../img/item_pretty.png');
 }
 
-.bomb {
+.item-pretty.bomb {
   background-position: 0 0%;
   background-size: 100%;
 }
-.bombos {
+.item-pretty.bombos {
   background-position: 0 3.125%;
   background-size: 100%;
 }
-.book {
+.item-pretty.book {
   background-position: 0 6.25%;
   background-size: 100%;
 }
-.boomerang-both {
+.item-pretty.boomerang-both {
   background-position: 0 9.375%;
   background-size: 100%;
 }
-.boomerang-red {
+.item-pretty.boomerang-red {
   background-position: 0 12.5%;
   background-size: 100%;
 }
-.boomerang {
+.item-pretty.boomerang {
   background-position: 0 15.625%;
   background-size: 100%;
 }
-.boots {
+.item-pretty.boots {
   background-position: 0 18.75%;
   background-size: 100%;
 }
-.bottle {
+.item-pretty.bottle {
   background-position: 0 21.875%;
   background-size: 100%;
 }
-.bow-silverarrows {
+.item-pretty.bow-silverarrows {
   background-position: 0 25%;
   background-size: 100%;
 }
-.bow {
+.item-pretty.bow {
   background-position: 0 28.125%;
   background-size: 100%;
 }
-.byrna {
+.item-pretty.byrna {
   background-position: 0 31.25%;
   background-size: 100%;
 }
-.cape {
+.item-pretty.cape {
   background-position: 0 34.375%;
   background-size: 100%;
 }
-.ether {
+.item-pretty.ether {
   background-position: 0 37.5%;
   background-size: 100%;
 }
-.firerod {
+.item-pretty.firerod {
   background-position: 0 40.625%;
   background-size: 100%;
 }
-.flippers {
+.item-pretty.flippers {
   background-position: 0 43.75%;
   background-size: 100%;
 }
-.flute {
+.item-pretty.flute {
   background-position: 0 46.875%;
   background-size: 100%;
 }
-.glove {
+.item-pretty.glove {
   background-position: 0 50%;
   background-size: 100%;
 }
-.glove2 {
+.item-pretty.glove2 {
   background-position: 0 53.125%;
   background-size: 100%;
 }
-.hammer {
+.item-pretty.hammer {
   background-position: 0 56.25%;
   background-size: 100%;
 }
-.hookshot {
+.item-pretty.hookshot {
   background-position: 0 59.375%;
   background-size: 100%;
 }
-.icerod {
+.item-pretty.icerod {
   background-position: 0 62.5%;
   background-size: 100%;
 }
-.lantern {
+.item-pretty.lantern {
   background-position: 0 65.625%;
   background-size: 100%;
 }
-.mirror {
+.item-pretty.mirror {
   background-position: 0 68.75%;
   background-size: 100%;
 }
-.moonpearl {
+.item-pretty.moonpearl {
   background-position: 0 71.875%;
   background-size: 100%;
 }
-.mushroom {
+.item-pretty.mushroom {
   background-position: 0 75%;
   background-size: 100%;
 }
-.mushroom-powder {
+.item-pretty.mushroom-powder {
   background-position: 0 78.125%;
   background-size: 100%;
 }
-.net {
+.item-pretty.net {
   background-position: 0 81.25%;
   background-size: 100%;
 }
-.powder {
+.item-pretty.powder {
   background-position: 0 84.375%;
   background-size: 100%;
 }
-.quake {
+.item-pretty.quake {
   background-position: 0 87.5%;
   background-size: 100%;
 }
-.shovel {
+.item-pretty.shovel {
   background-position: 0 90.625%;
   background-size: 100%;
 }
-.shovel-flute {
+.item-pretty.shovel-flute {
   background-position: 0 93.75%;
   background-size: 100%;
 }
-.silverarrows {
+.item-pretty.silverarrows {
   background-position: 0 96.875%;
   background-size: 100%;
 }
-.somaria {
+.item-pretty.somaria {
   background-position: 0 100%;
   background-size: 100%;
 }

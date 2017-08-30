@@ -170,13 +170,20 @@ $(() => {
       this.state = state;
       this.itemTracker = itemTracker;
       this.doorLocations = {};
+      this.caves = window.caves;
       for (const name of Object.keys(window.doorLocations)) {
         this.doorLocations[name] = window.doorLocations[name];
+        if (this.doorLocations[name].cave) {
+          if (!this.caves[this.doorLocations[name].cave]) {
+            console.warn(
+              `Location '${name}' points to a non existing cave '${this.doorLocations[name].cave}'`,
+            );
+          }
+        }
       }
       for (const name of Object.keys(window.overworldLocations)) {
         this.doorLocations[name] = window.overworldLocations[name];
       }
-      this.caves = window.caves;
       this.ui = {
         addLocationInputDoor: $('#add_location_text_door'),
         addLocationInputCave: $('#add_location_text_cave'),

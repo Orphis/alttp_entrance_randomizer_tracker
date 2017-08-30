@@ -268,6 +268,7 @@ $(() => {
         const locationName = td.textContent;
 
         const location = this.state.findLocation(locationName);
+        if (!location) return;
         if (location.annotation) {
           this.state.annotateLocation(locationName, null);
         } else {

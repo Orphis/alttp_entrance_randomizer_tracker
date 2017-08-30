@@ -167,6 +167,7 @@ $(() => {
 
   class LocationTracker {
     constructor(state, itemTracker) {
+      this.annotateLocationName = null;
       this.state = state;
       this.itemTracker = itemTracker;
       this.doorLocations = {};
@@ -364,6 +365,14 @@ $(() => {
       }
     }
 
+    get annotateLocation() {
+      return this.annotateLocationName;
+    }
+
+    setAnnotateLocation(value) {
+      this.annotateLocationName = value;
+    }
+
     initMap() {
       this.ui.enableMapsButton.click(() => {
         this.state.showMaps = !this.state.showMaps;
@@ -446,9 +455,24 @@ $(() => {
           event.preventDefault();
 
           const locationName = $(event.currentTarget).data('location');
-          let location = this.state.findLocation(locationName);
+          const location = this.state.findLocation(locationName);
+
+          if (this.annotateLocation) {
+            this.state.addLocation(
+              this.annotateLocation,
+              this.doorLocations[locationName].cave,
+              locationName,
+              false,
+            );
+            this.state.annotateLocation(this.annotateLocation, 'Marked');
+            this.setAnnotateLocation(null);
+            this.refreshList();
+            return;
+          }
+
           if (!location) {
-            location = this.state.addLocation(locationName, 'Something?', locationName, false);
+            this.setAnnotateLocation(locationName);
+            return;
           }
           if (location.annotation) {
             if (location.isDone) {

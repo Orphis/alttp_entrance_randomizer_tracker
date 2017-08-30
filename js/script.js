@@ -495,11 +495,9 @@ $(() => {
         this.state.addOnLocationChanged(
           function locationChangedEvent(event) {
             const dataLocation = this.data('location');
-            console.log(`Rect ${dataLocation} saw a change for ${event.location} ${event.what}`);
             if (event.location !== dataLocation) {
               return;
             }
-            console.log(`Update rect ${dataLocation}`);
             LocationTracker.refreshRect(this, event.value);
           }.bind(rect),
         );

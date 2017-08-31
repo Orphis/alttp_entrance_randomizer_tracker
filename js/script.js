@@ -11,7 +11,6 @@ $(() => {
     constructor() {
       this.state = {
         showUseless: true,
-        showMaps: false,
         locations: [],
         items: {},
         mapHeight: -1,
@@ -26,15 +25,6 @@ $(() => {
 
     set showUseless(value) {
       this.state.showUseless = value;
-      this.save();
-    }
-
-    get showMaps() {
-      return this.state.showMaps;
-    }
-
-    set showMaps(value) {
-      this.state.showMaps = value;
       this.save();
     }
 
@@ -192,7 +182,6 @@ $(() => {
         addLocationButtonClear: $('#add_location_clear'),
         addLocationForm: $('#add_location_form'),
         resetButton: $('#reset_tracker'),
-        enableMapsButton: $('#enable_maps'),
 
         tableLocations: $('#locations_table'),
         tableLocationsDT: null,
@@ -357,16 +346,6 @@ $(() => {
       });
     }
 
-    refreshMapsVisibility() {
-      if (this.state.showMaps) {
-        this.ui.mapLW.removeClass('hidden');
-        this.ui.mapDW.removeClass('hidden');
-      } else {
-        this.ui.mapLW.addClass('hidden');
-        this.ui.mapDW.addClass('hidden');
-      }
-    }
-
     annotateLocation(locationName) {
       if (!this.doorLocations[locationName].cave) {
         this.annotateLocationName = null;
@@ -383,15 +362,6 @@ $(() => {
     }
 
     initMap() {
-      this.ui.enableMapsButton.click(() => {
-        this.state.showMaps = !this.state.showMaps;
-        this.refreshMapsVisibility();
-      });
-
-      if (this.state.showMaps) {
-        this.ui.enableMapsButton.button('toggle');
-      }
-      this.refreshMapsVisibility();
       if (this.state.mapHeight > 0) {
         this.ui.mapLW.width(this.state.mapHeight);
         this.ui.mapLW.height(this.state.mapHeight);

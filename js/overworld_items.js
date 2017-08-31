@@ -5,12 +5,18 @@ window.overworldLocations = {
     x: '3.88%',
     y: '5.20%',
     isOverworld: true,
+    state(items) {
+      return items.has('book') ? 'visible' : '';
+    },
   },
   Mushroom: {
     region: 'Lost Woods',
     tag: 'lw',
     x: '12.33%',
     y: '8.60%',
+    state() {
+      return 'available';
+    },
   },
   'Spectacle Rock Item': {
     region: 'Death Mountain',
@@ -35,6 +41,9 @@ window.overworldLocations = {
     tag: 'lw',
     x: '9.13%',
     y: '47.96%',
+    state() {
+      return 'available';
+    },
   },
   'Race game reward': {
     region: 'Kakariko',

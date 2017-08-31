@@ -5,6 +5,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '19.18%',
     y: '3.17%',
+    state() {
+      return 'available';
+    },
   },
   "Thief's Hideout Drop": {
     region: 'Lost Woods',
@@ -13,6 +16,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '19.41%',
     y: '13.12%',
+    state() {
+      return 'available';
+    },
   },
   "Thief's Hideout Door": {
     region: 'Lost Woods',
@@ -20,6 +26,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '17.12%',
     y: '16.74%',
+    state() {
+      return 'available';
+    },
   },
   'Lumberjack Cave Drop': {
     region: 'Light World North',
@@ -35,12 +44,18 @@ window.doorLocations = {
     tag: 'lw',
     x: '34.25%',
     y: '3.62%',
+    state() {
+      return 'available';
+    },
   },
   'Lumberjack House': {
     region: 'Light World North',
     tag: 'lw',
     x: '34.25%',
     y: '7.00%',
+    state() {
+      return 'available';
+    },
   },
   'Death Mountain Entrance Front': {
     region: 'Light World North',
@@ -69,6 +84,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '46.35%',
     y: '26.70%',
+    state() {
+      return 'available';
+    },
   },
   'Sewer Grave Drop': {
     region: 'Light World North',
@@ -99,6 +117,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '64.61%',
     y: '30.54%',
+    state() {
+      return 'available';
+    },
   },
   'East of Graveyard Door': {
     region: 'Light World North',
@@ -106,6 +127,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '67.61%',
     y: '27.54%',
+    state() {
+      return 'available';
+    },
   },
   'Death Mountain Entrance Back': {
     region: 'Death Mountain',
@@ -224,6 +248,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '82.65%',
     y: '31.90%',
+    state() {
+      return 'available';
+    },
   },
   'Waterfall Fairy': {
     region: 'Light World East',
@@ -237,6 +264,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '83.11%',
     y: '64.25%',
+    state() {
+      return 'available';
+    },
   },
   'Cave by Eastern Palace Portal': {
     // definitely
@@ -244,6 +274,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '98.40%',
     y: '70.14%',
+    state() {
+      return 'available';
+    },
   },
   "Sahasrahla's Hut": {
     region: 'Light World East',
@@ -251,12 +284,18 @@ window.doorLocations = {
     tag: 'lw',
     x: '81.96%',
     y: '44.80%',
+    state() {
+      return 'available';
+    },
   },
   'Kakariko Fortune Teller North': {
     region: 'Kakariko',
     tag: 'lw',
     x: '18.72%',
     y: '31.90%',
+    state() {
+      return 'available';
+    },
   },
   "Old Woman's House Left": {
     region: 'Kakariko',
@@ -264,6 +303,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '16.00%',
     y: '41.63%',
+    state() {
+      return 'available';
+    },
   },
   "Old Woman's House Right": {
     region: 'Kakariko',
@@ -271,6 +313,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '19.00%',
     y: '41.63%',
+    state() {
+      return 'available';
+    },
   },
   "Blind's Hut": {
     region: 'Kakariko',
@@ -278,6 +323,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '13.00%',
     y: '41.63%',
+    state() {
+      return 'available';
+    },
   },
   'Kakariko Well Drop': {
     region: 'Kakariko',
@@ -286,6 +334,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '2.50%',
     y: '42.53%',
+    state() {
+      return 'available';
+    },
   },
   'Kakariko Well Door': {
     region: 'Kakariko',
@@ -293,6 +344,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '5.50%',
     y: '42.53%',
+    state() {
+      return 'available';
+    },
   },
   'House West of Bottle Vendor': {
     // definitely
@@ -300,6 +354,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '5.25%',
     y: '46.61%',
+    state() {
+      return 'available';
+    },
   },
   'House East of Bottle Vendor': {
     // definitely
@@ -307,6 +364,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '21.23%',
     y: '47.96%',
+    state() {
+      return 'available';
+    },
   },
   'Chicken House': {
     region: 'Kakariko',
@@ -314,6 +374,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '9.82%',
     y: '52.94%',
+    state() {
+      return 'available';
+    },
   },
   "Sick Kid's House": {
     region: 'Kakariko',
@@ -321,12 +384,18 @@ window.doorLocations = {
     tag: 'lw',
     x: '15.98%',
     y: '52.94%',
+    state() {
+      return 'available';
+    },
   },
   'House right of sick Kid': {
     region: 'Kakariko',
     tag: 'lw',
     x: '20.32%',
     y: '52.94%',
+    state() {
+      return 'available';
+    },
   },
   'Tavern Back Entrance': {
     region: 'Kakariko',
@@ -334,12 +403,18 @@ window.doorLocations = {
     tag: 'lw',
     x: '15.75%',
     y: '57.00%',
+    state() {
+      return 'available';
+    },
   },
   'Tavern Front Entrance': {
     region: 'Kakariko',
     tag: 'lw',
     x: '15.75%',
     y: '60.00%',
+    state() {
+      return 'available';
+    },
   },
   'Shop beside Tavern': {
     // definitely
@@ -347,6 +422,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '11.42%',
     y: '57.24%',
+    state() {
+      return 'available';
+    },
   },
   'Doorless Shed': {
     region: 'Kakariko',
@@ -360,6 +438,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '30.37%',
     y: '52.94%',
+    state() {
+      return 'available';
+    },
   },
   'Bat Cave Drop': {
     region: 'Kakariko',
@@ -375,6 +456,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '31.05%',
     y: '55.88%',
+    state() {
+      return 'available';
+    },
   },
   Library: {
     region: 'Kakariko',
@@ -382,6 +466,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '15.75%',
     y: '65.38%',
+    state() {
+      return 'available';
+    },
   },
   'Race Game Right': {
     region: 'Kakariko',
@@ -389,6 +476,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '14.16%',
     y: '71.27%',
+    state() {
+      return 'available';
+    },
   },
   'Race Game Left': {
     region: 'Kakariko',
@@ -402,18 +492,27 @@ window.doorLocations = {
     tag: 'lw',
     x: '21.92%',
     y: '70.36%',
+    state() {
+      return 'available';
+    },
   },
   'Lake Hylia Fortune Teller': {
     region: 'Lake Hylia',
     tag: 'lw',
     x: '65.53%',
     y: '80.09%',
+    state() {
+      return 'available';
+    },
   },
   'Cave North of Lake Hylia': {
     region: 'Lake Hylia',
     tag: 'lw',
     x: '73.52%',
     y: '76.47%',
+    state() {
+      return 'available';
+    },
   },
   'Lake Hylia Fairy Cave': {
     region: 'Lake Hylia',
@@ -433,6 +532,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '92.95%',
     y: '76.47%',
+    state() {
+      return 'available';
+    },
   },
   'Ice Rock Cave': {
     region: 'Lake Hylia',
@@ -460,6 +562,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '47.72%',
     y: '65.38%',
+    state(items) {
+      return items.has('boots') ? 'available' : '';
+    },
   },
   "Link's House": {
     region: 'Light World South',
@@ -467,6 +572,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '55.25%',
     y: '68.78%',
+    state() {
+      return 'available';
+    },
   },
   'Light World Hype Cave Spot': {
     // maybe
@@ -481,6 +589,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '47.26%',
     y: '93.67%',
+    state() {
+      return 'available';
+    },
   },
   'Rock Rupee Cave by Desert': {
     // maybe
@@ -496,6 +607,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '27.63%',
     y: '89.14%',
+    state() {
+      return 'available';
+    },
   },
   "Aginah's Cave": {
     region: 'Desert Area',
@@ -503,6 +617,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '19.86%',
     y: '82.58%',
+    state() {
+      return 'available';
+    },
   },
   'Checkerboard Cave': {
     region: 'Desert Area',
@@ -518,12 +635,18 @@ window.doorLocations = {
     drop: true,
     x: '60.27%',
     y: '41.18%',
+    state() {
+      return 'available';
+    },
   },
   'Uncle Door': {
     region: 'Hyrule Castle',
     tag: 'lw',
     x: '55.48%',
     y: '42.76%',
+    state() {
+      return 'available';
+    },
   },
 
   // Dark World
@@ -771,6 +894,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '50.46%',
     y: '44.12%',
+    state() {
+      return 'available';
+    },
   },
   'Hyrule Castle Left': {
     region: 'Hyrule Castle',
@@ -799,6 +925,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '96.58%',
     y: '38.69%',
+    state() {
+      return 'available';
+    },
   },
   'Desert Palace Main Entrance': {
     region: 'Desert Area',

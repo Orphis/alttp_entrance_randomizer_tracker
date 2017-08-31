@@ -410,7 +410,6 @@ window.doorLocations = {
     y: '80.09%',
   },
   'Cave North of Lake Hylia': {
-    // maybe
     region: 'Lake Hylia',
     tag: 'lw',
     x: '73.52%',
@@ -437,6 +436,7 @@ window.doorLocations = {
   },
   'Ice Rock Cave': {
     region: 'Lake Hylia',
+    cave: 'Small Rupee Farm',
     tag: 'lw',
     x: '91.45%',
     y: '79.47%',
@@ -485,6 +485,7 @@ window.doorLocations = {
   'Rock Rupee Cave by Desert': {
     // maybe
     region: 'Desert Area',
+    cave: 'Desert Rupee Farm',
     tag: 'lw',
     x: '31.05%',
     y: '95.70%',

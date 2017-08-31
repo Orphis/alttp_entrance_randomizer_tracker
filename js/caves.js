@@ -131,9 +131,14 @@ window.caves = {
   'Bomb Shop': {
     count: 0,
   },
+  'Small Rupee Farm': {
+    count: 0,
+  },
+  'Desert Rupee Farm': {
+    count: 0,
+  },
 
   // Multiple Entrances but no chests
-
   'Death Mountain downwards': {
     count: 0,
   },

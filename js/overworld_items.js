@@ -33,7 +33,7 @@ window.overworldLocations = {
     x: '42.47%',
     y: '2.04%',
     state(items) {
-      return items.access('dmnw') && items.has('book') ? 'available' : '';
+      return items.has('book') && items.has('sword2') && items.access('dmnw') ? 'available' : '';
     },
   },
   'Floating Island': {
@@ -98,7 +98,12 @@ window.overworldLocations = {
     x: '22.15%',
     y: '92.53%',
     state(items) {
-      return items.has('mirror') && items.has('book') && items.access('dwsouth') ? 'available' : '';
+      return items.has('mirror') &&
+      items.has('book') &&
+      items.has('sword2') &&
+      items.access('dwsouth')
+        ? 'available'
+        : '';
     },
   },
   'Lake Hylia Island': {

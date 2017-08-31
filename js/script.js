@@ -115,7 +115,9 @@ $(() => {
 
     getItem(item) {
       if (!this.state.items[item]) {
-        this.state.items[item] = 'none';
+        if (item === 'mail') {
+          this.state.items[item] = 'mail';
+        } else this.state.items[item] = 'none';
       }
       return this.state.items[item];
     }
@@ -660,76 +662,161 @@ $(() => {
       this.items = {
         bow: {
           values: ['none', 'silverarrows', 'bow', 'bow-silverarrows'],
+          type: 'item',
         },
         boomerang: {
           values: ['none', 'boomerang', 'boomerang-red', 'boomerang-both'],
+          type: 'item',
         },
         hookshot: {
           values: ['none', 'hookshot'],
+          type: 'item',
         },
         bomb: {
           values: ['none', 'bomb'],
+          type: 'item',
         },
         'mushroom-powder': {
           values: ['none', 'mushroom', 'powder', 'mushroom-powder'],
+          type: 'item',
         },
         firerod: {
           values: ['none', 'firerod'],
+          type: 'item',
         },
         icerod: {
           values: ['none', 'icerod'],
+          type: 'item',
         },
         bombos: {
           values: ['none', 'bombos'],
+          type: 'item',
         },
         ether: {
           values: ['none', 'ether'],
+          type: 'item',
         },
         quake: {
           values: ['none', 'quake'],
+          type: 'item',
         },
         lantern: {
           values: ['none', 'lantern'],
+          type: 'item',
         },
         hammer: {
           values: ['none', 'hammer'],
+          type: 'item',
         },
         'shovel-flute': {
           values: ['none', 'shovel', 'flute', 'shovel-flute'],
+          type: 'item',
         },
         net: {
           values: ['none', 'net'],
+          type: 'item',
         },
         book: {
           values: ['none', 'book'],
+          type: 'item',
         },
         bottle: {
           values: ['none', 'bottle'],
+          type: 'item',
         },
         somaria: {
           values: ['none', 'somaria'],
+          type: 'item',
         },
         byrna: {
           values: ['none', 'byrna'],
+          type: 'item',
         },
         cape: {
           values: ['none', 'cape'],
+          type: 'item',
         },
         mirror: {
           values: ['none', 'mirror'],
+          type: 'item',
         },
         boots: {
           values: ['none', 'boots'],
+          type: 'item',
         },
         glove: {
           values: ['none', 'glove', 'glove2'],
+          type: 'item',
         },
         flippers: {
           values: ['none', 'flippers'],
+          type: 'item',
         },
         moonpearl: {
           values: ['none', 'moonpearl'],
+          type: 'item',
         },
+        agahnim: {
+          values: ['none', 'agahnim1', 'agahnim2', 'agahnim1-agahnim2'],
+          type: 'bosses',
+        },
+        boss0: {
+          values: ['none', 'boss0'],
+          type: 'bosses',
+        },
+        boss1: {
+          values: ['none', 'boss1'],
+          type: 'bosses',
+        },
+        boss2: {
+          values: ['none', 'boss2'],
+          type: 'bosses',
+        },
+        boss3: {
+          values: ['none', 'boss3'],
+          type: 'bosses',
+        },
+        boss4: {
+          values: ['none', 'boss4'],
+          type: 'bosses',
+        },
+        boss5: {
+          values: ['none', 'boss5'],
+          type: 'bosses',
+        },
+        boss6: {
+          values: ['none', 'boss6'],
+          type: 'bosses',
+        },
+        boss7: {
+          values: ['none', 'boss7'],
+          type: 'bosses',
+        },
+        boss8: {
+          values: ['none', 'boss8'],
+          type: 'bosses',
+        },
+        boss9: {
+          values: ['none', 'boss9'],
+          type: 'bosses',
+        },
+        mail: {
+          values: ['mail', 'mail2', 'mail3'],
+          type: 'equipment',
+        },
+        sword: {
+          values: ['none', 'sword1', 'sword2', 'sword2-tempered', 'sword2-butter'],
+          type: 'equipment',
+        },
+        shield: {
+          values: ['none', 'shield1', 'shield2', 'shield3'],
+          type: 'equipment',
+        },
+      };
+      this.typeMapping = {
+        item: 'item-pretty',
+        bosses: 'bosses',
+        equipment: 'equipment',
       };
 
       this.initItems();
@@ -754,7 +841,7 @@ $(() => {
         this.ui.tracker.append(div);
 
         div.addClass('item');
-        div.addClass('item-pretty');
+        div.addClass(this.typeMapping[this.items[itemName].type]);
         div.data('item', itemName);
         div.data('item-state', this.state.getItem(itemName));
         this.refreshItem(itemName);
@@ -790,6 +877,7 @@ $(() => {
       for (const value of this.items[item].values) {
         div.removeClass(value);
       }
+      div.removeClass(item);
 
       if (itemState === 'none') {
         div.addClass('item_missing');
@@ -813,6 +901,13 @@ $(() => {
           break;
         case 'glove2':
           itemSlot = 'glove';
+          break;
+        case 'sword2':
+          itemSlot = 'sword';
+          break;
+        case 'agahnim1':
+        case 'agahnim2':
+          itemSlot = 'agahnim';
           break;
         default:
           itemSlot = item;
@@ -846,7 +941,7 @@ $(() => {
           return this.has('mirror') && this.access('dweast', allZones);
         case 'dweast':
           return (
-            this.has('agahnim') ||
+            this.has('agahnim1') ||
             (this.has('glove') && this.has('hammer') && this.has('moonpearl')) ||
             ((this.has('hammer') || this.has('flippers')) && this.access('dwwest', allZones))
           );

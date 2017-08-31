@@ -38,7 +38,7 @@ window.doorLocations = {
     x: '30.37%',
     y: '7.92%',
     state(items) {
-      return items.has('agahnim') && items.has('boots') ? 'available' : '';
+      return items.has('agahnim1') && items.has('boots') ? 'available' : '';
     },
   },
   'Lumberjack Cave Door': {

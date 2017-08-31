@@ -34,6 +34,8 @@ footer {
 
   --item-grid-width: 7;
   --item-grid-height: 7;
+  --item-scale-x: 1;
+  --item-scale-y: 1;
 }
 .large {
   --location-size: 48px;
@@ -141,8 +143,8 @@ footer {
 
 .item {
   position: absolute;
-  width: calc(100% / var(--item-grid-width));
-  height: calc(100% / var(--item-grid-height));
+  width: calc(100% / var(--item-grid-width) * var(--item-scale-x));
+  height: calc(100% / var(--item-grid-height) * var(--item-scale-y));
   z-index: 1;
   left: calc(var(--item-x) * 100% / var(--item-grid-width));
   top: calc(var(--item-y) * 100% / var(--item-grid-height));
@@ -152,27 +154,15 @@ footer {
   opacity: 0.3;
 }
 
-.silverarrows {
-  --item-x: 2;
-  --item-y: 0;
-}
-.bow-silverarrows {
-  --item-x: 2;
-  --item-y: 0;
-}
+.silverarrows,
+.bow-silverarrows,
 .bow {
   --item-x: 2;
   --item-y: 0;
 }
+.boomerang,
+.boomerang-red,
 .boomerang-both {
-  --item-x: 3;
-  --item-y: 0;
-}
-.boomerang-red {
-  --item-x: 3;
-  --item-y: 0;
-}
-.boomerang {
   --item-x: 3;
   --item-y: 0;
 }
@@ -184,14 +174,8 @@ footer {
   --item-x: 5;
   --item-y: 0;
 }
-.mushroom {
-  --item-x: 6;
-  --item-y: 0;
-}
-.mushroom-powder {
-  --item-x: 6;
-  --item-y: 0;
-}
+.mushroom-powder,
+.mushroom,
 .powder {
   --item-x: 6;
   --item-y: 0;
@@ -224,15 +208,9 @@ footer {
   --item-x: 3;
   --item-y: 2;
 }
+.shovel-flute,
+.shovel,
 .flute {
-  --item-x: 4;
-  --item-y: 2;
-}
-.shovel {
-  --item-x: 4;
-  --item-y: 2;
-}
-.shovel-flute {
   --item-x: 4;
   --item-y: 2;
 }
@@ -268,10 +246,7 @@ footer {
   --item-x: 2;
   --item-y: 4;
 }
-.glove {
-  --item-x: 3;
-  --item-y: 4;
-}
+.glove,
 .glove2 {
   --item-x: 3;
   --item-y: 4;
@@ -283,4 +258,76 @@ footer {
 .moonpearl {
   --item-x: 5;
   --item-y: 4;
+}
+
+.agahnim,
+.agahnim1,
+.agahnim2,
+.agahnim1-agahnim2 {
+  --item-x: 6;
+  --item-y: 4;
+}
+.boss0 {
+  --item-x: 0;
+  --item-y: 2;
+}
+.boss1 {
+  --item-x: 0;
+  --item-y: 3;
+}
+.boss2 {
+  --item-x: 0;
+  --item-y: 4;
+}
+.boss3 {
+  --item-x: 0;
+  --item-y: 5;
+}
+.boss4 {
+  --item-x: 1;
+  --item-y: 5;
+}
+.boss5 {
+  --item-x: 2;
+  --item-y: 5;
+}
+.boss6 {
+  --item-x: 3;
+  --item-y: 5;
+}
+.boss7 {
+  --item-x: 4;
+  --item-y: 5;
+}
+.boss8 {
+  --item-x: 5;
+  --item-y: 5;
+}
+.boss9 {
+  --item-x: 6;
+  --item-y: 5;
+}
+
+.mail,
+.mail2,
+.mail3 {
+  --item-x: 0;
+  --item-y: 0;
+  --item-scale-x: 2;
+  --item-scale-y: 2;
+}
+.shield,
+.shield1,
+.shield2,
+.shield3 {
+  --item-x: 0;
+  --item-y: 1;
+}
+.sword,
+.sword1,
+.sword2,
+.sword2-butter,
+.sword2-tempered {
+  --item-x: 1;
+  --item-y: 0;
 }

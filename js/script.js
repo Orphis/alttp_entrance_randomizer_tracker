@@ -488,19 +488,22 @@ $(() => {
           this.ui.mapFooter.html(text);
         });
 
-        const location = this.state.findLocation(name);
-        if (location) {
-          LocationTracker.refreshRect(rect, location);
-        }
+        this.refreshRect(rect);
 
         this.state.addOnLocationChanged(
-          function locationChangedEvent(event) {
-            const dataLocation = this.data('location');
+          function locationChangedEvent(rectTarget, event) {
+            const dataLocation = rectTarget.data('location');
             if (event.location !== dataLocation) {
               return;
             }
-            LocationTracker.refreshRect(this, event.value);
-          }.bind(rect),
+            this.refreshRect(rectTarget);
+          }.bind(this, rect),
+        );
+
+        this.state.addOnItemChanged(
+          function itemChangedEvent(rectTarget) {
+            this.refreshRect(rectTarget);
+          }.bind(this, rect),
         );
 
         door.rect = mapDiv;
@@ -508,7 +511,9 @@ $(() => {
       }
     }
 
-    static refreshRect(rect, location) {
+    refreshRect(rect) {
+      const locationName = rect.data('location');
+      const location = this.state.findLocation(locationName);
       if (!location) {
         rect.removeClass('marked');
         rect.removeClass('done');

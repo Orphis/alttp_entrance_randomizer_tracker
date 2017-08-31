@@ -498,15 +498,21 @@ $(() => {
         });
         rect.mouseenter((event) => {
           const locationName = $(event.currentTarget).data('location');
+          const caveName = this.doorLocations[locationName].cave;
           let text;
           if (this.annotateLocationName) {
-            text = `Connect <span style="color: green">${this
-              .annotateLocationName}</span> ➜ <span style="color: red">${locationName}</span>`;
+            if (caveName) {
+              text = `Connect <span style="color: green">${this
+                .annotateLocationName}</span> ➜ <span style="color: red">${locationName} (${caveName})</span>`;
+            } else {
+              text = `<span class="glyphicon glyphicon-warning-sign"></span> Can't connect <span style="color: green">${this
+                .annotateLocationName}</span> ➜ <span style="color: red">${locationName} (NO REMARKABLE CAVE)</span> <span class="glyphicon glyphicon-warning-sign"></span>`;
+            }
           } else {
             text = locationName;
             const location = this.state.findLocation(locationName);
             if (location) {
-              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${location.cave}</span>`;
+              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${location.cave} (${caveName})</span>`;
             }
           }
           this.ui.mapFooter.html(text);

@@ -26,23 +26,7 @@
 </head>
 
 <body>
-  <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <form id="add_location_form">
-        <div class="input-group">
-          <span class="input-group-addon">Door</span>
-          <input type="text" class="form-control" placeholder="Click for list of doors..." id="add_location_text_door" autocomplete="off">
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon">Cave</span>
-          <input type="text" class="form-control" placeholder="Click for list of caves..." id="add_location_text_cave" autocomplete="off">
-        </div>
-        <button type="submit" class="btn btn-primary">Add location</button>
-        <button type="button" class="btn btn-default" id="add_location_clear">Clear</button>
-        <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#clear_modal">Reset tracker</button>
-      </form>
-    </div>
-  </div>
+
   <div class="modal fade" tabindex="-1" role="dialog" id="clear_modal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -69,45 +53,62 @@
     </div>
   </div>
   <!-- <div>Coordinates LW: <span id="lw_coord"></span> DW: <span id="dw_coord"></span></div> -->
-  <div>
-    <table class="table table-striped table-condensed table-hover" id="locations_table">
-      <thead>
-        <tr>
-          <th>Door name</th>
-          <th>Cave name</th>
-          <th>Exit name</th>
-          <th>Added time</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <table class="table table-striped table-condensed table-hover" id="unvisited_doors_table">
-      <thead>
-        <tr>
-          <th>Unvisited Doors</th>
-          <th>Region</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <table class="table table-striped table-condensed table-hover" id="unvisited_caves_table">
-      <thead>
-        <tr>
-          <th>Unvisited Caves</th>
-          <th>Item count</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+  <div class="table_container">
+    <div class="container">
+      <form id="add_location_form">
+        <div class="input-group">
+          <span class="input-group-addon">Door</span>
+          <input type="text" class="form-control" placeholder="Click for list of doors..." id="add_location_text_door" autocomplete="off">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">Cave</span>
+          <input type="text" class="form-control" placeholder="Click for list of caves..." id="add_location_text_cave" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-primary">Add location</button>
+        <button type="button" class="btn btn-default" id="add_location_clear">Clear</button>
+        <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#clear_modal">Reset tracker</button>
+      </form>
+    </div>
+    <div>
+      <table class="table table-striped table-condensed table-hover" id="locations_table">
+        <thead>
+          <tr>
+            <th>Door name</th>
+            <th>Cave name</th>
+            <th>Exit name</th>
+            <th>Added time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="table table-striped table-condensed table-hover" id="unvisited_doors_table">
+        <thead>
+          <tr>
+            <th>Unvisited Doors</th>
+            <th>Region</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="table table-striped table-condensed table-hover" id="unvisited_caves_table">
+        <thead>
+          <tr>
+            <th>Unvisited Caves</th>
+            <th>Item count</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </div>
   <footer>
     <div class="container">

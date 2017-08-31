@@ -3,10 +3,9 @@
   width: 400px;
 }
 
-body {
+.table_container {
   margin-left: 15px;
   margin-right: 15px;
-  padding-top: 110px;
 }
 
 .ui-autocomplete {

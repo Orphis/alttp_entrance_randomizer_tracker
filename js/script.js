@@ -482,7 +482,7 @@ $(() => {
             text = locationName;
             const location = this.state.findLocation(locationName);
             if (location) {
-              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${location.cave} (${caveName})</span>`;
+              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${location.cave} (${location.exit})</span>`;
             }
           }
           this.ui.mapFooter.html(text);

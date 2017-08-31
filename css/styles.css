@@ -31,6 +31,9 @@ footer {
   --location-fill: #ff0000;
   --location-fill-hover: #ff8000;
   --location-stroke: #000000;
+
+  --item-grid-width: 7;
+  --item-grid-height: 7;
 }
 .large {
   --location-size: 48px;
@@ -138,11 +141,146 @@ footer {
 
 .item {
   position: absolute;
-  width: 20%;
-  height: 20%;
+  width: calc(100% / var(--item-grid-width));
+  height: calc(100% / var(--item-grid-height));
   z-index: 1;
+  left: calc(var(--item-x) * 100% / var(--item-grid-width));
+  top: calc(var(--item-y) * 100% / var(--item-grid-height));
 }
 
 .item_missing {
   opacity: 0.3;
+}
+
+.silverarrows {
+  --item-x: 2;
+  --item-y: 0;
+}
+.bow-silverarrows {
+  --item-x: 2;
+  --item-y: 0;
+}
+.bow {
+  --item-x: 2;
+  --item-y: 0;
+}
+.boomerang-both {
+  --item-x: 3;
+  --item-y: 0;
+}
+.boomerang-red {
+  --item-x: 3;
+  --item-y: 0;
+}
+.boomerang {
+  --item-x: 3;
+  --item-y: 0;
+}
+.hookshot {
+  --item-x: 4;
+  --item-y: 0;
+}
+.bomb {
+  --item-x: 5;
+  --item-y: 0;
+}
+.mushroom {
+  --item-x: 6;
+  --item-y: 0;
+}
+.mushroom-powder {
+  --item-x: 6;
+  --item-y: 0;
+}
+.powder {
+  --item-x: 6;
+  --item-y: 0;
+}
+.firerod {
+  --item-x: 2;
+  --item-y: 1;
+}
+.icerod {
+  --item-x: 3;
+  --item-y: 1;
+}
+.bombos {
+  --item-x: 4;
+  --item-y: 1;
+}
+.ether {
+  --item-x: 5;
+  --item-y: 1;
+}
+.quake {
+  --item-x: 6;
+  --item-y: 1;
+}
+.lantern {
+  --item-x: 2;
+  --item-y: 2;
+}
+.hammer {
+  --item-x: 3;
+  --item-y: 2;
+}
+.flute {
+  --item-x: 4;
+  --item-y: 2;
+}
+.shovel {
+  --item-x: 4;
+  --item-y: 2;
+}
+.shovel-flute {
+  --item-x: 4;
+  --item-y: 2;
+}
+.net {
+  --item-x: 5;
+  --item-y: 2;
+}
+.book {
+  --item-x: 6;
+  --item-y: 2;
+}
+.bottle {
+  --item-x: 2;
+  --item-y: 3;
+}
+.somaria {
+  --item-x: 3;
+  --item-y: 3;
+}
+.byrna {
+  --item-x: 4;
+  --item-y: 3;
+}
+.cape {
+  --item-x: 5;
+  --item-y: 3;
+}
+.mirror {
+  --item-x: 6;
+  --item-y: 3;
+}
+.boots {
+  --item-x: 2;
+  --item-y: 4;
+}
+.glove {
+  --item-x: 3;
+  --item-y: 4;
+}
+.glove2 {
+  --item-x: 3;
+  --item-y: 4;
+}
+.flippers {
+  --item-x: 4;
+  --item-y: 4;
+}
+.moonpearl {
+  --item-x: 5;
+  --item-y: 4;
 }

@@ -747,8 +747,7 @@ $(() => {
           this.state.mapHeight = ui.size.height;
         }.bind(this),
       });
-      let x = 0;
-      let y = 0;
+
       for (const itemName of Object.keys(this.items)) {
         const div = $(document.createElement('div'));
         this.ui.items[itemName] = div;
@@ -756,8 +755,6 @@ $(() => {
 
         div.addClass('item');
         div.addClass('item-pretty');
-        div.css('left', `${x * (100 / 5)}%`);
-        div.css('top', `${y * (100 / 5)}%`);
         div.data('item', itemName);
         div.data('item-state', this.state.getItem(itemName));
         this.refreshItem(itemName);
@@ -783,12 +780,6 @@ $(() => {
             itemTracker.refreshItem(changedItemName);
           }.bind(div, this),
         );
-
-        x += 1;
-        if (x === 5) {
-          x = 0;
-          y += 1;
-        }
       }
     }
 

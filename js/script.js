@@ -212,7 +212,10 @@ $(() => {
 
       this.state.addOnLocationChanged(() => {
         this.state.save();
+        this.refreshList();
       });
+
+      this.refreshList();
     }
 
     initForm() {
@@ -236,7 +239,6 @@ $(() => {
         const textDoor = this.ui.addLocationInputDoor.val();
         const textCave = this.ui.addLocationInputCave.val();
         this.state.addLocation(textDoor, textCave, textDoor, true);
-        this.refreshList();
         this.clearForm();
         event.preventDefault();
       });
@@ -245,7 +247,6 @@ $(() => {
       });
       this.ui.resetButton.click(() => {
         this.state.reset();
-        this.refreshList();
       });
     }
 
@@ -262,7 +263,6 @@ $(() => {
         const td = tr.firstChild;
         const s = td.textContent;
         this.state.removeLocation(s);
-        this.refreshList();
       });
       this.ui.tableLocations.find('tbody').on('click', 'tr', (event) => {
         const tr = event.currentTarget;
@@ -329,7 +329,6 @@ $(() => {
         const td = tr.firstChild;
         const s = td.textContent;
         this.state.addLocation(s, 'Useless', s, true);
-        this.refreshList();
       });
       this.ui.tableUnvisitedLocationsDT = this.ui.tableUnvisitedLocations.DataTable({
         paging: false,
@@ -381,7 +380,6 @@ $(() => {
       );
       this.state.annotateLocation(this.annotateLocationName, 'Marked');
       this.annotateLocationName = null;
-      this.refreshList();
     }
 
     initMap() {
@@ -467,8 +465,6 @@ $(() => {
             this.state.removeLocation(locationName);
             location = null;
           } else this.state.doLocation(locationName, !location.isDone);
-          LocationTracker.refreshRect($(event.currentTarget), location);
-          this.refreshList();
         });
         rect.contextmenu((event) => {
           event.preventDefault();
@@ -485,7 +481,6 @@ $(() => {
             if (this.doorLocations[locationName].overworld) {
               this.state.addLocation(locationName, locationName, locationName, false);
               this.state.annotateLocation(locationName, 'Marked');
-              this.refreshList();
             } else {
               this.annotateLocationName = locationName;
             }
@@ -500,8 +495,6 @@ $(() => {
           } else {
             this.state.annotateLocation(locationName, 'Marked');
           }
-
-          this.refreshList();
         });
         rect.mouseenter((event) => {
           const locationName = $(event.currentTarget).data('location');
@@ -822,13 +815,33 @@ $(() => {
         div.addClass(itemState);
       }
     }
+
+    has(item) {
+      let itemSlot;
+      switch (item) {
+        case 'mushroom':
+        case 'powder':
+          itemSlot = 'mushroom-powder';
+          break;
+        case 'shovel':
+        case 'flute':
+          itemSlot = 'shovel-flute';
+          break;
+        case 'glove2':
+          itemSlot = 'glove';
+          break;
+        default:
+          itemSlot = item;
+      }
+      return this.state.getItem(itemSlot).indexOf(item) !== -1;
+    }
   }
 
   const state = new State();
   state.load();
 
   const itemTracker = new ItemTracker(state);
-
   const locationTracker = new LocationTracker(state, itemTracker);
-  locationTracker.refreshList();
+
+  window.trackers = { itemTracker, locationTracker };
 });

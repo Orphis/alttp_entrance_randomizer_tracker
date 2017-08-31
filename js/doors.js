@@ -37,6 +37,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '30.37%',
     y: '7.92%',
+    state(items) {
+      return items.has('agahnim') && items.has('boots') ? 'available' : '';
+    },
   },
   'Lumberjack Cave Door': {
     region: 'Light World North',
@@ -63,6 +66,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '35.16%',
     y: '19.23%',
+    state(items) {
+      return items.has('glove') ? 'available' : '';
+    },
   },
   'Death Mountain Exit Back': {
     region: 'Light World North',
@@ -70,6 +76,11 @@ window.doorLocations = {
     tag: 'lw',
     x: '35.16%',
     y: '15.38%',
+    state(items) {
+      return items.access('dmexit') || (items.has('mirror') && items.access('dwbumpexit'))
+        ? 'available'
+        : '';
+    },
   },
   'Sanctuary Bonk Rocks': {
     region: 'Light World North',
@@ -77,6 +88,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '38.36%',
     y: '29.19%',
+    state(items) {
+      return items.has('boots') ? 'available' : '';
+    },
   },
   Sanctuary: {
     region: 'Light World North',
@@ -95,6 +109,9 @@ window.doorLocations = {
     drop: true,
     x: '52.74%',
     y: '28.96%',
+    state(items) {
+      return items.has('glove') ? 'available' : '';
+    },
   },
   'Graveyard Cliff': {
     region: 'Light World North',
@@ -102,6 +119,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '57.53%',
     y: '27.38%',
+    state(items) {
+      return items.has('mirror') && items.access('dwwest') ? 'available' : '';
+    },
   },
   "King's Tomb": {
     region: 'Light World North',
@@ -109,6 +129,12 @@ window.doorLocations = {
     tag: 'lw',
     x: '60.27%',
     y: '28.96%',
+    state(items) {
+      return items.has('boots') &&
+      (items.has('glove2') || (items.has('mirror') && items.access('dwwest')))
+        ? 'available'
+        : '';
+    },
   },
   'East of Graveyard Drop': {
     region: 'Light World North',
@@ -137,6 +163,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '40.64%',
     y: '19.23%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'Death Mountain Exit Front': {
     region: 'Death Mountain',
@@ -144,6 +173,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '39.50%',
     y: '14.03%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   "Old Man's Cave Front": {
     region: 'Death Mountain',
@@ -151,6 +183,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '45.43%',
     y: '22.62%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   "Old Man's Cave Back": {
     region: 'Death Mountain',
@@ -158,6 +193,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '53.65%',
     y: '15.84%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'Spectacle Rock Item Peak': {
     region: 'Death Mountain',
@@ -165,6 +203,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '48.63%',
     y: '10.41%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'Spectacle Rock Item Get': {
     region: 'Death Mountain',
@@ -172,6 +213,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '45.89%',
     y: '14.25%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'Spectacle Rock Exit': {
     region: 'Death Mountain',
@@ -179,6 +223,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '48.63%',
     y: '14.71%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'Paradox Cave Top': {
     region: 'Death Mountain',
@@ -186,6 +233,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '86.53%',
     y: '6.11%',
+    state(items) {
+      return items.access('dmne') ? 'available' : '';
+    },
   },
   'Paradox Cave Bottom': {
     region: 'Death Mountain',
@@ -193,6 +243,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '86.99%',
     y: '21.49%',
+    state(items) {
+      return items.access('dmeast') ? 'available' : '';
+    },
   },
   'Mimic Cave': {
     region: 'Death Mountain',
@@ -200,6 +253,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '84.93%',
     y: '9.28%',
+    state(items) {
+      return items.has('mirror') && items.access('dwdmledge') ? 'available' : '';
+    },
   },
   'Spiral Cave Top': {
     region: 'Death Mountain',
@@ -207,6 +263,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '79.00%',
     y: '9.28%',
+    state(items) {
+      return items.access('dmne') ? 'available' : '';
+    },
   },
   'Spiral Cave Bottom': {
     region: 'Death Mountain',
@@ -214,6 +273,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '79.00%',
     y: '13.35%',
+    state(items) {
+      return items.access('dmeast') ? 'available' : '';
+    },
   },
   'Light World Bitch Door Front': {
     region: 'Death Mountain',
@@ -221,6 +283,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '82%',
     y: '14.71%',
+    state(items) {
+      return items.access('dmeast') ? 'available' : '';
+    },
   },
   'Light World Bitch Door Exit': {
     region: 'Death Mountain',
@@ -228,12 +293,18 @@ window.doorLocations = {
     tag: 'lw',
     x: '82%',
     y: '11.31%',
+    state(items) {
+      return items.access('dmne') ? 'available' : '';
+    },
   },
   'Twin Cave Left': {
     region: 'Death Mountain',
     tag: 'lw',
     x: '85.00%',
     y: '14.71%',
+    state(items) {
+      return items.access('dmeast') ? 'available' : '';
+    },
   },
   'Twin Cave Right': {
     region: 'Death Mountain',
@@ -241,6 +312,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '88.00%',
     y: '14.71%',
+    state(items) {
+      return items.access('dmeast') ? 'available' : '';
+    },
   },
   "Witch's Hut": {
     region: 'Light World East',
@@ -257,6 +331,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '90.64%',
     y: '14.25%',
+    state(items) {
+      return items.has('flippers') ? 'available' : '';
+    },
   },
   'Tree Cave by Eastern Palace': {
     // definitely
@@ -431,6 +508,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '2.28%',
     y: '58.82%',
+    state(items) {
+      return items.has('bomb') ? 'available' : '';
+    },
   },
   "Blacksmiths's House": {
     region: 'Kakariko',
@@ -449,6 +529,12 @@ window.doorLocations = {
     tag: 'lw',
     x: '34.05%',
     y: '55.88%',
+    state(items) {
+      return items.has('hammer') ||
+      (items.has('mirror') && items.has('glove2') && items.access('dwwest'))
+        ? 'available'
+        : '';
+    },
   },
   'Bat Cave Door': {
     region: 'Kakariko',
@@ -486,6 +572,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '10.50%',
     y: '71.27%',
+    state(items) {
+      return items.has('mirror') && items.access('dwsouth') ? 'available' : '';
+    },
   },
   'Kakariko Fortune Teller South': {
     region: 'Kakariko',
@@ -519,6 +608,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '80.37%',
     y: '85.07%',
+    state(items) {
+      return items.has('flippers') ? 'available' : '';
+    },
   },
   'Ice Bomb Cave': {
     region: 'Lake Hylia',
@@ -526,6 +618,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '89.95%',
     y: '76.47%',
+    state(items) {
+      return items.has('bomb') ? 'available' : '';
+    },
   },
   'Ice Fairy Cave': {
     region: 'Lake Hylia',
@@ -542,6 +637,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '91.45%',
     y: '79.47%',
+    state(items) {
+      return items.has('glove') ? 'available' : '';
+    },
   },
   'Mini Moldorm Cave': {
     region: 'Lake Hylia',
@@ -549,6 +647,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '65.30%',
     y: '93.67%',
+    state(items) {
+      return items.has('bomb') ? 'available' : '';
+    },
   },
   'South of Grove': {
     region: 'Light World South',
@@ -556,6 +657,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '26.48%',
     y: '82.58%',
+    state(items) {
+      return items.has('mirror') && items.access('dwsouth') ? 'available' : '';
+    },
   },
   "Link's House Bonk Rocks": {
     region: 'Light World South',
@@ -582,6 +686,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '60.27%',
     y: '77.60%',
+    state(items) {
+      return items.has('bomb') ? 'available' : '';
+    },
   },
   Dam: {
     region: 'Light World South',
@@ -600,6 +707,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '31.05%',
     y: '95.70%',
+    state(items) {
+      return items.has('glove') ? 'available' : '';
+    },
   },
   'Regular Cave by Desert': {
     // maybe
@@ -627,6 +737,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '17.58%',
     y: '78.05%',
+    state(items) {
+      return items.access('mire') && items.has('mirror') && items.has('glove') ? 'available' : '';
+    },
   },
   'Uncle Drop': {
     region: 'Hyrule Castle',
@@ -655,6 +768,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '34.25%',
     y: '7.00%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Bumper Cave Bottom': {
     region: 'Dark World North',
@@ -662,6 +778,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '35.16%',
     y: '19.23%',
+    state(items) {
+      return items.has('glove') && items.access('dwwest') ? 'available' : '';
+    },
   },
   'Bumper Cave Top': {
     region: 'Dark World North',
@@ -669,24 +788,36 @@ window.doorLocations = {
     tag: 'dw',
     x: '35.16%',
     y: '15.38%',
+    state() {
+      return '';
+    },
   },
   'DW Sanctuary Spot': {
     region: 'Dark World North',
     tag: 'dw',
     x: '46.35%',
     y: '26.70%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Fire Shield Shop': {
     region: 'Dark World North',
     tag: 'dw',
     x: '33.11%',
     y: '45.25%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   "DW Witch's Hut": {
     region: 'Dark World East',
     tag: 'dw',
     x: '80.37%',
     y: '33.03%',
+    state(items) {
+      return items.access('dwne') ? 'available' : '';
+    },
   },
   'Tree Cave by Palace of Darkness': {
     // maybe
@@ -694,6 +825,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '83.11%',
     y: '64.25%',
+    state(items) {
+      return items.access('dweast') ? 'available' : '';
+    },
   },
   'DW Cave by Eastern Palace Portal': {
     // maybe
@@ -701,18 +835,27 @@ window.doorLocations = {
     tag: 'dw',
     x: '98.40%',
     y: '70.14%',
+    state(items) {
+      return items.access('dweast') ? 'available' : '';
+    },
   },
   'Monkey Hut': {
     region: 'Dark World East',
     tag: 'dw',
     x: '84.70%',
     y: '50.68%',
+    state(items) {
+      return items.access('dweast') ? 'available' : '';
+    },
   },
   'Village of Outcasts Fortune Teller': {
     region: 'Village of Outcasts',
     tag: 'dw',
     x: '18.72%',
     y: '31.90%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Chest Game': {
     region: 'Village of Outcasts',
@@ -720,6 +863,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '5.25%',
     y: '46.61%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'C House': {
     region: 'Village of Outcasts',
@@ -727,12 +873,18 @@ window.doorLocations = {
     tag: 'dw',
     x: '21.23%',
     y: '47.96%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Peg House': {
     region: 'Village of Outcasts',
     tag: 'dw',
     x: '20.32%',
     y: '52.94%',
+    state(items) {
+      return items.has('hammer') && items.access('dwwest') ? 'available' : '';
+    },
   },
   'Doorless Hut': {
     region: 'Village of Outcasts',
@@ -740,6 +892,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '11.42%',
     y: '57.24%',
+    state(items) {
+      return items.has('bomb') && items.access('dwwest') ? 'available' : '';
+    },
   },
   'Peg Cave': {
     region: 'Village of Outcasts',
@@ -747,18 +902,29 @@ window.doorLocations = {
     tag: 'dw',
     x: '31.05%',
     y: '60.63%',
+    state(items) {
+      return items.has('hammer') && items.has('glove2') && items.access('dwwest')
+        ? 'available'
+        : '';
+    },
   },
   'Bow Game House': {
     region: 'Dark World South',
     tag: 'dw',
     x: '21.92%',
     y: '70.36%',
+    state(items) {
+      return items.access('dwsouth') ? 'available' : '';
+    },
   },
   'Bonk Rocks by Bomb Shop': {
     region: 'Dark World South',
     tag: 'dw',
     x: '47.72%',
     y: '65.38%',
+    state(items) {
+      return items.has('boots') && items.access('dwsouth') ? 'available' : '';
+    },
   },
   'Bomb Shop': {
     region: 'Dark World South',
@@ -766,6 +932,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '55.25%',
     y: '68.78%',
+    state(items) {
+      return items.access('dwsouth') ? 'available' : '';
+    },
   },
   'Hype Cave': {
     region: 'Dark World South',
@@ -773,30 +942,57 @@ window.doorLocations = {
     tag: 'dw',
     x: '60.27%',
     y: '77.60%',
+    state(items) {
+      return items.has('bomb') && items.access('dwsouth') ? 'available' : '';
+    },
   },
   'DW Lake Hylia House': {
     region: 'Dark World Lake Hylia',
     tag: 'dw',
     x: '65.53%',
     y: '80.09%',
+    state(items) {
+      return items.access('dwsouth') ? 'available' : '';
+    },
   },
   'DW Ice Bomb Cave': {
     region: 'Dark World Lake Hylia',
     tag: 'dw',
     x: '89.95%',
     y: '76.47%',
+    state(items) {
+      return items.has('moonpearl') &&
+      items.has('flippers') &&
+      items.has('bomb') &&
+      items.access('dweast')
+        ? 'available'
+        : '';
+    },
   },
   'DW Ice Fairy Cave': {
     region: 'Dark World Lake Hylia',
     tag: 'dw',
     x: '92.95%',
     y: '76.47%',
+    state(items) {
+      return items.has('moonpearl') && items.has('flippers') && items.access('dweast')
+        ? 'available'
+        : '';
+    },
   },
   'DW Ice Rock Cave': {
     region: 'Dark World Lake Hylia',
     tag: 'dw',
     x: '91.45%',
     y: '79.47%',
+    state(items) {
+      return items.has('moonpearl') &&
+      items.has('flippers') &&
+      items.has('glove') &&
+      items.access('dweast')
+        ? 'available'
+        : '';
+    },
   },
   'Left Mire Head': {
     region: 'Misery Mire Area',
@@ -804,18 +1000,27 @@ window.doorLocations = {
     tag: 'dw',
     x: '3.67%',
     y: '80.32%',
+    state(items) {
+      return items.access('mire') ? 'available' : '';
+    },
   },
   'Right Mire Head': {
     region: 'Misery Mire Area',
     tag: 'dw',
     x: '10.47%',
     y: '80.32%',
+    state(items) {
+      return items.access('mire') ? 'available' : '';
+    },
   },
   'Mire Cave': {
     region: 'Misery Mire Area',
     tag: 'dw',
     x: '19.86%',
     y: '82.58%',
+    state(items) {
+      return items.access('mire') ? 'available' : '';
+    },
   },
   'Pyramid Fairy': {
     region: 'Pyramid Area',
@@ -823,6 +1028,11 @@ window.doorLocations = {
     tag: 'dw',
     x: '46.80%',
     y: '48.87%',
+    state(items) {
+      return items.has('crystal5') && items.has('crystal6') && items.access('dweast')
+        ? 'available'
+        : '';
+    },
   },
   'Ganon Drop': {
     region: 'Pyramid Area',
@@ -831,6 +1041,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '49.32%',
     y: '41.40%',
+    state(items) {
+      return items.has('agahnim2') ? 'available' : '';
+    },
   },
   'Ganon Door': {
     region: 'Pyramid Area',
@@ -838,6 +1051,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '43.80%',
     y: '48.87%',
+    state() {
+      return '';
+    },
   },
   'Spike Cave': {
     region: 'Dark World Death Mountain',
@@ -845,6 +1061,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '57.31%',
     y: '14.93%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'West DM Fairy Cave': {
     // maybe
@@ -852,6 +1071,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '39.95%',
     y: '19.46%',
+    state(items) {
+      return items.access('dm') ? 'available' : '';
+    },
   },
   'DW Twin Cave Left': {
     region: 'Dark World Death Mountain',
@@ -859,18 +1081,27 @@ window.doorLocations = {
     tag: 'dw',
     x: '84.02%',
     y: '14.93%',
+    state(items) {
+      return items.access('dwdmeast') ? 'available' : '';
+    },
   },
   'DW Twin Cave Right': {
     region: 'Dark World Death Mountain',
     tag: 'dw',
     x: '87.02%',
     y: '14.93%',
+    state(items) {
+      return items.access('dwdmeast') ? 'available' : '';
+    },
   },
   'DW East DM Upper Exit': {
     region: 'Dark World Death Mountain',
     tag: 'dw',
     x: '86.53%',
     y: '6.56%',
+    state(items) {
+      return items.access('dwdmne') ? 'available' : '';
+    },
   },
   'Hookshot Cave Front': {
     region: 'Dark World Death Mountain',
@@ -878,6 +1109,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '82.88%',
     y: '6.33%',
+    state(items) {
+      return items.access('dwdmne') ? 'available' : '';
+    },
   },
   'Hookshot Cave Back': {
     region: 'Dark World Death Mountain',
@@ -885,6 +1119,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '80.14%',
     y: '2.04%',
+    state(items) {
+      return items.access('dwdmisland') ? 'available' : '';
+    },
   },
 
   // Light world dungeons
@@ -904,6 +1141,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '45.53%',
     y: '38.46%',
+    state(items) {
+      return items.access('hyruletop') ? 'available' : '';
+    },
   },
   'Hyrule Castle Right': {
     region: 'Hyrule Castle',
@@ -911,6 +1151,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '55.48%',
     y: '38.46%',
+    state(items) {
+      return items.access('hyruletop') ? 'available' : '';
+    },
   },
   'Hyrule Castle Agahnim': {
     region: 'Hyrule Castle',
@@ -918,6 +1161,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '50.46%',
     y: '40.05%',
+    state(items) {
+      return items.access('hyruletop') ? 'available' : '';
+    },
   },
   'Eastern Palace': {
     region: 'Light World East',
@@ -935,6 +1181,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '7.31%',
     y: '81.22%',
+    state(items) {
+      return items.has('book') || (items.access('mire') && items.has('mirror')) ? 'available' : '';
+    },
   },
   'Desert Palace West': {
     region: 'Desert Area',
@@ -942,6 +1191,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '3.20%',
     y: '79.19%',
+    state(items) {
+      return items.access('desertledge') ? 'available' : '';
+    },
   },
   'Desert Palace East': {
     region: 'Desert Area',
@@ -949,6 +1201,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '11.42%',
     y: '79.19%',
+    state() {
+      return '';
+    },
   },
   'Desert Palace Back': {
     region: 'Desert Area',
@@ -956,6 +1211,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '7.31%',
     y: '76.47%',
+    state(items) {
+      return items.access('desertledge') && items.has('glove') ? 'available' : '';
+    },
   },
   'Tower of Hera': {
     region: 'Death Mountain',
@@ -963,6 +1221,9 @@ window.doorLocations = {
     tag: 'lw',
     x: '56.62%',
     y: '3.85%',
+    state(items) {
+      return items.access('dmnw') ? 'available' : '';
+    },
   },
 
   // Dark world dungeons
@@ -972,6 +1233,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '96.58%',
     y: '38.69%',
+    state(items) {
+      return items.has('moonpearl') && items.access('dweast') ? 'available' : '';
+    },
   },
   'Swamp Palace': {
     region: 'Dark World South',
@@ -979,6 +1243,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '47.26%',
     y: '93.67%',
+    state(items) {
+      return items.access('dwsouth') ? 'available' : '';
+    },
   },
   'Skull Woods Drop Left': {
     region: 'Skull Woods',
@@ -987,6 +1254,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '14.87%',
     y: '17.42%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Skull Woods Drop Right': {
     region: 'Skull Woods',
@@ -995,6 +1265,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '19.21%',
     y: '17.19%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Skull Woods Drop Back': {
     region: 'Skull Woods',
@@ -1003,6 +1276,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '10.99%',
     y: '8.82%',
+    state(items) {
+      return items.access('swback') ? 'available' : '';
+    },
   },
   'Skull Woods Drop Big Chest': {
     region: 'Skull Woods',
@@ -1011,6 +1287,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '19.41%',
     y: '13.12%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Skull Woods Front Entrance': {
     region: 'Skull Woods',
@@ -1018,6 +1297,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '17.12%',
     y: '15.00%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Skull Woods Second Entrance': {
     region: 'Skull Woods',
@@ -1025,6 +1307,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '13.73%',
     y: '13.80%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Skull Woods Exit to Back': {
     region: 'Skull Woods',
@@ -1032,6 +1317,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '5.05%',
     y: '12.22%',
+    state(items) {
+      return items.access('swback') ? 'available' : '';
+    },
   },
   'Skull Woods Big Skull': {
     region: 'Skull Woods',
@@ -1039,6 +1327,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '3.00%',
     y: '4.52%',
+    state(items) {
+      return items.has('firerod') && items.access('swback') ? 'available' : '';
+    },
   },
   "Thieve's Town": {
     region: 'Village of Outcasts',
@@ -1046,6 +1337,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '11.90%',
     y: '47.74%',
+    state(items) {
+      return items.access('dwwest') ? 'available' : '';
+    },
   },
   'Ice Palace': {
     region: 'Dark World Lake Hylia',
@@ -1053,6 +1347,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '80.37%',
     y: '85.07%',
+    state(items) {
+      return items.has('flippers') && items.has('glove2') ? 'available' : '';
+    },
   },
   'Misery Mire': {
     region: 'Misery Mire Area',
@@ -1060,6 +1357,15 @@ window.doorLocations = {
     tag: 'dw',
     x: '6.97%',
     y: '81.22%',
+    state(items) {
+      return items.access('mire') &&
+      items.has('bombos') &&
+      items.has('ether') &&
+      items.has('quake') &&
+      items.has('moonpearl')
+        ? 'available'
+        : '';
+    },
   },
   'Turtle Rock Main Entrance': {
     region: 'Dark World Death Mountain',
@@ -1067,6 +1373,15 @@ window.doorLocations = {
     tag: 'dw',
     x: '93.86%',
     y: '7.47%',
+    state(items) {
+      return items.access('dwdmne') &&
+      items.has('bombos') &&
+      items.has('ether') &&
+      items.has('quake') &&
+      items.has('moonpearl')
+        ? 'available'
+        : '';
+    },
   },
   'Turtle Rock Laser Wall': {
     region: 'Dark World Death Mountain',
@@ -1074,6 +1389,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '79.00%',
     y: '9.68%',
+    state(items) {
+      return items.access('dwdmledge') ? 'available' : '';
+    },
   },
   'Turtle Rock Big Chest': {
     region: 'Dark World Death Mountain',
@@ -1081,6 +1399,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '84.93%',
     y: '9.68%',
+    state(items) {
+      return items.access('dwdmledge') ? 'available' : '';
+    },
   },
   'Turtle Rock Boss Entrance': {
     region: 'Dark World Death Mountain',
@@ -1088,6 +1409,9 @@ window.doorLocations = {
     tag: 'dw',
     x: '82.00%',
     y: '11.61%',
+    state() {
+      return '';
+    },
   },
   "Ganon's Tower": {
     region: 'Dark World Death Mountain',
@@ -1095,5 +1419,8 @@ window.doorLocations = {
     tag: 'dw',
     x: '56.62%',
     y: '3.85%',
+    state(items) {
+      return items.access('dwdmne') ? 'available' : '';
+    },
   },
 };

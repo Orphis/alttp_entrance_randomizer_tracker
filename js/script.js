@@ -522,6 +522,8 @@ $(() => {
         if (state === 'available' || state === 'visible') {
           rect.addClass(state);
         }
+      } else {
+        console.log(`Missing status function for '${locationName}'`);
       }
 
       if (!location) {
@@ -825,6 +827,70 @@ $(() => {
           itemSlot = item;
       }
       return this.state.getItem(itemSlot).indexOf(item) !== -1;
+    }
+
+    access(zone, zones) {
+      if (zones && zones.includes(zone)) return false;
+      let allZones;
+      if (!zones) allZones = [zone];
+      else {
+        allZones = zones;
+        zones.push(zone);
+      }
+
+      switch (zone) {
+        case 'dm':
+          return this.has('flute');
+        case 'dmeast':
+          return (
+            (this.has('hookshot') && this.access('dm', allZones)) || this.access('dmne', allZones)
+          );
+        case 'dmnw':
+          return this.has('mirror') && this.access('dm', allZones);
+        case 'dmne':
+          return this.has('hammer') && this.access('dmnw', allZones);
+        case 'desertledge':
+          return this.has('mirror') && this.access('mire', allZones);
+        case 'hyruletop':
+          return this.has('mirror') && this.access('dweast', allZones);
+        case 'dweast':
+          return (
+            this.has('agahnim') ||
+            (this.has('glove') && this.has('hammer') && this.has('moonpearl')) ||
+            ((this.has('hammer') || this.has('flippers')) && this.access('dwwest', allZones))
+          );
+        case 'dwne':
+          return (
+            this.has('moonpearl') &&
+            ((this.has('flippers') || this.has('hammer') || this.has('glove')) &&
+              this.access('dweast', allZones))
+          );
+        case 'dwwest':
+          return (
+            (this.has('moonpearl') &&
+              (this.has('glove2') || (this.has('glove') && this.has('hammer')))) ||
+            (this.has('hookshot') && this.access('dwne', allZones))
+          );
+        case 'dwsouth':
+          return (
+            this.has('moonpearl') &&
+            ((this.has('glove') && this.has('hammer')) ||
+              (this.has('hammer') && this.access('dweast', allZones)) ||
+              this.access('dwwest', allZones))
+          );
+        case 'dwdmeast':
+          return this.has('glove2') && this.access('dmeast', allZones);
+        case 'dwdmne':
+          return this.has('glove2') && this.has('hammer') && this.access('dwne', allZones);
+        case 'mire':
+          return this.has('glove2') && this.has('flute');
+        case 'swback':
+        case 'dwbumpexit':
+        case 'dwdmisland':
+        case 'dwdmledge':
+        default:
+          return false;
+      }
     }
   }
 

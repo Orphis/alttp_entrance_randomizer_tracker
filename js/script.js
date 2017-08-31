@@ -288,7 +288,7 @@ $(() => {
             orderable: false,
             className: 'center',
             defaultContent:
-              '<a href="" class="editor_remove"><span class="glyphicon glyphicon-remove"></a>',
+              '<a href="#" class="editor_remove"><span class="glyphicon glyphicon-remove"></a>',
           },
         ],
         buttons: [
@@ -330,7 +330,7 @@ $(() => {
             orderable: false,
             className: 'center',
             defaultContent:
-              '<a href="" class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>',
+              '<a href="#" class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>',
           },
           {
             data: 'tag',

@@ -41,6 +41,14 @@ footer {
   --location-size: 14px;
   --location-border-width: 4px;
 }
+.available {
+  --location-fill: #32cd32;
+  --location-fill-hover: #00ff00;
+}
+.visible {
+  --location-fill: #ffd700;
+  --location-fill-hover: #ffff00;
+}
 .marked {
   --location-fill: #0080ff;
   --location-fill-hover: #80c0ff;
@@ -98,34 +106,25 @@ footer {
 }
 
 .location rect {
-  width: 100%;
-  height: 100%;
   stroke-width: var(--location-border-width);
   stroke: var(--location-stroke);
-  fill: var(--location-fill);
 }
 
 .location circle {
   stroke-width: calc(var(--location-border-width) / 2);
   stroke: var(--location-stroke);
-  fill: var(--location-fill);
 }
 
 .location polygon {
   stroke-width: calc(var(--location-border-width) * 2);
   stroke: var(--location-stroke);
+}
+
+.location {
   fill: var(--location-fill);
 }
 
-.location:hover rect {
-  fill: var(--location-fill-hover);
-}
-
-.location:hover circle {
-  fill: var(--location-fill-hover);
-}
-
-.location:hover polygon {
+.location:hover {
   fill: var(--location-fill-hover);
 }
 

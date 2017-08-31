@@ -514,6 +514,16 @@ $(() => {
     refreshRect(rect) {
       const locationName = rect.data('location');
       const location = this.state.findLocation(locationName);
+
+      if (this.doorLocations[locationName].state) {
+        const state = this.doorLocations[locationName].state(this.itemTracker);
+        rect.removeClass('available');
+        rect.removeClass('visible');
+        if (state === 'available' || state === 'visible') {
+          rect.addClass(state);
+        }
+      }
+
       if (!location) {
         rect.removeClass('marked');
         rect.removeClass('done');

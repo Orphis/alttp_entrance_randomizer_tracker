@@ -245,12 +245,13 @@ $(() => {
     initTables() {
       this.ui.tableLocations.on('click', 'a.editor_remove', (event) => {
         event.preventDefault();
+        event.stopPropagation();
         const tr = $(event.currentTarget).closest('tr')[0];
         const td = tr.firstChild;
         const s = td.textContent;
         this.state.removeLocation(s);
       });
-      this.ui.tableLocations.find('tbody').on('click', 'tr', (event) => {
+      this.ui.tableLocations.on('click', 'tbody tr', (event) => {
         const tr = event.currentTarget;
         const td = tr.firstChild;
         const locationName = td.textContent;
@@ -285,7 +286,7 @@ $(() => {
             orderable: false,
             className: 'center',
             defaultContent:
-              '<a href="#" class="editor_remove"><span class="glyphicon glyphicon-remove"></a>',
+              '<a class="editor_remove"><span class="glyphicon glyphicon-remove"></a>',
           },
         ],
         buttons: [
@@ -327,7 +328,7 @@ $(() => {
             orderable: false,
             className: 'center',
             defaultContent:
-              '<a href="#" class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>',
+              '<a class="editor_useless text-nowrap"><span title="Mark Useless" class="glyphicon glyphicon-remove"></span></a>',
           },
           {
             data: 'tag',

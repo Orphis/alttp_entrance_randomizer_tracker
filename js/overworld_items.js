@@ -6,6 +6,7 @@ window.overworldLocations = {
     y: '5.20%',
     isOverworld: true,
     state(items) {
+      if (items.has('pendant-all')) return 'available';
       return items.has('book') ? 'visible' : '';
     },
   },
@@ -125,6 +126,15 @@ window.overworldLocations = {
     y: '69.91%',
     state(items) {
       return items.has('flippers') ? 'available' : '';
+    },
+  },
+  'Sahasrahla Pendant': {
+    region: 'Light World East',
+    tag: 'lw',
+    x: '81.96%',
+    y: '46.30%',
+    state(items) {
+      return items.has('pendant-green') ? 'available' : '';
     },
   },
   Zora: {

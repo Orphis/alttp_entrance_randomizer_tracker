@@ -271,41 +271,141 @@ footer {
   --item-x: 0;
   --item-y: 2;
 }
+.boss0reward {
+  --item-x: 0.5;
+  --item-y: 2.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss0chest {
+  --item-x: 1;
+  --item-y: 2;
+}
 .boss1 {
   --item-x: 0;
+  --item-y: 3;
+}
+.boss1reward {
+  --item-x: 0.5;
+  --item-y: 3.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss1chest {
+  --item-x: 1;
   --item-y: 3;
 }
 .boss2 {
   --item-x: 0;
   --item-y: 4;
 }
+.boss2reward {
+  --item-x: 0.5;
+  --item-y: 4.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss2chest {
+  --item-x: 1;
+  --item-y: 4;
+}
 .boss3 {
   --item-x: 0;
   --item-y: 5;
+}
+.boss3reward {
+  --item-x: 0.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss3chest {
+  --item-x: 0;
+  --item-y: 6;
 }
 .boss4 {
   --item-x: 1;
   --item-y: 5;
 }
+.boss4reward {
+  --item-x: 1.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss4chest {
+  --item-x: 1;
+  --item-y: 6;
+}
 .boss5 {
   --item-x: 2;
   --item-y: 5;
+}
+.boss5reward {
+  --item-x: 2.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss5chest {
+  --item-x: 2;
+  --item-y: 6;
 }
 .boss6 {
   --item-x: 3;
   --item-y: 5;
 }
+.boss6reward {
+  --item-x: 3.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss6chest {
+  --item-x: 3;
+  --item-y: 6;
+}
 .boss7 {
   --item-x: 4;
   --item-y: 5;
+}
+.boss7reward {
+  --item-x: 4.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss7chest {
+  --item-x: 4;
+  --item-y: 6;
 }
 .boss8 {
   --item-x: 5;
   --item-y: 5;
 }
+.boss8reward {
+  --item-x: 5.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss8chest {
+  --item-x: 5;
+  --item-y: 6;
+}
 .boss9 {
   --item-x: 6;
   --item-y: 5;
+}
+.boss9reward {
+  --item-x: 6.5;
+  --item-y: 5.5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
+.boss9chest {
+  --item-x: 6;
+  --item-y: 6;
 }
 
 .mail,

@@ -360,9 +360,9 @@ window.doorLocations = {
     cave: "Sahasrahla's Hut",
     tag: 'lw',
     x: '81.96%',
-    y: '44.80%',
-    state() {
-      return 'available';
+    y: '43.30%',
+    state(items) {
+      return items.has('bomb') || items.has('boots') ? 'available' : '';
     },
   },
   'Kakariko Fortune Teller North': {
@@ -1029,9 +1029,7 @@ window.doorLocations = {
     x: '46.80%',
     y: '48.87%',
     state(items) {
-      return items.has('crystal5') && items.has('crystal6') && items.access('dweast')
-        ? 'available'
-        : '';
+      return items.has('crystal56') && items.access('dweast') ? 'available' : '';
     },
   },
   'Ganon Drop': {
@@ -1162,7 +1160,9 @@ window.doorLocations = {
     x: '50.46%',
     y: '40.05%',
     state(items) {
-      return items.access('hyruletop') ? 'available' : '';
+      return (items.has('sword2') || items.has('cape')) && items.access('hyruletop')
+        ? 'available'
+        : '';
     },
   },
   'Eastern Palace': {
@@ -1359,6 +1359,7 @@ window.doorLocations = {
     y: '81.22%',
     state(items) {
       return items.access('mire') &&
+      items.has('sword') &&
       items.has('bombos') &&
       items.has('ether') &&
       items.has('quake') &&
@@ -1375,6 +1376,7 @@ window.doorLocations = {
     y: '7.47%',
     state(items) {
       return items.access('dwdmne') &&
+      items.has('sword') &&
       items.has('bombos') &&
       items.has('ether') &&
       items.has('quake') &&
@@ -1420,7 +1422,7 @@ window.doorLocations = {
     x: '56.62%',
     y: '3.85%',
     state(items) {
-      return items.access('dwdmne') ? 'available' : '';
+      return items.has('crystal-all') && items.access('dwdmne') ? 'available' : '';
     },
   },
 };

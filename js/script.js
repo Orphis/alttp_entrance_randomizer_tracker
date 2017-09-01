@@ -42,16 +42,16 @@ $(() => {
     }
 
     reset() {
-      const oldLocations = this.state.locations;
-      this.state.locations = [];
-      for (const location of oldLocations) {
-        this.triggerLocationChanged(location.door, 'delete');
-      }
-
       const oldItems = this.state.items;
       this.state.items = {};
       for (const item of Object.keys(oldItems)) {
         this.triggerItemChanged(item);
+      }
+
+      const oldLocations = this.state.locations;
+      this.state.locations = [];
+      for (const location of oldLocations) {
+        this.triggerLocationChanged(location.door, 'delete');
       }
 
       this.save();
@@ -114,11 +114,6 @@ $(() => {
     }
 
     getItem(item) {
-      if (!this.state.items[item]) {
-        if (item === 'mail') {
-          this.state.items[item] = 'mail';
-        } else this.state.items[item] = 'none';
-      }
       return this.state.items[item];
     }
 
@@ -760,46 +755,6 @@ $(() => {
           values: ['none', 'agahnim1', 'agahnim2', 'agahnim1-agahnim2'],
           type: 'bosses',
         },
-        boss0: {
-          values: ['none', 'boss0'],
-          type: 'bosses',
-        },
-        boss1: {
-          values: ['none', 'boss1'],
-          type: 'bosses',
-        },
-        boss2: {
-          values: ['none', 'boss2'],
-          type: 'bosses',
-        },
-        boss3: {
-          values: ['none', 'boss3'],
-          type: 'bosses',
-        },
-        boss4: {
-          values: ['none', 'boss4'],
-          type: 'bosses',
-        },
-        boss5: {
-          values: ['none', 'boss5'],
-          type: 'bosses',
-        },
-        boss6: {
-          values: ['none', 'boss6'],
-          type: 'bosses',
-        },
-        boss7: {
-          values: ['none', 'boss7'],
-          type: 'bosses',
-        },
-        boss8: {
-          values: ['none', 'boss8'],
-          type: 'bosses',
-        },
-        boss9: {
-          values: ['none', 'boss9'],
-          type: 'bosses',
-        },
         mail: {
           values: ['mail', 'mail2', 'mail3'],
           type: 'equipment',
@@ -813,6 +768,31 @@ $(() => {
           type: 'equipment',
         },
       };
+      const dungeonChestCount = [3, 2, 2, 5, 6, 3, 4, 3, 2, 5];
+      for (let i = 0; i < 10; i += 1) {
+        this.items[`boss${i}`] = {
+          values: ['none', `boss${i}`],
+          type: 'bosses',
+        };
+        this.items[`boss${i}reward`] = {
+          values: [
+            'reward-unknown',
+            'reward-crystal',
+            'reward-crystal56',
+            'reward-pendant-green',
+            'reward-pendant-bluered',
+          ],
+          type: 'bosses',
+        };
+        const dungeonChests = {
+          values: [],
+          type: 'bosses',
+        };
+        for (let j = dungeonChestCount[i]; j >= 0; j -= 1) {
+          dungeonChests.values.push(`chest${j}`);
+        }
+        this.items[`boss${i}chest`] = dungeonChests;
+      }
       this.typeMapping = {
         item: 'item-pretty',
         bosses: 'bosses',
@@ -843,15 +823,13 @@ $(() => {
         div.addClass('item');
         div.addClass(this.typeMapping[this.items[itemName].type]);
         div.data('item', itemName);
-        div.data('item-state', this.state.getItem(itemName));
         this.refreshItem(itemName);
         div.click((event) => {
           event.preventDefault();
 
           const clickedItemName = $(event.currentTarget).data('item');
-          const clickedItemState = this.state.getItem(clickedItemName);
+          const clickedItemState = this.safeGetItem(clickedItemName);
           console.log(`Clicked on item: ${clickedItemName}`);
-          console.log(this.items[clickedItemName].values);
 
           const itemStates = this.items[clickedItemName].values;
           const newItemState =
@@ -870,16 +848,28 @@ $(() => {
       }
     }
 
+    safeGetItem(item) {
+      let value = this.state.getItem(item);
+      if (!value) {
+        value = this.items[item].values[0];
+        this.state.setItem(item, value);
+      }
+      return value;
+    }
+
     refreshItem(item) {
       const div = this.ui.items[item];
-      const itemState = this.state.getItem(item);
+      const itemState = this.safeGetItem(item);
 
       for (const value of this.items[item].values) {
         div.removeClass(value);
       }
       div.removeClass(item);
 
-      if (itemState === 'none') {
+      if (item.endsWith('reward') || item.endsWith('chest')) {
+        div.addClass(item);
+        div.addClass(itemState);
+      } else if (itemState === 'none') {
         div.addClass('item_missing');
         div.addClass(item);
       } else {
@@ -890,6 +880,8 @@ $(() => {
 
     has(item) {
       let itemSlot;
+      let count = 0;
+
       switch (item) {
         case 'mushroom':
         case 'powder':
@@ -909,10 +901,39 @@ $(() => {
         case 'agahnim2':
           itemSlot = 'agahnim';
           break;
+        case 'crystal56':
+          for (let i = 0; i < 10; i += 1) {
+            const dungeonReward = this.safeGetItem(`boss${i}reward`);
+            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            if (dungeonReward === 'reward-crystal56' && dungeonCompleted) count += 1;
+          }
+          return count >= 2;
+        case 'crystal-all':
+          for (let i = 0; i < 10; i += 1) {
+            const dungeonReward = this.safeGetItem(`boss${i}reward`);
+            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            if (dungeonReward.startsWith('reward-crystal') && dungeonCompleted) count += 1;
+          }
+          return count >= 7;
+        case 'pendant-green':
+          for (let i = 0; i < 10; i += 1) {
+            const dungeonReward = this.safeGetItem(`boss${i}reward`);
+            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            if (dungeonReward === 'reward-pendant-green' && dungeonCompleted) count += 1;
+          }
+          return count >= 1;
+        case 'pendant-all':
+          for (let i = 0; i < 10; i += 1) {
+            const dungeonReward = this.safeGetItem(`boss${i}reward`);
+            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            if (dungeonReward.startsWith('reward-pendant') && dungeonCompleted) count += 1;
+          }
+          return count >= 3;
         default:
           itemSlot = item;
       }
-      return this.state.getItem(itemSlot).indexOf(item) !== -1;
+
+      return this.safeGetItem(itemSlot).indexOf(item) !== -1;
     }
 
     access(zone, zones) {

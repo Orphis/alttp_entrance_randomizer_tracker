@@ -11,54 +11,102 @@
   background-size: 100%;
 }
 .bosses.agahnim1-agahnim2 {
-  background-position: 0 7.692308%;
+  background-position: 0 4.43686%;
   background-size: 100%;
 }
 .bosses.agahnim1 {
-  background-position: 0 15.384615%;
+  background-position: 0 8.87372%;
   background-size: 100%;
 }
 .bosses.agahnim2 {
-  background-position: 0 23.076923%;
+  background-position: 0 13.31058%;
   background-size: 100%;
 }
 .bosses.boss0 {
-  background-position: 0 30.769231%;
+  background-position: 0 17.74744%;
   background-size: 100%;
 }
 .bosses.boss1 {
-  background-position: 0 38.461538%;
+  background-position: 0 22.1843%;
   background-size: 100%;
 }
 .bosses.boss2 {
-  background-position: 0 46.153846%;
+  background-position: 0 26.62116%;
   background-size: 100%;
 }
 .bosses.boss3 {
-  background-position: 0 53.846154%;
+  background-position: 0 31.05802%;
   background-size: 100%;
 }
 .bosses.boss4 {
-  background-position: 0 61.538462%;
+  background-position: 0 35.494881%;
   background-size: 100%;
 }
 .bosses.boss5 {
-  background-position: 0 69.230769%;
+  background-position: 0 39.931741%;
   background-size: 100%;
 }
 .bosses.boss6 {
-  background-position: 0 76.923077%;
+  background-position: 0 44.368601%;
   background-size: 100%;
 }
 .bosses.boss7 {
-  background-position: 0 84.615385%;
+  background-position: 0 48.805461%;
   background-size: 100%;
 }
 .bosses.boss8 {
-  background-position: 0 92.307692%;
+  background-position: 0 53.242321%;
   background-size: 100%;
 }
 .bosses.boss9 {
-  background-position: 0 100%;
+  background-position: 0 57.679181%;
   background-size: 100%;
+}
+.bosses.chest0 {
+  background-position: 0 62.116041%;
+  background-size: 100%;
+}
+.bosses.chest1 {
+  background-position: 0 66.552901%;
+  background-size: 100%;
+}
+.bosses.chest2 {
+  background-position: 0 70.989761%;
+  background-size: 100%;
+}
+.bosses.chest3 {
+  background-position: 0 75.426621%;
+  background-size: 100%;
+}
+.bosses.chest4 {
+  background-position: 0 79.863481%;
+  background-size: 100%;
+}
+.bosses.chest5 {
+  background-position: 0 84.300341%;
+  background-size: 100%;
+}
+.bosses.chest6 {
+  background-position: 0 88.737201%;
+  background-size: 100%;
+}
+.bosses.reward-crystal {
+  background-position: 0 91.182365%;
+  background-size: 200%;
+}
+.bosses.reward-crystal56 {
+  background-position: 0 93.386774%;
+  background-size: 200%;
+}
+.bosses.reward-pendant-bluered {
+  background-position: 0 95.591182%;
+  background-size: 200%;
+}
+.bosses.reward-pendant-green {
+  background-position: 0 97.795591%;
+  background-size: 200%;
+}
+.bosses.reward-unknown {
+  background-position: 0 100%;
+  background-size: 200%;
 }

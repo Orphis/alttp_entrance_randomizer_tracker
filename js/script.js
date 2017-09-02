@@ -769,7 +769,7 @@ $(() => {
           type: 'equipment',
         },
       };
-      const dungeonChestCount = [3, 2, 2, 5, 6, 3, 4, 3, 2, 5];
+      const dungeonChestCount = [3, 2, 2, 5, 6, 2, 4, 3, 2, 5];
       for (let i = 0; i < 10; i += 1) {
         this.items[`boss${i}`] = {
           values: ['none', `boss${i}`],

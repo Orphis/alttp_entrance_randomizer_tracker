@@ -174,10 +174,6 @@ $(() => {
         this.doorLocations[name].overworld = true;
       }
       this.ui = {
-        addLocationInputDoor: $('#add_location_text_door'),
-        addLocationInputCave: $('#add_location_text_cave'),
-        addLocationButtonClear: $('#add_location_clear'),
-        addLocationForm: $('#add_location_form'),
         resetButton: $('#reset_tracker'),
 
         tableLocations: $('#locations_table'),
@@ -205,41 +201,9 @@ $(() => {
     }
 
     initForm() {
-      this.ui.addLocationInputDoor.autocomplete({
-        source: [],
-        minLength: 0,
-      });
-      this.ui.addLocationInputDoor.click((event) => {
-        $(event.target).autocomplete('search', event.target.value);
-      });
-
-      this.ui.addLocationInputCave.autocomplete({
-        source: Object.keys(this.caves).filter(item => item !== 'Useless').sort(),
-        minLength: 0,
-      });
-      this.ui.addLocationInputCave.click((event) => {
-        $(event.target).autocomplete('search', event.target.value);
-      });
-
-      this.ui.addLocationForm.submit((event) => {
-        const textDoor = this.ui.addLocationInputDoor.val();
-        const textCave = this.ui.addLocationInputCave.val();
-        this.state.addLocation(textDoor, textCave, textDoor, true);
-        this.clearForm();
-        event.preventDefault();
-      });
-      this.ui.addLocationButtonClear.click(() => {
-        this.clearForm();
-      });
       this.ui.resetButton.click(() => {
         this.state.reset();
       });
-    }
-
-    clearForm() {
-      this.ui.addLocationInputDoor.val('');
-      this.ui.addLocationInputCave.val('');
-      this.ui.addLocationInputDoor.focus();
     }
 
     initTables() {
@@ -576,11 +540,6 @@ $(() => {
       this.ui.tableUnvisitedLocationsDT.clear();
       this.ui.tableUnvisitedLocationsDT.rows.add(unvisitedDoorsArray);
       this.ui.tableUnvisitedLocationsDT.rows().invalidate().draw();
-      this.ui.addLocationInputDoor.autocomplete(
-        'option',
-        'source',
-        Array.from(unvisitedDoors).sort(),
-      );
 
       // Update the unvisited caves model
       const unvisitedCaves = setDifference(allCaves, foundCaves);

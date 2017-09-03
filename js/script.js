@@ -571,6 +571,22 @@ $(() => {
       return div;
     }
 
+    static createSVGDiamond(className) {
+      const div = $(document.createElement('div'));
+      div.addClass('location');
+      if (className) div.addClass(className);
+
+      const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgElement.setAttribute('viewBox', '0 0 100 100');
+      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      rectElement.setAttribute('points', '50,0 100,50 50,100 0,50');
+
+      svgElement.appendChild(rectElement);
+      div.append(svgElement);
+
+      return div;
+    }
+
     static createSVGCircle(className) {
       const div = $(document.createElement('div'));
       div.addClass('location');

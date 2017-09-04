@@ -328,6 +328,7 @@ window.doorLocations = {
   },
   'Waterfall Fairy': {
     region: 'Light World East',
+    cave: 'Waterfall fairy',
     tag: 'lw',
     x: '90.64%',
     y: '14.25%',
@@ -346,7 +347,6 @@ window.doorLocations = {
     },
   },
   'Cave by Eastern Palace Portal': {
-    // definitely
     region: 'Light World East',
     tag: 'lw',
     x: '98.40%',
@@ -362,7 +362,7 @@ window.doorLocations = {
     x: '81.96%',
     y: '43.30%',
     state(items) {
-      return items.has('bomb') || items.has('boots') ? 'available' : '';
+      return 'available';
     },
   },
   'Kakariko Fortune Teller North': {
@@ -754,6 +754,7 @@ window.doorLocations = {
   },
   'Uncle Door': {
     region: 'Hyrule Castle',
+    cave: 'Uncle',
     tag: 'lw',
     x: '55.48%',
     y: '42.76%',

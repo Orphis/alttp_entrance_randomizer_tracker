@@ -1094,6 +1094,7 @@ window.doorLocations = {
   },
   'DW East DM Upper Exit': {
     region: 'Dark World Death Mountain',
+    cave: 'Super Bunny Cave',
     tag: 'dw',
     x: '86.53%',
     y: '6.56%',

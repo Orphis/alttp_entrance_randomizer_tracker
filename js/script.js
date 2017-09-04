@@ -579,7 +579,7 @@ $(() => {
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svgElement.setAttribute('viewBox', '0 0 100 100');
       const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-      rectElement.setAttribute('points', '50,0 100,50 50,100 0,50');
+      rectElement.setAttribute('points', '50,5 95,50 50,95 5,50');
 
       svgElement.appendChild(rectElement);
       div.append(svgElement);
@@ -612,7 +612,7 @@ $(() => {
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svgElement.setAttribute('viewBox', '0 0 100 100');
       const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-      rectElement.setAttribute('points', '0,0 100,0 50,100');
+      rectElement.setAttribute('points', '5,5 95,5 50,95');
 
       svgElement.appendChild(rectElement);
       div.append(svgElement);

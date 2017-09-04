@@ -120,7 +120,7 @@ footer {
 }
 
 .location polygon {
-  stroke-width: calc(var(--location-border-width) * 2);
+  stroke-width: calc(var(--location-border-width) * 4);
   stroke: var(--location-stroke);
 }
 

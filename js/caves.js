@@ -1262,6 +1262,7 @@ window.caves = {
     count: 4,
     region: 'Hyrule Castle',
     tag: 'lw',
+    dungeon: true,
     entrance: {
       'Hyrule Castle Main Entrance': {
         x: '50.46%',
@@ -1290,6 +1291,7 @@ window.caves = {
     count: 0,
     region: 'Hyrule Castle',
     tag: 'lw',
+    dungeon: true,
     entrance: {
       'Hyrule Castle Agahnim': {
         x: '50.46%',
@@ -1306,6 +1308,7 @@ window.caves = {
     count: 3,
     region: 'Light World East',
     tag: 'lw',
+    dungeon: true,
     entrance: {
       'Eastern Palace': {
         x: '96.58%',
@@ -1320,6 +1323,7 @@ window.caves = {
     count: 2,
     region: 'Desert Area',
     tag: 'lw',
+    dungeon: true,
     entrance: {
       'Desert Palace Main Entrance': {
         x: '7.31%',
@@ -1350,6 +1354,7 @@ window.caves = {
     count: 1,
     region: 'Desert Area',
     tag: 'lw',
+    dungeon: true,
     entrance: {
       'Desert Palace Back': {
         x: '7.31%',
@@ -1364,6 +1369,7 @@ window.caves = {
     count: 2,
     region: 'Death Mountain',
     tag: 'lw',
+    dungeon: true,
     entrance: {
       'Tower of Hera': {
         x: '56.62%',
@@ -1380,6 +1386,7 @@ window.caves = {
     count: 5,
     region: 'Dark World East',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Palace of Darkness': {
         x: '96.58%',
@@ -1394,6 +1401,7 @@ window.caves = {
     count: 6,
     region: 'Dark World South',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Swamp Palace': {
         x: '47.26%',
@@ -1408,6 +1416,7 @@ window.caves = {
     count: 2,
     region: 'Skull Woods',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Skull Woods Drop Left': {
         drop: true,
@@ -1446,6 +1455,7 @@ window.caves = {
     count: 1,
     region: 'Skull Woods',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Skull Woods Drop Back': {
         drop: true,
@@ -1475,6 +1485,7 @@ window.caves = {
     count: 2,
     region: 'Skull Woods',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Skull Woods Big Skull': {
         x: '3.00%',
@@ -1489,6 +1500,7 @@ window.caves = {
     count: 4,
     region: 'Village of Outcasts',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       "Thieve's Town": {
         x: '11.90%',
@@ -1503,6 +1515,7 @@ window.caves = {
     count: 3,
     region: 'Dark World Lake Hylia',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Ice Palace': {
         x: '80.37%',
@@ -1517,6 +1530,7 @@ window.caves = {
     count: 2,
     region: 'Misery Mire Area',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Misery Mire': {
         x: '6.97%',
@@ -1538,6 +1552,7 @@ window.caves = {
     count: 5,
     region: 'Dark World Death Mountain',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       'Turtle Rock Main Entrance': {
         x: '93.86%',
@@ -1580,6 +1595,7 @@ window.caves = {
     count: 20,
     region: 'Dark World Death Mountain',
     tag: 'dw',
+    dungeon: true,
     entrance: {
       "Ganon's Tower": {
         x: '56.62%',

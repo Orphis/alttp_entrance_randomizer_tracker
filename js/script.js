@@ -160,9 +160,18 @@ $(() => {
       this.doorLocations = {};
       this.caves = window.caves;
       for (const caveName of Object.keys(this.caves)) {
+        const hasDrop =
+          Object.entries(this.caves[caveName].entrance).find(i => i[1].drop === true) !== undefined;
+        const isDungeon = this.caves[caveName].dungeon === true;
+        const isMulti =
+          isDungeon ||
+          (!hasDrop &&
+            caveName !== 'Useless' &&
+            Object.keys(this.caves[caveName].entrance).length > 1);
         for (const doorName of Object.keys(this.caves[caveName].entrance)) {
           this.doorLocations[doorName] = this.caves[caveName].entrance[doorName];
           this.doorLocations[doorName].cave = caveName;
+          this.doorLocations[doorName].multi = isMulti;
           if (!this.doorLocations[doorName].region) {
             this.doorLocations[doorName].region = this.caves[caveName].region;
           }
@@ -375,6 +384,7 @@ $(() => {
         let rect;
         if (door.overworld) rect = LocationTracker.createSVGCircle(rectSize);
         else if (door.drop) rect = LocationTracker.createSVGTriangle(rectSize);
+        else if (door.multi) rect = LocationTracker.createSVGDiamond(rectSize);
         else rect = LocationTracker.createSVGRect(rectSize);
         rect.css('left', door.x);
         rect.css('top', door.y);

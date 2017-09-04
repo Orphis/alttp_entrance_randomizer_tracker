@@ -159,13 +159,15 @@ $(() => {
       this.itemTracker = itemTracker;
       this.doorLocations = {};
       this.caves = window.caves;
-      for (const name of Object.keys(window.doorLocations)) {
-        this.doorLocations[name] = window.doorLocations[name];
-        if (this.doorLocations[name].cave) {
-          if (!this.caves[this.doorLocations[name].cave]) {
-            console.warn(
-              `Location '${name}' points to a non existing cave '${this.doorLocations[name].cave}'`,
-            );
+      for (const caveName of Object.keys(this.caves)) {
+        for (const doorName of Object.keys(this.caves[caveName].entrance)) {
+          this.doorLocations[doorName] = this.caves[caveName].entrance[doorName];
+          this.doorLocations[doorName].cave = caveName;
+          if (!this.doorLocations[doorName].region) {
+            this.doorLocations[doorName].region = this.caves[caveName].region;
+          }
+          if (!this.doorLocations[doorName].tag) {
+            this.doorLocations[doorName].tag = this.caves[caveName].tag;
           }
         }
       }

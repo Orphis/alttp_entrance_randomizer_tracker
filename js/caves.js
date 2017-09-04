@@ -31,7 +31,7 @@ window.caves = {
   'Fat Fairy': {
     count: 2,
   },
-  "Waterfall fairy": {
+  'Waterfall fairy': {
     count: 2,
   },
   'West of Mire': {

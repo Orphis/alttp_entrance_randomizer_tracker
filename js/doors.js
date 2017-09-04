@@ -361,7 +361,7 @@ window.doorLocations = {
     tag: 'lw',
     x: '81.96%',
     y: '43.30%',
-    state(items) {
+    state() {
       return 'available';
     },
   },

@@ -28,6 +28,8 @@ footer {
 :root {
   --location-size: 24px;
   --location-border-width: 5px;
+  --location-border-circle-width: 2.5px;
+  --location-border-polygon-width: 12px;
   --location-fill: #ff0000;
   --location-fill-hover: #ff8000;
   --location-stroke: #000000;
@@ -115,12 +117,12 @@ footer {
 }
 
 .location circle {
-  stroke-width: calc(var(--location-border-width) / 2);
+  stroke-width: var(--location-border-circle-width);
   stroke: var(--location-stroke);
 }
 
 .location polygon {
-  stroke-width: calc(var(--location-border-width) * 4);
+  stroke-width: var(--location-border-polygon-width);
   stroke: var(--location-stroke);
 }
 

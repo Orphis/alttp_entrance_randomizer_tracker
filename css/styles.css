@@ -4,8 +4,9 @@
 }
 
 .table_container {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 2em;
 }
 
 .ui-autocomplete {

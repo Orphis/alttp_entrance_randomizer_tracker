@@ -1119,13 +1119,13 @@ window.caves = {
             : '';
         },
       },
-    },
-    'Death Mountain Exit Front': {
-      region: 'Death Mountain',
-      x: '39.50%',
-      y: '14.03%',
-      state(items) {
-        return items.access('dm') ? 'available' : '';
+      'Death Mountain Exit Front': {
+        region: 'Death Mountain',
+        x: '39.50%',
+        y: '14.03%',
+        state(items) {
+          return items.access('dm') ? 'available' : '';
+        },
       },
     },
   },

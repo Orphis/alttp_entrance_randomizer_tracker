@@ -383,15 +383,15 @@ $(() => {
         let rectSize = 'small';
         if (door.tag.indexOf('large') !== -1) rectSize = 'large';
         else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
-        let rect;
-        if (door.overworld) rect = LocationTracker.createSVGCircle(rectSize);
-        else if (door.drop) rect = LocationTracker.createSVGTriangle(rectSize);
-        else if (door.multi) rect = LocationTracker.createSVGDiamond(rectSize);
-        else rect = LocationTracker.createSVGRect(rectSize);
-        rect.css('left', door.x);
-        rect.css('top', door.y);
-        rect.data('location', name);
-        rect.click((event) => {
+        let locationDiv;
+        if (door.overworld) locationDiv = LocationTracker.createSVGCircle(rectSize);
+        else if (door.drop) locationDiv = LocationTracker.createSVGTriangle(rectSize);
+        else if (door.multi) locationDiv = LocationTracker.createSVGDiamond(rectSize);
+        else locationDiv = LocationTracker.createSVGRect(rectSize);
+        locationDiv.css('left', door.x);
+        locationDiv.css('top', door.y);
+        locationDiv.data('location', name);
+        locationDiv.click((event) => {
           event.preventDefault();
 
           const locationName = $(event.currentTarget).data('location');
@@ -412,7 +412,7 @@ $(() => {
             location = null;
           } else this.state.doLocation(locationName, !location.isDone);
         });
-        rect.contextmenu((event) => {
+        locationDiv.contextmenu((event) => {
           event.preventDefault();
 
           const locationName = $(event.currentTarget).data('location');
@@ -442,7 +442,7 @@ $(() => {
             this.state.annotateLocation(locationName, 'Marked');
           }
         });
-        rect.mouseenter((event) => {
+        locationDiv.mouseenter((event) => {
           const locationName = $(event.currentTarget).data('location');
           const caveName = this.doorLocations[locationName].cave;
           let text;
@@ -464,7 +464,7 @@ $(() => {
           this.ui.mapFooter.html(text);
         });
 
-        this.refreshRect(rect);
+        this.refreshLocation(locationDiv);
 
         this.state.addOnLocationChanged(
           function locationChangedEvent(rectTarget, event) {
@@ -472,46 +472,46 @@ $(() => {
             if (event.location !== dataLocation) {
               return;
             }
-            this.refreshRect(rectTarget);
-          }.bind(this, rect),
+            this.refreshLocation(rectTarget);
+          }.bind(this, locationDiv),
         );
 
         this.state.addOnItemChanged(
-          function itemChangedEvent(rectTarget) {
-            this.refreshRect(rectTarget);
-          }.bind(this, rect),
+          function itemChangedEvent(locationDivChanged) {
+            this.refreshLocation(locationDivChanged);
+          }.bind(this, locationDiv),
         );
 
         door.rect = mapDiv;
-        mapDiv.append(rect);
+        mapDiv.append(locationDiv);
       }
     }
 
-    refreshRect(rect) {
-      const locationName = rect.data('location');
+    refreshLocation(locationDiv) {
+      const locationName = locationDiv.data('location');
       const location = this.state.findLocation(locationName);
 
       if (this.doorLocations[locationName].state) {
         const state = this.doorLocations[locationName].state(this.itemTracker);
-        rect.removeClass('available');
-        rect.removeClass('visible');
+        locationDiv.removeClass('available');
+        locationDiv.removeClass('visible');
         if (state === 'available' || state === 'visible') {
-          rect.addClass(state);
+          locationDiv.addClass(state);
         }
       } else {
         console.log(`Missing status function for '${locationName}'`);
       }
 
       if (!location) {
-        rect.removeClass('marked');
-        rect.removeClass('done');
+        locationDiv.removeClass('marked');
+        locationDiv.removeClass('done');
         return;
       }
 
-      if (location.annotation) rect.addClass('marked');
-      else rect.removeClass('marked');
-      if (location.isDone) rect.addClass('done');
-      else rect.removeClass('done');
+      if (location.annotation) locationDiv.addClass('marked');
+      else locationDiv.removeClass('marked');
+      if (location.isDone) locationDiv.addClass('done');
+      else locationDiv.removeClass('done');
     }
 
     refreshList() {
@@ -575,11 +575,11 @@ $(() => {
       if (className) div.addClass(className);
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      rectElement.setAttribute('width', '100%');
-      rectElement.setAttribute('height', '100%');
+      const shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      shapeElement.setAttribute('width', '100%');
+      shapeElement.setAttribute('height', '100%');
 
-      svgElement.appendChild(rectElement);
+      svgElement.appendChild(shapeElement);
       div.append(svgElement);
 
       return div;
@@ -592,10 +592,10 @@ $(() => {
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svgElement.setAttribute('viewBox', '0 0 100 100');
-      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-      rectElement.setAttribute('points', '50,5 95,50 50,95 5,50');
+      const shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      shapeElement.setAttribute('points', '50,5 95,50 50,95 5,50');
 
-      svgElement.appendChild(rectElement);
+      svgElement.appendChild(shapeElement);
       div.append(svgElement);
 
       return div;
@@ -607,12 +607,12 @@ $(() => {
       if (className) div.addClass(className);
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      rectElement.setAttribute('cx', '50%');
-      rectElement.setAttribute('cy', '50%');
-      rectElement.setAttribute('r', '40%');
+      const shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      shapeElement.setAttribute('cx', '50%');
+      shapeElement.setAttribute('cy', '50%');
+      shapeElement.setAttribute('r', '40%');
 
-      svgElement.appendChild(rectElement);
+      svgElement.appendChild(shapeElement);
       div.append(svgElement);
 
       return div;
@@ -625,10 +625,10 @@ $(() => {
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svgElement.setAttribute('viewBox', '0 0 100 100');
-      const rectElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-      rectElement.setAttribute('points', '5,5 95,5 50,95');
+      const shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      shapeElement.setAttribute('points', '5,5 95,5 50,95');
 
-      svgElement.appendChild(rectElement);
+      svgElement.appendChild(shapeElement);
       div.append(svgElement);
 
       return div;

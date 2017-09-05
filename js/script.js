@@ -343,6 +343,7 @@ $(() => {
       }
       this.ui.mapLW.resizable({
         aspectRatio: 1,
+        minWidth: 100,
         alsoResize: '.resizable',
         stop: function resizeEvent(event, ui) {
           this.state.mapHeight = ui.size.height;
@@ -350,6 +351,7 @@ $(() => {
       });
       this.ui.mapDW.resizable({
         aspectRatio: 1,
+        minWidth: 100,
         alsoResize: '.resizable',
         stop: function resizeEvent(event, ui) {
           this.state.mapHeight = ui.size.height;
@@ -797,6 +799,7 @@ $(() => {
       }
       this.ui.tracker.resizable({
         aspectRatio: 1,
+        minWidth: 100,
         alsoResize: '.resizable',
         stop: function resizeEvent(event, ui) {
           this.state.mapHeight = ui.size.height;

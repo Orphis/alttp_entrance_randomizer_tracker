@@ -1536,14 +1536,14 @@ window.caves = {
         x: '6.97%',
         y: '81.22%',
         state(items) {
-          return items.access('mire') &&
-          items.has('sword') &&
+          if (!items.access('mire')) return '';
+          return items.has('sword') &&
           items.has('bombos') &&
           items.has('ether') &&
           items.has('quake') &&
           items.has('moonpearl')
             ? 'available'
-            : '';
+            : 'visible';
         },
       },
     },
@@ -1558,14 +1558,15 @@ window.caves = {
         x: '93.86%',
         y: '7.47%',
         state(items) {
-          return items.access('dwdmne') &&
-          items.has('sword') &&
+          if (!items.access('dwne')) return '';
+
+          return items.has('sword') &&
           items.has('bombos') &&
           items.has('ether') &&
           items.has('quake') &&
           items.has('moonpearl')
             ? 'available'
-            : '';
+            : 'visible';
         },
       },
       'Turtle Rock Laser Wall': {

@@ -60,6 +60,10 @@ footer {
   --location-fill-hover: #a0a0a0;
   --location-stroke: #0080ff;
 }
+.highlighted,
+.highlighted.done {
+  --location-stroke: #ffd700;
+}
 
 .map_container {
   display: inline-block;

@@ -445,6 +445,7 @@ $(() => {
         locationDiv.mouseenter((event) => {
           const locationName = $(event.currentTarget).data('location');
           const caveName = this.doorLocations[locationName].cave;
+
           let text;
           if (this.annotateLocationName) {
             if (caveName) {
@@ -456,12 +457,27 @@ $(() => {
             }
           } else {
             text = locationName;
-            const location = this.state.findLocation(locationName);
-            if (location) {
-              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${location.cave} (${location.exit})</span>`;
+            const locationState = this.state.findLocation(locationName);
+            if (locationState) {
+              text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${locationState.cave} (${locationState.exit})</span>`;
+
+              for (const location of this.state.locations) {
+                if (
+                  location.cave !== 'Useless' &&
+                  location.cave === locationState.cave &&
+                  location.door !== locationState.door
+                ) {
+                  this.doorLocations[location.door].rect.addClass('highlighted');
+                }
+              }
             }
           }
           this.ui.mapFooter.html(text);
+        });
+        locationDiv.mouseleave(() => {
+          for (const location of this.state.locations) {
+            this.doorLocations[location.door].rect.removeClass('highlighted');
+          }
         });
 
         this.refreshLocation(locationDiv);
@@ -482,7 +498,7 @@ $(() => {
           }.bind(this, locationDiv),
         );
 
-        door.rect = mapDiv;
+        door.rect = locationDiv;
         mapDiv.append(locationDiv);
       }
     }

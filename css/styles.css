@@ -76,7 +76,7 @@ footer {
   background: black;
   color: white;
   position: absolute;
-  bottom: 0px;
+  bottom: -1em;
   width: 100%;
 }
 

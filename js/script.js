@@ -266,7 +266,7 @@ $(() => {
         ],
         buttons: [
           {
-            text: 'Hide Useless',
+            text: 'Hide Done',
             action: function toggleUseless() {
               this.state.showUseless = !this.state.showUseless;
               this.refreshList();
@@ -530,7 +530,7 @@ $(() => {
       for (const item of this.state.locations) {
         foundDoor.add(item.door);
         foundCaves.add(item.cave);
-        if (this.state.showUseless || item.cave !== 'Useless') {
+        if (this.state.showUseless || !(item.cave === 'Useless' || item.isDone)) {
           locationsArray.push(item);
         }
       }

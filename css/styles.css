@@ -1,16 +1,7 @@
-.door_text,
-.cave_text {
-  width: 400px;
-}
-
 .table_container {
   margin-left: 1em;
   margin-right: 1em;
   margin-top: 2em;
-}
-
-.ui-autocomplete {
-  z-index: 1040;
 }
 
 .table-condensed > thead > tr > th,

@@ -324,7 +324,7 @@ $(() => {
     }
 
     annotateLocation(locationName) {
-      if (!this.doorLocations[locationName].cave) {
+      if (!this.doorLocations[locationName].cave === 'Useless') {
         this.annotateLocationName = null;
         return;
       }

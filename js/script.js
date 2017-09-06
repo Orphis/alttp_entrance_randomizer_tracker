@@ -61,6 +61,10 @@ $(() => {
       return this.state.locations.find(item => item.door === door);
     }
 
+    findLocationReverse(door) {
+      return this.state.locations.find(item => item.exit === door);
+    }
+
     addLocation(door, cave, exit, isDone, annotation) {
       const location = this.findLocation(door);
       if (location) return location;
@@ -460,7 +464,6 @@ $(() => {
             const locationState = this.state.findLocation(locationName);
             if (locationState) {
               text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${locationState.cave} (${locationState.exit})</span>`;
-
               for (const location of this.state.locations) {
                 if (
                   location.cave !== 'Useless' &&
@@ -470,6 +473,10 @@ $(() => {
                   this.doorLocations[location.door].rect.addClass('highlighted');
                 }
               }
+            }
+            const locationReverseState = this.state.findLocationReverse(locationName);
+            if (locationReverseState) {
+              this.doorLocations[locationReverseState.door].rect.addClass('highlighted');
             }
           }
           this.ui.mapFooter.html(text);

@@ -475,7 +475,7 @@ $(() => {
               }
             }
             const locationReverseState = this.state.findLocationReverse(locationName);
-            if (locationReverseState) {
+            if (locationReverseState && locationReverseState.cave !== 'Useless') {
               this.doorLocations[locationReverseState.door].rect.addClass('highlighted');
             }
           }

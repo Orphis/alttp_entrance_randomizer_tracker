@@ -452,7 +452,7 @@ $(() => {
 
           let text;
           if (this.annotateLocationName) {
-            if (caveName) {
+            if (caveName && caveName !== 'Useless') {
               text = `Connect <span style="color: green">${this
                 .annotateLocationName}</span> ➜ <span style="color: red">${locationName} (${caveName})</span>`;
             } else {

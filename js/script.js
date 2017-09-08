@@ -62,7 +62,7 @@ $(() => {
     }
 
     findLocationReverse(door) {
-      return this.state.locations.find(item => item.exit === door);
+      return this.state.locations.find(item => item.exit === door && item.cave !== 'Useless');
     }
 
     addLocation(door, cave, exit, isDone, annotation) {
@@ -476,7 +476,7 @@ $(() => {
             }
             const locationReverseState = this.state.findLocationReverse(locationName);
             if (locationReverseState && locationReverseState.cave !== 'Useless') {
-              this.doorLocations[locationReverseState.door].rect.addClass('highlighted');
+              this.doorLocations[locationReverseState.door].rect.addClass('highlighted_reverse');
             }
           }
           this.ui.mapFooter.html(text);
@@ -484,6 +484,7 @@ $(() => {
         locationDiv.mouseleave(() => {
           for (const location of this.state.locations) {
             this.doorLocations[location.door].rect.removeClass('highlighted');
+            this.doorLocations[location.door].rect.removeClass('highlighted_reverse');
           }
         });
 

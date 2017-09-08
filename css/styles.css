@@ -62,6 +62,10 @@ footer {
 }
 .highlighted,
 .highlighted.done {
+  --location-stroke: #ff0000;
+}
+.highlighted_reverse,
+.highlighted_reverse.done {
   --location-stroke: #ffd700;
 }
 

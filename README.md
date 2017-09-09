@@ -29,6 +29,12 @@ Colors:
 * Blue: location has been marked as important
 * Gray: item has been taken, location has been checked or marked useless
 
+Outline colors:
+
+* Blue: location is marked
+* Yellow: when pointing to a cave with the mouse, it shows where the matching vanilla cave is. If Eastern Palace points to Ice Palace, hovering over Ice Palace will make Easter Palace yellow
+* Red: when pointing to a multiple entrance cave, it shows where the other entrances connected to the same cave take you
+
 Left-click on a location or item to mark is as done or useless.
 
 In entrance randomizer mode, when you right click on a location, you can click on
@@ -41,6 +47,5 @@ A note will appear when you hover on the square telling you "Sick Kid -> Sahasra
 
 * Networked mode: Could be useful for casters in tournaments to sync up all the entrances they have tracked, or the item trackers to embed in OBS directly.
 * Twitch integration for chat to mark items
-* Lines connecting connected entrances for easy visualization
 * Some kind of support for madness / insanity modes.
 * Oh, and a regular item randomizer mode that's more simple

@@ -206,6 +206,7 @@ $(() => {
       this.initForm();
       this.initTables();
       this.initMap();
+      LocationTracker.initHelp();
 
       this.state.addOnLocationChanged(() => {
         this.state.save();
@@ -509,6 +510,38 @@ $(() => {
         door.rect = locationDiv;
         mapDiv.append(locationDiv);
       }
+    }
+
+    static initHelp() {
+      $('.help-location').each(function initHelpLocations() {
+        let locationShape;
+        if (this.classList.contains('help-overworld')) {
+          locationShape = LocationTracker.createSVGCircle();
+        } else if (this.classList.contains('help-multi')) {
+          locationShape = LocationTracker.createSVGDiamond();
+        } else if (this.classList.contains('help-drop')) {
+          locationShape = LocationTracker.createSVGTriangle();
+        } else {
+          locationShape = LocationTracker.createSVGRect();
+        }
+
+        if (this.classList.contains('help-available')) {
+          locationShape.addClass('available');
+        } else if (this.classList.contains('help-visible')) {
+          locationShape.addClass('visible');
+        } else if (this.classList.contains('help-marked')) {
+          locationShape.addClass('marked');
+        }
+        if (this.classList.contains('help-highlighted')) {
+          locationShape.addClass('highlighted');
+        } else if (this.classList.contains('help-highlighted-reverse')) {
+          locationShape.addClass('highlighted_reverse');
+        }
+        if (this.classList.contains('help-done')) {
+          locationShape.addClass('done');
+        }
+        $(this).append(locationShape);
+      });
     }
 
     refreshLocation(locationDiv) {

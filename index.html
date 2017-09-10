@@ -89,6 +89,42 @@ ga('send', 'pageview');
       </div>
     </div>
   </div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="help_modal">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">❔ Help</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <h4>How to</h4>
+            <p>Clicking on items will mark them as found and update the matching locations accordingly.</p>
+            <p>Left clicking on locations will mark them as done.</p>
+            <p>Right clicking on locations will enter "marking" mode. The next location you click on will be connected to this entrance. For example, clicking on the entrance <em>Eastern Palace</em> then on <em>Ice Palace</em> to make a connection <em>Eastern Palace ➜ Ice Palace</em>.</p>
+            <h4>Color legend</h4>
+            <p><span class="help-location"></span> Location is unavailable</p>
+            <p><span class="help-location help-available"></span> Location is available</p>
+            <p><span class="help-location help-visible"></span> Location is unavailable, but you can see what it holds.</p>
+            <p><span class="help-location help-marked"></span> Location has been marked with something important</p>
+            <p><span class="help-location help-marked help-done"></span> Location has been marked with something important and is done</p>
+            <p><span class="help-location help-marked help-highlighted"></span> Highlighted location points to the same cave as this location</p>
+            <p><span class="help-location help-marked help-highlighted-reverse"></span> Vanilla highlighted location cave is at this location</p>
+            <p><span class="help-location help-done"></span> Location has been done</p>
+            <h4>Shape legend</h4>
+            <p><span class="help-location help-available"></span> Location is a regular door to a single entrance cave</p>
+            <p><span class="help-location help-available help-overworld"></span> Location is an outdoor item, a fetch quest or NPC</p>
+            <p><span class="help-location help-available help-multi"></span> Location is a multi entrance cave or dungeon</p>
+            <p><span class="help-location help-available help-drop"></span> Location is a hole to fall into</p>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div style="text-align: center; vertical-align: top; ">
     <div class="item-tracker resizable" id="item_tracker"></div>
     <div class="map_container">
@@ -99,7 +135,10 @@ ga('send', 'pageview');
   </div>
   <!-- <div>Coordinates LW: <span id="lw_coord"></span> DW: <span id="dw_coord"></span></div> -->
   <div class="table_container">
-    <div class="container">
+    <div class="pull-right">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#help_modal">
+        <span class="glyphicon glyphicon-question-mark" aria-hidden="true"></span> ❔ Help
+      </button>
       <button type="button" class="btn btn-default" data-toggle="modal" data-target="#option_modal">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Options
       </button>

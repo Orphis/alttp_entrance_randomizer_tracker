@@ -13,6 +13,11 @@
   padding: 2px;
 }
 
+.modal-body {
+  max-height: calc(100vh - 212px);
+  overflow-y: auto;
+}
+
 footer {
   margin: 20px;
 }
@@ -102,6 +107,11 @@ footer {
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 1;
+}
+
+.help-location .location {
+  position: inherit;
+  transform: none;
 }
 
 .location svg {

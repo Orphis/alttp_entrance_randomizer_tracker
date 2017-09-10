@@ -594,9 +594,9 @@ $(() => {
     }
 
     static createSVGRect(className) {
-      const div = $(document.createElement('div'));
-      div.addClass('location');
-      if (className) div.addClass(className);
+      const outer = $(document.createElement('span'));
+      outer.addClass('location');
+      if (className) outer.addClass(className);
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       const shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -604,15 +604,15 @@ $(() => {
       shapeElement.setAttribute('height', '100%');
 
       svgElement.appendChild(shapeElement);
-      div.append(svgElement);
+      outer.append(svgElement);
 
-      return div;
+      return outer;
     }
 
     static createSVGDiamond(className) {
-      const div = $(document.createElement('div'));
-      div.addClass('location');
-      if (className) div.addClass(className);
+      const outer = $(document.createElement('span'));
+      outer.addClass('location');
+      if (className) outer.addClass(className);
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svgElement.setAttribute('viewBox', '0 0 100 100');
@@ -620,15 +620,15 @@ $(() => {
       shapeElement.setAttribute('points', '50,5 95,50 50,95 5,50');
 
       svgElement.appendChild(shapeElement);
-      div.append(svgElement);
+      outer.append(svgElement);
 
-      return div;
+      return outer;
     }
 
     static createSVGCircle(className) {
-      const div = $(document.createElement('div'));
-      div.addClass('location');
-      if (className) div.addClass(className);
+      const outer = $(document.createElement('span'));
+      outer.addClass('location');
+      if (className) outer.addClass(className);
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       const shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -637,15 +637,15 @@ $(() => {
       shapeElement.setAttribute('r', '40%');
 
       svgElement.appendChild(shapeElement);
-      div.append(svgElement);
+      outer.append(svgElement);
 
-      return div;
+      return outer;
     }
 
     static createSVGTriangle(className) {
-      const div = $(document.createElement('div'));
-      div.addClass('location');
-      if (className) div.addClass(className);
+      const outer = $(document.createElement('span'));
+      outer.addClass('location');
+      if (className) outer.addClass(className);
 
       const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svgElement.setAttribute('viewBox', '0 0 100 100');
@@ -653,9 +653,9 @@ $(() => {
       shapeElement.setAttribute('points', '5,5 95,5 50,95');
 
       svgElement.appendChild(shapeElement);
-      div.append(svgElement);
+      outer.append(svgElement);
 
-      return div;
+      return outer;
     }
   }
 

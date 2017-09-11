@@ -1558,15 +1558,18 @@ window.caves = {
         x: '93.86%',
         y: '7.47%',
         state(items) {
-          if (!items.access('dwne')) return '';
+          if (!items.access('dmne')) return '';
 
-          return items.has('sword') &&
-          items.has('bombos') &&
-          items.has('ether') &&
-          items.has('quake') &&
-          items.has('moonpearl')
-            ? 'available'
-            : 'visible';
+          if (
+            items.has('sword') &&
+            items.has('hammer') &&
+            items.has('bombos') &&
+            items.has('ether') &&
+            items.has('quake') &&
+            items.has('moonpearl')
+          ) { return 'available'; }
+
+          return items.access('dwdmne') ? 'visible' : '';
         },
       },
       'Turtle Rock Laser Wall': {

@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/equipment.css">
   <script src="js/caves.js"></script>
   <script src="js/overworld_items.js"></script>
+  <script src="js/item_randomizer.js"></script>
   <script src="js/script.js"></script>
   <script>
   (function (i, s, o, g, r, a, m) {
@@ -70,21 +71,24 @@ ga('send', 'pageview');
           <h4 class="modal-title"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Options</h4>
         </div>
         <div class="modal-body">
-          Not yet implemented!
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <label for="randomizer_type" class="col-sm-2 control-label">Type</label>
               <div class="col-sm-10" id="randomizer_type">
-                <div class="btn-group" role="group" aria-label="...">
-                  <button type="button" class="btn btn-default">Item</button>
-                  <button type="button" class="btn btn-default">Entrance</button>
+                <div class="btn-group" role="group" aria-label="..." data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="randomizer_type" id="randomizer_type_item" value="item">Item
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="randomizer_type" id="randomizer_type_entrance" value="entrance">Entrance
+                  </label>
                 </div>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="close_options">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="save_options">Save options</button>
         </div>
       </div>
@@ -147,6 +151,8 @@ ga('send', 'pageview');
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Reset tracker
       </button>
     </div>
+  </div>
+  <div class="table_container" id="table_container">
     <div>
       <table class="table table-striped table-condensed table-hover" id="locations_table">
         <thead>

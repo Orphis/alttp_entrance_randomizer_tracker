@@ -11,12 +11,22 @@ $(() => {
     constructor() {
       this.state = {
         showUseless: true,
+        mode: 'item',
         locations: [],
         items: {},
         mapHeight: -1,
       };
       this.locationListeners = [];
       this.itemListeners = [];
+    }
+
+    get mode() {
+      return this.state.mode;
+    }
+
+    set mode(value) {
+      this.state.mode = value;
+      this.save();
     }
 
     get showUseless() {
@@ -117,6 +127,10 @@ $(() => {
       }
     }
 
+    clearLocationChanged() {
+      this.locationListeners = [];
+    }
+
     getItem(item) {
       return this.state.items[item];
     }
@@ -162,7 +176,57 @@ $(() => {
       this.state = state;
       this.itemTracker = itemTracker;
       this.doorLocations = {};
-      this.caves = window.caves;
+      this.ui = {
+        resetButton: $('#reset_tracker'),
+        saveOptionsButton: $('#save_options'),
+        closeOptionsButton: $('#close_options'),
+        optionModal: $('#option_modal'),
+
+        tableContainer: $('#table_container'),
+        tableLocations: $('#locations_table'),
+        tableLocationsDT: null,
+        tableUnvisitedLocations: $('#unvisited_doors_table'),
+        tableUnvisitedLocationsDT: null,
+        tableUnvisitedCaves: $('#unvisited_caves_table'),
+        tableUnvisitedCavesDT: null,
+
+        mapLW: $('#lw_map'),
+        mapDW: $('#dw_map'),
+        mapFooter: $('#map_footer'),
+      };
+      this.initForm();
+      this.initTables();
+      LocationTracker.initHelp();
+      this.initMap();
+
+      this.setupTracker();
+    }
+
+    setupTracker() {
+      this.state.clearLocationChanged();
+      this.loadLocations();
+      this.initLocations();
+
+      if (this.state.mode === 'item') {
+        this.ui.tableContainer.addClass('hidden');
+      } else {
+        this.ui.tableContainer.removeClass('hidden');
+      }
+
+      this.refreshList();
+    }
+
+    loadLocations() {
+      this.doorLocations = {};
+
+      if (this.state.mode === 'entrance') {
+        this.caves = window.caves;
+        this.overworld_items = window.overworldLocations;
+      } else if (this.state.mode === 'item') {
+        this.caves = window.item_randomizer;
+        this.overworld_items = window.overworldLocations;
+      }
+
       for (const caveName of Object.keys(this.caves)) {
         const hasDrop =
           Object.entries(this.caves[caveName].entrance).find(i => i[1].drop === true) !== undefined;
@@ -188,37 +252,33 @@ $(() => {
         this.doorLocations[name] = window.overworldLocations[name];
         this.doorLocations[name].overworld = true;
       }
-      this.ui = {
-        resetButton: $('#reset_tracker'),
-
-        tableLocations: $('#locations_table'),
-        tableLocationsDT: null,
-        tableUnvisitedLocations: $('#unvisited_doors_table'),
-        tableUnvisitedLocationsDT: null,
-        tableUnvisitedCaves: $('#unvisited_caves_table'),
-        tableUnvisitedCavesDT: null,
-
-        mapLW: $('#lw_map'),
-        mapDW: $('#dw_map'),
-        mapFooter: $('#map_footer'),
-      };
-
-      this.initForm();
-      this.initTables();
-      this.initMap();
-      LocationTracker.initHelp();
-
-      this.state.addOnLocationChanged(() => {
-        this.state.save();
-        this.refreshList();
-      });
-
-      this.refreshList();
     }
 
     initForm() {
       this.ui.resetButton.click(() => {
         this.state.reset();
+      });
+
+      this.ui.saveOptionsButton.click(() => {
+        const randomizerType = $('#option_modal input[name=randomizer_type]:checked');
+        console.log(`Randomizer type:${randomizerType.val()}`);
+
+        if (this.state.mode !== randomizerType.val()) {
+          this.state.mode = randomizerType.val();
+          this.state.reset();
+          this.setupTracker();
+        }
+      });
+
+      this.ui.optionModal.on('show.bs.modal', () => {
+        const oldRandomizerType = $('#option_modal input[name=randomizer_type]:checked');
+        oldRandomizerType.prop('checked', false);
+        oldRandomizerType.parent().removeClass('active');
+        const newRandomizerTypeButton = $(
+          `#option_modal input[name=randomizer_type][value='${this.state.mode}']`,
+        );
+        newRandomizerTypeButton.prop('checked', true);
+        newRandomizerTypeButton.parent().addClass('active');
       });
     }
 
@@ -363,6 +423,15 @@ $(() => {
         }.bind(this),
       });
 
+      this.state.addOnItemChanged(() => {
+        for (const location of this.ui.mapLW.find('.location')) {
+          this.refreshLocation($(location));
+        }
+        for (const location of this.ui.mapDW.find('.location')) {
+          this.refreshLocation($(location));
+        }
+      });
+
       /* this.ui.mapLW.mousemove((event) => {
         let x = (event.pageX - this.ui.mapLW.offset().left) / this.ui.mapLW.width();
         let y = (event.pageY - this.ui.mapLW.offset().top) / this.ui.mapLW.height();
@@ -377,6 +446,11 @@ $(() => {
         y = (y * 100).toFixed(2);
         $('#dw_coord').text(`(${x}, ${y})`);
       }); */
+    }
+
+    initLocations() {
+      this.ui.mapLW.find('.location').remove();
+      this.ui.mapDW.find('.location').remove();
 
       for (const [name, door] of Object.entries(this.doorLocations)) {
         if (!door.x || !door.y) {
@@ -386,8 +460,13 @@ $(() => {
 
         const mapDiv = door.tag.indexOf('lw') !== -1 ? this.ui.mapLW : this.ui.mapDW;
         let rectSize = 'small';
-        if (door.tag.indexOf('large') !== -1) rectSize = 'large';
-        else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
+        if (this.state.mode === 'entrance') {
+          if (door.tag.indexOf('large') !== -1) rectSize = 'large';
+          else if (door.tag.indexOf('small') !== -1) rectSize = 'small';
+        } else if (this.state.mode === 'item') {
+          if (door.dungeon) rectSize = 'large';
+          else rectSize = '';
+        }
         let locationDiv;
         if (door.overworld) locationDiv = LocationTracker.createSVGCircle(rectSize);
         else if (door.drop) locationDiv = LocationTracker.createSVGTriangle(rectSize);
@@ -501,15 +580,14 @@ $(() => {
           }.bind(this, locationDiv),
         );
 
-        this.state.addOnItemChanged(
-          function itemChangedEvent(locationDivChanged) {
-            this.refreshLocation(locationDivChanged);
-          }.bind(this, locationDiv),
-        );
-
         door.rect = locationDiv;
         mapDiv.append(locationDiv);
       }
+
+      this.state.addOnLocationChanged(() => {
+        this.state.save();
+        this.refreshList();
+      });
     }
 
     static initHelp() {

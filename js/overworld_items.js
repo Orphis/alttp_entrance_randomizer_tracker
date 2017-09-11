@@ -62,7 +62,10 @@ window.overworldLocations = {
     x: '3.65%',
     y: '69.00%',
     state(items) {
-      return items.has('mirror') && items.access('dwsouth') ? 'available' : 'visible';
+      return (items.has('mirror') && items.access('dwsouth')) ||
+      (items.state.mode === 'item' && items.has('bomb'))
+        ? 'available'
+        : 'visible';
     },
   },
   'Shovel dig': {

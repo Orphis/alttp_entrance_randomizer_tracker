@@ -595,7 +595,10 @@ $(() => {
       }
       this.ui.tableLocationsDT.clear();
       this.ui.tableLocationsDT.rows.add(locationsArray);
-      this.ui.tableLocationsDT.rows().invalidate().draw();
+      this.ui.tableLocationsDT
+        .rows()
+        .invalidate()
+        .draw();
 
       // Update the unvisited doors model
       const unvisitedDoors = setDifference(allDoors, foundDoor);
@@ -610,7 +613,10 @@ $(() => {
       }
       this.ui.tableUnvisitedLocationsDT.clear();
       this.ui.tableUnvisitedLocationsDT.rows.add(unvisitedDoorsArray);
-      this.ui.tableUnvisitedLocationsDT.rows().invalidate().draw();
+      this.ui.tableUnvisitedLocationsDT
+        .rows()
+        .invalidate()
+        .draw();
 
       // Update the unvisited caves model
       const unvisitedCaves = setDifference(allCaves, foundCaves);
@@ -623,7 +629,10 @@ $(() => {
       }
       this.ui.tableUnvisitedCavesDT.clear();
       this.ui.tableUnvisitedCavesDT.rows.add(unvisitedCavesArray);
-      this.ui.tableUnvisitedCavesDT.rows().invalidate().draw();
+      this.ui.tableUnvisitedCavesDT
+        .rows()
+        .invalidate()
+        .draw();
     }
 
     static createSVGRect(className) {

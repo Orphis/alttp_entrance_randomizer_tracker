@@ -97,10 +97,10 @@ footer {
 }
 
 #lw_map {
-  background-image: url("../img/lightworld.png");
+  background-image: url('../img/lightworld.png');
 }
 #dw_map {
-  background-image: url("../img/darkworld.png");
+  background-image: url('../img/darkworld.png');
 }
 
 .location {

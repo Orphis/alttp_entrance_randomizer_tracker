@@ -510,7 +510,7 @@ $(() => {
           }
 
           if (!location) {
-            if (this.doorLocations[locationName].overworld) {
+            if (this.doorLocations[locationName].overworld || this.state.mode === 'item') {
               this.state.addLocation(locationName, locationName, locationName, false);
               this.state.annotateLocation(locationName, 'Marked');
             } else {
@@ -532,7 +532,7 @@ $(() => {
           const locationName = $(event.currentTarget).data('location');
           const caveName = this.doorLocations[locationName].cave;
 
-          let text;
+          let text = locationName;
           if (this.annotateLocationName) {
             if (caveName && caveName !== 'Useless') {
               text = `Connect <span style="color: green">${this
@@ -541,8 +541,7 @@ $(() => {
               text = `<span class="glyphicon glyphicon-warning-sign"></span> Can't connect <span style="color: green">${this
                 .annotateLocationName}</span> ➜ <span style="color: red">${locationName} (NO REMARKABLE CAVE)</span> <span class="glyphicon glyphicon-warning-sign"></span>`;
             }
-          } else {
-            text = locationName;
+          } else if (this.state.mode === 'entrance') {
             const locationState = this.state.findLocation(locationName);
             if (locationState) {
               text = `<span style="color: green">${text}</span> ➜ <span style="color: red">${locationState.cave} (${locationState.exit})</span>`;

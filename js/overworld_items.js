@@ -77,6 +77,7 @@ window.overworldLocations = {
   'Dam sunken item': {
     region: 'Light World South',
     tag: 'lw',
+    entranceOnly: true,
     x: '44.98%',
     y: '91.40%',
     state() {

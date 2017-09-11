@@ -248,9 +248,11 @@ $(() => {
           }
         }
       }
-      for (const name of Object.keys(window.overworldLocations)) {
-        this.doorLocations[name] = window.overworldLocations[name];
-        this.doorLocations[name].overworld = true;
+      for (const name of Object.keys(this.overworld_items)) {
+        if (this.state.mode === 'entrance' || !this.overworld_items[name].entranceOnly) {
+          this.doorLocations[name] = this.overworld_items[name];
+          this.doorLocations[name].overworld = true;
+        }
       }
     }
 

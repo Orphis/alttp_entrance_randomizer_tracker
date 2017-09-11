@@ -1084,17 +1084,29 @@ $(() => {
 
       switch (zone) {
         case 'dm':
-          return this.has('flute');
+          return (
+            this.has('flute') ||
+            (this.state.mode === 'item' && this.has('glove') && this.has('lantern'))
+          );
         case 'dmeast':
           return (
             (this.has('hookshot') && this.access('dm', allZones)) || this.access('dmne', allZones)
           );
         case 'dmnw':
-          return this.has('mirror') && this.access('dm', allZones);
+          return (
+            (this.has('mirror') && this.access('dm', allZones)) ||
+            (this.has('hammer') && this.access('dmne', allZones))
+          );
         case 'dmne':
-          return this.has('hammer') && this.access('dmnw', allZones);
+          return (
+            (this.has('hammer') && this.access('dmnw', allZones)) ||
+            (this.state.mode === 'item' && this.access('dmeast', allZones))
+          );
         case 'desertledge':
-          return this.has('mirror') && this.access('mire', allZones);
+          return (
+            (this.has('mirror') && this.access('mire', allZones)) ||
+            (this.state.mode === 'item' && this.has('book'))
+          );
         case 'hyruletop':
           return this.has('mirror') && this.access('dweast', allZones);
         case 'dweast':
@@ -1125,13 +1137,34 @@ $(() => {
         case 'dwdmeast':
           return this.has('glove2') && this.access('dmeast', allZones);
         case 'dwdmne':
-          return this.has('glove2') && this.has('hammer') && this.access('dwne', allZones);
+          return (
+            (this.has('glove2') && this.has('hammer') && this.access('dwne', allZones)) ||
+            (this.state.mode === 'item' && this.access('dwdmeast', allZones))
+          );
         case 'mire':
           return this.has('glove2') && this.has('flute');
-        case 'swback':
         case 'dwbumpexit':
+          return this.state.mode === 'item' && this.has('cape') && this.access('dwwest', allZones);
         case 'dwdmisland':
+          return (
+            this.state.mode === 'item' &&
+            this.has('glove') &&
+            this.has('bomb') &&
+            this.access('dwdmne')
+          );
+        case 'turtlerock':
+          return (
+            this.access('dmne', allZones) &&
+            this.has('hammer') &&
+            this.has('sword') &&
+            this.has('bombos') &&
+            this.has('ether') &&
+            this.has('quake') &&
+            this.has('moonpearl')
+          );
         case 'dwdmledge':
+          return this.state.mode === 'item' && this.access('turtlerock') && this.has('somaria');
+        case 'swback':
         default:
           return false;
       }

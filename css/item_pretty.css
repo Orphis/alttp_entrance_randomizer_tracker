@@ -6,135 +6,195 @@
   background-image: url('../img/item_pretty.png');
 }
 
-.item-pretty.bomb {
+.item-pretty.mail {
   background-position: 0 0%;
   background-size: 100%;
 }
-.item-pretty.bombos {
-  background-position: 0 3.125%;
+.item-pretty.mail2 {
+  background-position: 0 4.093938%;
   background-size: 100%;
+}
+.item-pretty.mail3 {
+  background-position: 0 8.187877%;
+  background-size: 100%;
+}
+.item-pretty.agahnim {
+  background-position: 0 12.037325%;
+  background-size: 200%;
+}
+.item-pretty.agahnim1-agahnim2 {
+  background-position: 0 14.059098%;
+  background-size: 200%;
+}
+.item-pretty.agahnim1 {
+  background-position: 0 16.080871%;
+  background-size: 200%;
+}
+.item-pretty.agahnim2 {
+  background-position: 0 18.102644%;
+  background-size: 200%;
+}
+.item-pretty.bomb {
+  background-position: 0 20.124417%;
+  background-size: 200%;
+}
+.item-pretty.bombos {
+  background-position: 0 22.14619%;
+  background-size: 200%;
 }
 .item-pretty.book {
-  background-position: 0 6.25%;
-  background-size: 100%;
+  background-position: 0 24.167963%;
+  background-size: 200%;
 }
 .item-pretty.boomerang-both {
-  background-position: 0 9.375%;
-  background-size: 100%;
+  background-position: 0 26.189736%;
+  background-size: 200%;
 }
 .item-pretty.boomerang-red {
-  background-position: 0 12.5%;
-  background-size: 100%;
+  background-position: 0 28.211509%;
+  background-size: 200%;
 }
 .item-pretty.boomerang {
-  background-position: 0 15.625%;
-  background-size: 100%;
+  background-position: 0 30.233281%;
+  background-size: 200%;
 }
 .item-pretty.boots {
-  background-position: 0 18.75%;
-  background-size: 100%;
+  background-position: 0 32.255054%;
+  background-size: 200%;
 }
 .item-pretty.bottle {
-  background-position: 0 21.875%;
-  background-size: 100%;
+  background-position: 0 34.276827%;
+  background-size: 200%;
 }
 .item-pretty.bow-silverarrows {
-  background-position: 0 25%;
-  background-size: 100%;
+  background-position: 0 36.2986%;
+  background-size: 200%;
 }
 .item-pretty.bow {
-  background-position: 0 28.125%;
-  background-size: 100%;
+  background-position: 0 38.320373%;
+  background-size: 200%;
 }
 .item-pretty.byrna {
-  background-position: 0 31.25%;
-  background-size: 100%;
+  background-position: 0 40.342146%;
+  background-size: 200%;
 }
 .item-pretty.cape {
-  background-position: 0 34.375%;
-  background-size: 100%;
+  background-position: 0 42.363919%;
+  background-size: 200%;
 }
 .item-pretty.ether {
-  background-position: 0 37.5%;
-  background-size: 100%;
+  background-position: 0 44.385692%;
+  background-size: 200%;
 }
 .item-pretty.firerod {
-  background-position: 0 40.625%;
-  background-size: 100%;
+  background-position: 0 46.407465%;
+  background-size: 200%;
 }
 .item-pretty.flippers {
-  background-position: 0 43.75%;
-  background-size: 100%;
+  background-position: 0 48.429238%;
+  background-size: 200%;
 }
 .item-pretty.flute {
-  background-position: 0 46.875%;
-  background-size: 100%;
+  background-position: 0 50.451011%;
+  background-size: 200%;
 }
 .item-pretty.glove {
-  background-position: 0 50%;
-  background-size: 100%;
+  background-position: 0 52.472784%;
+  background-size: 200%;
 }
 .item-pretty.glove2 {
-  background-position: 0 53.125%;
-  background-size: 100%;
+  background-position: 0 54.494557%;
+  background-size: 200%;
 }
 .item-pretty.hammer {
-  background-position: 0 56.25%;
-  background-size: 100%;
+  background-position: 0 56.51633%;
+  background-size: 200%;
 }
 .item-pretty.hookshot {
-  background-position: 0 59.375%;
-  background-size: 100%;
+  background-position: 0 58.538103%;
+  background-size: 200%;
 }
 .item-pretty.icerod {
-  background-position: 0 62.5%;
-  background-size: 100%;
+  background-position: 0 60.559876%;
+  background-size: 200%;
 }
 .item-pretty.lantern {
-  background-position: 0 65.625%;
-  background-size: 100%;
+  background-position: 0 62.581649%;
+  background-size: 200%;
 }
 .item-pretty.mirror {
-  background-position: 0 68.75%;
-  background-size: 100%;
+  background-position: 0 64.603421%;
+  background-size: 200%;
 }
 .item-pretty.moonpearl {
-  background-position: 0 71.875%;
-  background-size: 100%;
+  background-position: 0 66.625194%;
+  background-size: 200%;
 }
 .item-pretty.mushroom {
-  background-position: 0 75%;
-  background-size: 100%;
+  background-position: 0 68.646967%;
+  background-size: 200%;
 }
 .item-pretty.mushroom-powder {
-  background-position: 0 78.125%;
-  background-size: 100%;
+  background-position: 0 70.66874%;
+  background-size: 200%;
 }
 .item-pretty.net {
-  background-position: 0 81.25%;
-  background-size: 100%;
+  background-position: 0 72.690513%;
+  background-size: 200%;
 }
 .item-pretty.powder {
-  background-position: 0 84.375%;
-  background-size: 100%;
+  background-position: 0 74.712286%;
+  background-size: 200%;
 }
 .item-pretty.quake {
-  background-position: 0 87.5%;
-  background-size: 100%;
+  background-position: 0 76.734059%;
+  background-size: 200%;
+}
+.item-pretty.shield1 {
+  background-position: 0 78.755832%;
+  background-size: 200%;
+}
+.item-pretty.shield2 {
+  background-position: 0 80.777605%;
+  background-size: 200%;
+}
+.item-pretty.shield3 {
+  background-position: 0 82.799378%;
+  background-size: 200%;
 }
 .item-pretty.shovel {
-  background-position: 0 90.625%;
-  background-size: 100%;
+  background-position: 0 84.821151%;
+  background-size: 200%;
 }
 .item-pretty.shovel-flute {
-  background-position: 0 93.75%;
-  background-size: 100%;
+  background-position: 0 86.842924%;
+  background-size: 200%;
 }
 .item-pretty.silverarrows {
-  background-position: 0 96.875%;
-  background-size: 100%;
+  background-position: 0 88.864697%;
+  background-size: 200%;
 }
 .item-pretty.somaria {
+  background-position: 0 90.88647%;
+  background-size: 200%;
+}
+.item-pretty.sword1 {
+  background-position: 0 92.908243%;
+  background-size: 200%;
+}
+.item-pretty.sword2-butter {
+  background-position: 0 94.930016%;
+  background-size: 200%;
+}
+.item-pretty.sword2-tempered {
+  background-position: 0 96.951788%;
+  background-size: 200%;
+}
+.item-pretty.sword2 {
+  background-position: 0 98.973561%;
+  background-size: 200%;
+}
+.item-pretty.none {
   background-position: 0 100%;
-  background-size: 100%;
+  background-size: 400%;
 }

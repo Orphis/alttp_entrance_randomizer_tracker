@@ -351,7 +351,7 @@ window.item_randomizer = {
         x: '31.05%',
         y: '60.63%',
         state(items) {
-          return items.has('hammer') && items.has('glove2') && items.access('dwwest')
+          return items.has('hammer') && items.has('glove', 2) && items.access('dwwest')
             ? 'available'
             : '';
         },
@@ -382,7 +382,7 @@ window.item_randomizer = {
         y: '28.96%',
         state(items) {
           return items.has('boots') &&
-          (items.has('glove2') || (items.has('mirror') && items.access('dwwest')))
+          (items.has('glove', 2) || (items.has('mirror') && items.access('dwwest')))
             ? 'available'
             : '';
         },
@@ -534,7 +534,7 @@ window.item_randomizer = {
         y: '55.88%',
         state(items) {
           return items.has('hammer') ||
-          (items.has('mirror') && items.has('glove2') && items.access('dwwest'))
+          (items.has('mirror') && items.has('glove', 2) && items.access('dwwest'))
             ? 'available'
             : '';
         },
@@ -563,8 +563,8 @@ window.item_randomizer = {
       "Witch's Hut": {
         x: '82.65%',
         y: '31.90%',
-        state() {
-          return 'available';
+        state(items) {
+          return items.has('mushroom') ? 'available' : '';
         },
       },
     },
@@ -610,7 +610,7 @@ window.item_randomizer = {
         x: '50.46%',
         y: '40.05%',
         state(items) {
-          return items.has('sword2') || items.has('cape') ? 'available' : '';
+          return items.has('sword', 2) || items.has('cape') ? 'available' : '';
         },
       },
     },
@@ -734,7 +734,7 @@ window.item_randomizer = {
         x: '80.37%',
         y: '85.07%',
         state(items) {
-          return items.has('flippers') && items.has('glove2') ? 'available' : '';
+          return items.has('flippers') && items.has('glove', 2) ? 'available' : '';
         },
       },
     },

@@ -787,7 +787,7 @@ window.caves = {
         x: '31.05%',
         y: '60.63%',
         state(items) {
-          return items.has('hammer') && items.has('glove2') && items.access('dwwest')
+          return items.has('hammer') && items.has('glove', 2) && items.access('dwwest')
             ? 'available'
             : '';
         },
@@ -818,7 +818,7 @@ window.caves = {
         y: '28.96%',
         state(items) {
           return items.has('boots') &&
-          (items.has('glove2') || (items.has('mirror') && items.access('dwwest')))
+          (items.has('glove', 2) || (items.has('mirror') && items.access('dwwest')))
             ? 'available'
             : '';
         },
@@ -997,7 +997,7 @@ window.caves = {
         y: '55.88%',
         state(items) {
           return items.has('hammer') ||
-          (items.has('mirror') && items.has('glove2') && items.access('dwwest'))
+          (items.has('mirror') && items.has('glove', 2) && items.access('dwwest'))
             ? 'available'
             : '';
         },
@@ -1297,7 +1297,7 @@ window.caves = {
         x: '50.46%',
         y: '40.05%',
         state(items) {
-          return (items.has('sword2') || items.has('cape')) && items.access('hyruletop')
+          return (items.has('sword', 2) || items.has('cape')) && items.access('hyruletop')
             ? 'available'
             : '';
         },
@@ -1521,7 +1521,7 @@ window.caves = {
         x: '80.37%',
         y: '85.07%',
         state(items) {
-          return items.has('flippers') && items.has('glove2') ? 'available' : '';
+          return items.has('flippers') && items.has('glove', 2) ? 'available' : '';
         },
       },
     },
@@ -1567,7 +1567,9 @@ window.caves = {
             items.has('ether') &&
             items.has('quake') &&
             items.has('moonpearl')
-          ) { return 'available'; }
+          ) {
+            return 'available';
+          }
 
           return items.access('dwdmne') ? 'visible' : '';
         },

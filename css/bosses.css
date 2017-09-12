@@ -6,22 +6,6 @@
   background-image: url('../img/bosses.png');
 }
 
-.bosses.agahnim {
-  background-position: 0 0%;
-  background-size: 100%;
-}
-.bosses.agahnim1-agahnim2 {
-  background-position: 0 4.43686%;
-  background-size: 100%;
-}
-.bosses.agahnim1 {
-  background-position: 0 8.87372%;
-  background-size: 100%;
-}
-.bosses.agahnim2 {
-  background-position: 0 13.31058%;
-  background-size: 100%;
-}
 .bosses.boss0 {
   background-position: 0 17.74744%;
   background-size: 100%;

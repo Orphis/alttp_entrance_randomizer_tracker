@@ -13,11 +13,115 @@ $(() => {
         showUseless: true,
         mode: 'item',
         locations: [],
-        items: {},
         mapHeight: -1,
+
+        items: State.emptyItems(),
+        dungeons: State.emptyDungeons(),
       };
       this.locationListeners = [];
       this.itemListeners = [];
+    }
+
+    static emptyItems() {
+      return {
+        bow: 0,
+        silverarrows: 0,
+        boomerang: 0,
+        'boomerang-red': 0,
+        hookshot: 0,
+        bomb: 0,
+        mushroom: 0,
+        powder: 0,
+        firerod: 0,
+        icerod: 0,
+        bombos: 0,
+        ether: 0,
+        quake: 0,
+        lantern: 0,
+        hammer: 0,
+        shovel: 0,
+        flute: 0,
+        net: 0,
+        book: 0,
+        bottle: 0,
+        somaria: 0,
+        byrna: 0,
+        cape: 0,
+        mirror: 0,
+        boots: 0,
+        glove: 0,
+        flippers: 0,
+        moonpearl: 0,
+        agahnim: 0,
+        mail: 0,
+        sword: 0,
+        shield: 0,
+      };
+    }
+
+    static emptyDungeons() {
+      return [
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 3,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 2,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 2,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 5,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 6,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 2,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 4,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 3,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 2,
+        },
+        {
+          reward: 0,
+          done: 0,
+          count: 0,
+          totalCount: 5,
+        },
+      ];
     }
 
     get mode() {
@@ -53,7 +157,8 @@ $(() => {
 
     reset() {
       const oldItems = this.state.items;
-      this.state.items = {};
+      this.state.items = State.emptyItems();
+      this.state.dungeons = State.emptyDungeons();
       for (const item of Object.keys(oldItems)) {
         this.triggerItemChanged(item);
       }
@@ -131,6 +236,10 @@ $(() => {
       this.locationListeners = [];
     }
 
+    getItemList() {
+      return Object.keys(this.state.items);
+    }
+
     getItem(item) {
       return this.state.items[item];
     }
@@ -138,6 +247,16 @@ $(() => {
     setItem(item, value) {
       this.state.items[item] = value;
       this.triggerItemChanged(item);
+      this.save();
+    }
+
+    getDungeonState(dungeonID, state) {
+      return this.state.dungeons[dungeonID][state];
+    }
+
+    setDungeonState(dungeonID, state, value) {
+      this.state.dungeons[dungeonID][state] = value;
+      this.triggerItemChanged(`dungeon${dungeonID}`);
       this.save();
     }
 
@@ -790,149 +909,50 @@ $(() => {
       };
 
       this.items = {
-        bow: {
-          values: ['none', 'silverarrows', 'bow', 'bow-silverarrows'],
-          type: 'item',
-        },
-        boomerang: {
-          values: ['none', 'boomerang', 'boomerang-red', 'boomerang-both'],
-          type: 'item',
-        },
-        hookshot: {
-          values: ['none', 'hookshot'],
-          type: 'item',
-        },
-        bomb: {
-          values: ['none', 'bomb'],
-          type: 'item',
-        },
-        'mushroom-powder': {
-          values: ['none', 'mushroom', 'powder', 'mushroom-powder'],
-          type: 'item',
-        },
-        firerod: {
-          values: ['none', 'firerod'],
-          type: 'item',
-        },
-        icerod: {
-          values: ['none', 'icerod'],
-          type: 'item',
-        },
-        bombos: {
-          values: ['none', 'bombos'],
-          type: 'item',
-        },
-        ether: {
-          values: ['none', 'ether'],
-          type: 'item',
-        },
-        quake: {
-          values: ['none', 'quake'],
-          type: 'item',
-        },
-        lantern: {
-          values: ['none', 'lantern'],
-          type: 'item',
-        },
-        hammer: {
-          values: ['none', 'hammer'],
-          type: 'item',
-        },
-        'shovel-flute': {
-          values: ['none', 'shovel', 'flute', 'shovel-flute'],
-          type: 'item',
-        },
-        net: {
-          values: ['none', 'net'],
-          type: 'item',
-        },
-        book: {
-          values: ['none', 'book'],
-          type: 'item',
-        },
-        bottle: {
-          values: ['none', 'bottle'],
-          type: 'item',
-        },
-        somaria: {
-          values: ['none', 'somaria'],
-          type: 'item',
-        },
-        byrna: {
-          values: ['none', 'byrna'],
-          type: 'item',
-        },
-        cape: {
-          values: ['none', 'cape'],
-          type: 'item',
-        },
-        mirror: {
-          values: ['none', 'mirror'],
-          type: 'item',
-        },
-        boots: {
-          values: ['none', 'boots'],
-          type: 'item',
-        },
-        glove: {
-          values: ['none', 'glove', 'glove2'],
-          type: 'item',
-        },
-        flippers: {
-          values: ['none', 'flippers'],
-          type: 'item',
-        },
-        moonpearl: {
-          values: ['none', 'moonpearl'],
-          type: 'item',
-        },
-        agahnim: {
-          values: ['none', 'agahnim1', 'agahnim2', 'agahnim1-agahnim2'],
-          type: 'bosses',
-        },
-        mail: {
-          values: ['mail', 'mail2', 'mail3'],
-          type: 'equipment',
-        },
-        sword: {
-          values: ['none', 'sword1', 'sword2', 'sword2-tempered', 'sword2-butter'],
-          type: 'equipment',
-        },
-        shield: {
-          values: ['none', 'shield1', 'shield2', 'shield3'],
-          type: 'equipment',
-        },
+        bow: ['bow', 'silverarrows', 'bow', 'bow-silverarrows'],
+        'boomerang-red': ['boomerang-both', 'boomerang', 'boomerang-red', 'boomerang-both'],
+        powder: ['mushroom-powder', 'mushroom', 'powder', 'mushroom-powder'],
+        flute: ['shovel-flute', 'shovel', 'flute', 'shovel-flute'],
+        glove: ['glove', 'glove', 'glove2'],
+        agahnim: ['agahnim', 'agahnim1', 'agahnim2', 'agahnim1-agahnim2'],
+        mail: ['mail', 'mail2', 'mail3'],
+        sword: ['none', 'sword1', 'sword2', 'sword2-tempered', 'sword2-butter'],
+        shield: ['none', 'shield1', 'shield2', 'shield3'],
       };
-      const dungeonChestCount = [3, 2, 2, 5, 6, 2, 4, 3, 2, 5];
+
+      this.ignoredItems = ['silverarrows', 'boomerang', 'shovel', 'mushroom'];
+      this.pluralItems = ['sword', 'mail', 'shield', 'glove', 'agahnim'];
+
+      this.pairedItem = {
+        bow: 'silverarrows',
+        'boomerang-red': 'boomerang',
+        powder: 'mushroom',
+        flute: 'shovel',
+      };
+      this.rewardMapping = [
+        'reward-unknown',
+        'reward-crystal',
+        'reward-crystal56',
+        'reward-pendant-green',
+        'reward-pendant-bluered',
+      ];
+
+      this.dungeonItems = {};
       for (let i = 0; i < 10; i += 1) {
-        this.items[`boss${i}`] = {
-          values: ['none', `boss${i}`],
-          type: 'bosses',
-        };
-        this.items[`boss${i}reward`] = {
-          values: [
-            'reward-unknown',
-            'reward-crystal',
-            'reward-crystal56',
-            'reward-pendant-green',
-            'reward-pendant-bluered',
-          ],
-          type: 'bosses',
-        };
-        const dungeonChests = {
-          values: [],
-          type: 'bosses',
-        };
-        for (let j = dungeonChestCount[i]; j >= 0; j -= 1) {
-          dungeonChests.values.push(`chest${j}`);
+        this.dungeonItems[`boss${i}`] = ['none', `boss${i}`];
+        this.dungeonItems[`boss${i}reward`] = [
+          'reward-unknown',
+          'reward-crystal',
+          'reward-crystal56',
+          'reward-pendant-green',
+          'reward-pendant-bluered',
+        ];
+        const dungeonChests = [];
+        for (let j = this.state.getDungeonState(i, 'totalCount'); j >= 0; j -= 1) {
+          dungeonChests.push(`chest${j}`);
         }
-        this.items[`boss${i}chest`] = dungeonChests;
+        this.dungeonItems[`boss${i}chest`] = dungeonChests;
       }
-      this.typeMapping = {
-        item: 'item-pretty',
-        bosses: 'bosses',
-        equipment: 'equipment',
-      };
 
       this.initItems();
     }
@@ -951,13 +971,16 @@ $(() => {
         }.bind(this),
       });
 
-      for (const itemName of Object.keys(this.items)) {
+      for (const itemName of this.state.getItemList()) {
+        if (this.ignoredItems.indexOf(itemName) >= 0) continue;
+
         const div = $(document.createElement('div'));
         this.ui.items[itemName] = div;
         this.ui.tracker.append(div);
 
         div.addClass('item');
-        div.addClass(this.typeMapping[this.items[itemName].type]);
+        div.addClass('item-pretty');
+        div.addClass(itemName);
         div.data('item', itemName);
         this.refreshItem(itemName);
         div.click((event) => {
@@ -967,101 +990,163 @@ $(() => {
           const clickedItemState = this.safeGetItem(clickedItemName);
           console.log(`Clicked on item: ${clickedItemName}`);
 
-          const itemStates = this.items[clickedItemName].values;
-          const newItemState =
-            itemStates[(itemStates.indexOf(clickedItemState) + 1) % itemStates.length];
-          this.state.setItem(clickedItemName, newItemState);
+          if (this.pairedItem[clickedItemName]) {
+            let pairedState = 0;
+            pairedState += clickedItemState ? 2 : 0;
+            pairedState += this.safeGetItem(this.pairedItem[clickedItemName]) ? 1 : 0;
+            pairedState = (pairedState + 1) % 4;
+
+            this.state.setItem(this.pairedItem[clickedItemName], pairedState & 1);
+            this.state.setItem(clickedItemName, pairedState & 2 ? 1 : 0);
+          } else if (this.pluralItems.indexOf(clickedItemName) >= 0) {
+            this.state.setItem(
+              clickedItemName,
+              (clickedItemState + 1) % this.items[clickedItemName].length,
+            );
+          } else {
+            let maxState = 2;
+            if (this.pluralItems[clickedItemName]) maxState = this.pluralItems[clickedItemName];
+
+            const newItemState = (clickedItemState + 1) % maxState;
+            this.state.setItem(clickedItemName, newItemState);
+          }
         });
         this.state.addOnItemChanged(
-          function itemChanged(itemTracker, event) {
+          function itemChanged(itemTracker) {
             const changedItemName = this.data('item');
-            if (event.item !== changedItemName) {
-              return;
-            }
             itemTracker.refreshItem(changedItemName);
+          }.bind(div, this),
+        );
+      }
+
+      for (const dungeonItem of Object.keys(this.dungeonItems)) {
+        const div = $(document.createElement('div'));
+        this.ui.items[dungeonItem] = div;
+        this.ui.tracker.append(div);
+
+        div.addClass('item');
+        div.addClass('bosses');
+        div.data('item', dungeonItem);
+        this.refreshDungeonItem(dungeonItem);
+        div.click((event) => {
+          event.preventDefault();
+
+          const clickedItemName = $(event.currentTarget).data('item');
+          let key;
+          if (clickedItemName.endsWith('reward')) key = 'reward';
+          else if (clickedItemName.endsWith('chest')) key = 'count';
+          else key = 'done';
+
+          const dungeonID = Number.parseInt(clickedItemName.replace('boss', ''), 10);
+
+          const clickedItemState = this.state.getDungeonState(dungeonID, key);
+          console.log(`Clicked on item: ${clickedItemName}`);
+
+          const maxState = this.dungeonItems[clickedItemName].length;
+
+          const newItemState = (clickedItemState + 1) % maxState;
+          this.state.setDungeonState(dungeonID, key, newItemState);
+        });
+        this.state.addOnItemChanged(
+          function itemChanged(itemTracker) {
+            const changedItemName = this.data('item');
+            itemTracker.refreshDungeonItem(changedItemName);
           }.bind(div, this),
         );
       }
     }
 
     safeGetItem(item) {
-      let value = this.state.getItem(item);
-      if (!value) {
-        value = this.items[item].values[0];
-        this.state.setItem(item, value);
-      }
+      const value = this.state.getItem(item);
       return value;
     }
 
-    refreshItem(item) {
+    refreshDungeonItem(item) {
       const div = this.ui.items[item];
-      const itemState = this.safeGetItem(item);
 
-      for (const value of this.items[item].values) {
+      const dungeonID = Number.parseInt(item.replace('boss', ''), 10);
+      let key;
+      if (item.endsWith('reward')) key = 'reward';
+      else if (item.endsWith('chest')) key = 'count';
+      else key = 'done';
+
+      const itemState = this.dungeonItems[item][this.state.getDungeonState(dungeonID, key)];
+
+      for (const value of this.dungeonItems[item]) {
         div.removeClass(value);
       }
-      div.removeClass(item);
+      div.removeClass('item_missing');
+      div.addClass(item);
 
       if (item.endsWith('reward') || item.endsWith('chest')) {
         div.addClass(item);
         div.addClass(itemState);
       } else if (itemState === 'none') {
-        div.addClass('item_missing');
         div.addClass(item);
+        div.addClass('item_missing');
       } else {
-        div.removeClass('item_missing');
         div.addClass(itemState);
       }
     }
 
-    has(item) {
+    refreshItem(item) {
+      const div = this.ui.items[item];
+      let itemState = this.safeGetItem(item);
+
+      div.removeClass('item_missing');
+
+      if (this.pairedItem[item]) {
+        for (const classState of this.items[item]) div.removeClass(classState);
+
+        let pairedState = 0;
+        pairedState += itemState ? 2 : 0;
+        pairedState += this.safeGetItem(this.pairedItem[item]) ? 1 : 0;
+        itemState = pairedState;
+
+        div.addClass(this.items[item][pairedState]);
+      } else if (this.pluralItems.indexOf(item) >= 0) {
+        for (const classState of this.items[item]) div.removeClass(classState);
+        div.addClass(this.items[item][itemState]);
+      }
+      if (itemState === 0 && item !== 'mail') {
+        div.addClass('item_missing');
+      }
+    }
+
+    has(item, value = 1) {
       let itemSlot;
       let count = 0;
 
       switch (item) {
-        case 'mushroom':
-        case 'powder':
-          itemSlot = 'mushroom-powder';
-          break;
-        case 'shovel':
-        case 'flute':
-          itemSlot = 'shovel-flute';
-          break;
-        case 'glove2':
-          itemSlot = 'glove';
-          break;
-        case 'sword2':
-          itemSlot = 'sword';
-          break;
         case 'agahnim1':
         case 'agahnim2':
           itemSlot = 'agahnim';
           break;
         case 'crystal56':
           for (let i = 0; i < 10; i += 1) {
-            const dungeonReward = this.safeGetItem(`boss${i}reward`);
-            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            const dungeonReward = this.rewardMapping[this.state.getDungeonState(i, 'reward')];
+            const dungeonCompleted = this.state.getDungeonState(i, 'done');
             if (dungeonReward === 'reward-crystal56' && dungeonCompleted) count += 1;
           }
           return count >= 2;
         case 'crystal-all':
           for (let i = 0; i < 10; i += 1) {
-            const dungeonReward = this.safeGetItem(`boss${i}reward`);
-            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            const dungeonReward = this.rewardMapping[this.state.getDungeonState(i, 'reward')];
+            const dungeonCompleted = this.state.getDungeonState(i, 'done');
             if (dungeonReward.startsWith('reward-crystal') && dungeonCompleted) count += 1;
           }
           return count >= 7;
         case 'pendant-green':
           for (let i = 0; i < 10; i += 1) {
-            const dungeonReward = this.safeGetItem(`boss${i}reward`);
-            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            const dungeonReward = this.rewardMapping[this.state.getDungeonState(i, 'reward')];
+            const dungeonCompleted = this.state.getDungeonState(i, 'done');
             if (dungeonReward === 'reward-pendant-green' && dungeonCompleted) count += 1;
           }
           return count >= 1;
         case 'pendant-all':
           for (let i = 0; i < 10; i += 1) {
-            const dungeonReward = this.safeGetItem(`boss${i}reward`);
-            const dungeonCompleted = this.safeGetItem(`boss${i}`) !== 'none';
+            const dungeonReward = this.rewardMapping[this.state.getDungeonState(i, 'reward')];
+            const dungeonCompleted = this.state.getDungeonState(i, 'done');
             if (dungeonReward.startsWith('reward-pendant') && dungeonCompleted) count += 1;
           }
           return count >= 3;
@@ -1069,7 +1154,7 @@ $(() => {
           itemSlot = item;
       }
 
-      return this.safeGetItem(itemSlot).indexOf(item) !== -1;
+      return this.safeGetItem(itemSlot) >= value;
     }
 
     access(zone, zones) {
@@ -1123,7 +1208,7 @@ $(() => {
         case 'dwwest':
           return (
             (this.has('moonpearl') &&
-              (this.has('glove2') || (this.has('glove') && this.has('hammer')))) ||
+              (this.has('glove', 2) || (this.has('glove') && this.has('hammer')))) ||
             (this.has('hookshot') && this.access('dwne', allZones))
           );
         case 'dwsouth':
@@ -1134,14 +1219,14 @@ $(() => {
               this.access('dwwest', allZones))
           );
         case 'dwdmeast':
-          return this.has('glove2') && this.access('dmeast', allZones);
+          return this.has('glove', 2) && this.access('dmeast', allZones);
         case 'dwdmne':
           return (
-            (this.has('glove2') && this.has('hammer') && this.access('dwne', allZones)) ||
+            (this.has('glove', 2) && this.has('hammer') && this.access('dwne', allZones)) ||
             (this.state.mode === 'item' && this.access('dwdmeast', allZones))
           );
         case 'mire':
-          return this.has('glove2') && this.has('flute');
+          return this.has('glove', 2) && this.has('flute');
         case 'dwbumpexit':
           return this.state.mode === 'item' && this.has('cape') && this.access('dwwest', allZones);
         case 'dwdmisland':

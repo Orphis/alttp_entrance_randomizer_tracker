@@ -34,7 +34,7 @@ window.overworldLocations = {
     x: '42.47%',
     y: '2.04%',
     state(items) {
-      return items.has('book') && items.has('sword2') && items.access('dmnw') ? 'available' : '';
+      return items.has('book') && items.has('sword', 2) && items.access('dmnw') ? 'available' : '';
     },
   },
   'Floating Island': {
@@ -105,7 +105,7 @@ window.overworldLocations = {
     state(items) {
       return items.has('mirror') &&
       items.has('book') &&
-      items.has('sword2') &&
+      items.has('sword', 2) &&
       items.access('dwsouth')
         ? 'available'
         : '';
@@ -175,7 +175,7 @@ window.overworldLocations = {
     x: '29.91%',
     y: '53.17%',
     state(items) {
-      return items.has('glove2') && items.access('dwwest') ? 'available' : '';
+      return items.has('glove', 2) && items.access('dwwest') ? 'available' : '';
     },
   },
   'Blacksmith frog': {
@@ -184,7 +184,7 @@ window.overworldLocations = {
     x: '13.50%',
     y: '66.97%',
     state(items) {
-      return items.has('glove2') && items.access('dwwest') ? 'available' : '';
+      return items.has('glove', 2) && items.access('dwwest') ? 'available' : '';
     },
   },
   'Haunted Grove': {

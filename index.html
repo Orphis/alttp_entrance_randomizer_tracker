@@ -16,6 +16,8 @@
   <!-- DataTables -->
   <link rel="stylesheet" type="text/css" href="libs/datatables/1.10.15/datatables.min.css">
   <script type="text/javascript" charset="utf-8" src="libs/datatables/1.10.15/datatables.min.js"></script>
+  <!-- TMI -->
+  <script src="http://cdn.tmijs.org/js/latest/1.x/tmi.min.js"></script>
   <!-- Own -->
   <link rel="stylesheet" href="css/styles.css?v=1.0">
   <link rel="stylesheet" href="css/item_pretty.css">
@@ -82,6 +84,21 @@ ga('send', 'pageview');
                     <input type="radio" name="randomizer_type" id="randomizer_type_entrance" value="entrance">Entrance
                   </label>
                 </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="twitch_user" class="col-sm-3 col-sm-offset-3 control-label">Twitch integration</label>
+            </div>
+            <div class="form-group">
+              <label for="twitch_user" class="col-sm-3 control-label">Twitch user</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="twitch_user">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="twitch_password" class="col-sm-3 control-label">Twitch password</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="twitch_password">
               </div>
             </div>
           </form>

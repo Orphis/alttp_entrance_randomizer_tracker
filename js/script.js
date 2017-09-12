@@ -15,6 +15,11 @@ $(() => {
         locations: [],
         mapHeight: -1,
 
+        twitch: {
+          user: '',
+          password: '',
+        },
+
         items: State.emptyItems(),
         dungeons: State.emptyDungeons(),
       };
@@ -130,6 +135,15 @@ $(() => {
 
     set mode(value) {
       this.state.mode = value;
+      this.save();
+    }
+
+    get twitch() {
+      return this.state.twitch;
+    }
+
+    set twitch(value) {
+      this.state.twitch = value;
       this.save();
     }
 
@@ -300,6 +314,8 @@ $(() => {
         saveOptionsButton: $('#save_options'),
         closeOptionsButton: $('#close_options'),
         optionModal: $('#option_modal'),
+        twitchUser: $('#twitch_user'),
+        twitchPassword: $('#twitch_password'),
 
         tableContainer: $('#table_container'),
         tableLocations: $('#locations_table'),
@@ -382,12 +398,20 @@ $(() => {
 
       this.ui.saveOptionsButton.click(() => {
         const randomizerType = $('#option_modal input[name=randomizer_type]:checked');
-        console.log(`Randomizer type:${randomizerType.val()}`);
 
         if (this.state.mode !== randomizerType.val()) {
           this.state.mode = randomizerType.val();
           this.state.reset();
           this.setupTracker();
+        }
+        if (
+          this.state.twitch.user !== this.ui.twitchUser.val() ||
+          this.state.twitch.password !== this.ui.twitchPassword.val()
+        ) {
+          this.state.twitch = {
+            user: this.ui.twitchUser.val(),
+            password: this.ui.twitchPassword.val(),
+          };
         }
       });
 
@@ -400,6 +424,8 @@ $(() => {
         );
         newRandomizerTypeButton.prop('checked', true);
         newRandomizerTypeButton.parent().addClass('active');
+        this.ui.twitchUser.val(this.state.twitch.user);
+        this.ui.twitchPassword.val(this.state.twitch.password);
       });
     }
 
@@ -1262,4 +1288,58 @@ $(() => {
   const locationTracker = new LocationTracker(state, itemTracker);
 
   window.trackers = { itemTracker, locationTracker };
+
+  const options = {
+    options: {
+      debug: true,
+    },
+    connection: {
+      reconnect: true,
+    },
+    identity: {
+      username: state.twitch.user,
+      password: state.twitch.password,
+    },
+    channels: [`#${state.twitch.user}`],
+  };
+
+  // eslint-disable-next-line no-undef, new-cap
+  const client = new tmi.client(options);
+  client.on('message', (channel, userstate, message) => {
+    const tokens = message
+      .split(' ')
+      .map(s => s.trim().toLowerCase())
+      .filter(s => s !== '');
+
+    if (tokens[0] !== '!tracker') return;
+
+    const item = tokens[1];
+    let itemValue;
+
+    if (state.getItemList().indexOf(item) < 0) {
+      console.log(`Ignoring tracker command for invalid item '${item}'`);
+      return;
+    }
+
+    switch (tokens[2]) {
+      case undefined:
+      case 'on':
+        itemValue = 1;
+        break;
+      case 'off':
+        itemValue = 0;
+        break;
+      default:
+        itemValue = tokens[2] ? Number.parseInt(tokens[2], 10) : 1;
+    }
+
+    const specialItems = { glove: 2, sword: 4, mail: 2, shield: 3, agahnim: 3 };
+    if (specialItems[item]) {
+      itemValue = Math.min(itemValue, specialItems[item]);
+    }
+    itemValue = Math.max(0, itemValue);
+
+    state.setItem(item, itemValue);
+  });
+  client.connect();
 });

@@ -1,4 +1,4 @@
-window.item_randomizer = {
+const itemCaves = {
   'Death Mountain Hype Cave': {
     count: 7,
     region: 'Death Mountain',
@@ -808,3 +808,5 @@ window.item_randomizer = {
     },
   },
 };
+
+export default itemCaves;

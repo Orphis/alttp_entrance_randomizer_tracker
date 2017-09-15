@@ -1,4 +1,4 @@
-window.caves = {
+const fullCaves = {
   Useless: {
     count: 0,
     entrance: {
@@ -1642,3 +1642,5 @@ window.caves = {
     },
   },
 };
+
+export default fullCaves;

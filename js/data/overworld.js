@@ -1,4 +1,4 @@
-window.overworldLocations = {
+const overworldItems = {
   Pedestal: {
     region: 'Lost Woods',
     tag: 'lw',
@@ -225,3 +225,5 @@ window.overworldLocations = {
     },
   },
 };
+
+export default overworldItems;

@@ -145,6 +145,7 @@ class LocationTracker {
   }
 
   initTables() {
+    this.ui.tableLocations.addClass('table table-striped table-condensed table-hover');
     this.ui.tableLocations.on('click', 'a.editor_remove', (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -174,10 +175,11 @@ class LocationTracker {
       paging: false,
       info: false,
       columns: [
-        { data: 'door' },
-        { data: 'cave' },
-        { data: 'exit' },
+        { title: 'Door name', data: 'door' },
+        { title: 'Cave name', data: 'cave' },
+        { title: 'Exit name', data: 'exit' },
         {
+          title: 'Added time',
           data: 'time',
           render(data) {
             return new Date(data).toLocaleTimeString();
@@ -211,6 +213,7 @@ class LocationTracker {
       .container()
       .appendTo('#locations_table_wrapper .col-sm-6:eq(0)');
 
+    this.ui.tableUnvisitedLocations.addClass('table table-striped table-condensed table-hover');
     this.ui.tableUnvisitedLocations.on('click', 'a.editor_useless', (event) => {
       event.preventDefault();
       const tr = $(event.target).closest('tr')[0];
@@ -222,9 +225,10 @@ class LocationTracker {
       paging: false,
       info: false,
       columns: [
-        { data: 'name' },
-        { data: 'region' },
+        { title: 'Unvisited Doors', data: 'name' },
+        { title: 'Region', data: 'region' },
         {
+          title: '',
           data: null,
           orderable: false,
           className: 'center',
@@ -238,10 +242,12 @@ class LocationTracker {
         },
       ],
     });
+
+    this.ui.tableUnvisitedCaves.addClass('table table-striped table-condensed table-hover');
     this.ui.tableUnvisitedCavesDT = this.ui.tableUnvisitedCaves.DataTable({
       paging: false,
       info: false,
-      columns: [{ data: 'name' }, { data: 'count' }],
+      columns: [{ title: 'Unvisited Caves', data: 'name' }, { title: 'Item count', data: 'count' }],
     });
   }
 

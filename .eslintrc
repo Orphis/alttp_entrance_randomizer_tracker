@@ -6,11 +6,23 @@
     "jquery": true,
   },
 
-  rules:{
+  plugins: [
+    "react",
+  ],
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+
+  "rules": {
     "linebreak-style": 0,
     "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"],
     "no-console": "off",
     "no-continue": "off",
-    "no-bitwise": "off"
+    "no-bitwise": "off",
+    "class-methods-use-this": "off",
+    "react/jsx-uses-vars": 1,
   }
 }

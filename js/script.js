@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap';
 import tmi from 'tmi.js';
 
 import State from './State';
-import LocationTracker from './LocationTracker';
+import LocationTracker from './LocationTracker.jsx';
 import ItemTracker from './ItemTracker';
 
 const state = new State();

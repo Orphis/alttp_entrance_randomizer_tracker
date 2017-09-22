@@ -5,10 +5,13 @@ import 'datatables.net-bs/css/dataTables.bootstrap.css';
 import 'datatables.net';
 import 'datatables.net-bs';
 import 'datatables.net-buttons-bs';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import overworldItems from './data/overworld';
 import entranceCaves from './data/entrance';
 import itemCaves from './data/item';
+import Table from './components/Table.jsx';
 
 const setDifference = function setDifference(A, B) {
   const difference = new Set(A);
@@ -243,12 +246,22 @@ class LocationTracker {
       ],
     });
 
+    /* ReactDOM.render(
+      <Table
+        columns={[
+          { title: 'Unvisited Caves', data: 'name' },
+          { title: 'Item count', data: 'count' },
+        ]}
+      />,
+      document.getElementById('unvisited_caves_div'),
+    ); */
+    /*
     this.ui.tableUnvisitedCaves.addClass('table table-striped table-condensed table-hover');
     this.ui.tableUnvisitedCavesDT = this.ui.tableUnvisitedCaves.DataTable({
       paging: false,
       info: false,
       columns: [{ title: 'Unvisited Caves', data: 'name' }, { title: 'Item count', data: 'count' }],
-    });
+    }); */
   }
 
   annotateLocation(locationName) {
@@ -571,12 +584,13 @@ class LocationTracker {
         count: this.caves[item].count,
       });
     }
+    /*
     this.ui.tableUnvisitedCavesDT.clear();
     this.ui.tableUnvisitedCavesDT.rows.add(unvisitedCavesArray);
     this.ui.tableUnvisitedCavesDT
       .rows()
       .invalidate()
-      .draw();
+      .draw(); */
   }
 
   static createSVGRect(className) {

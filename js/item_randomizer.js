@@ -689,7 +689,7 @@ window.item_randomizer = {
         x: '47.26%',
         y: '93.67%',
         state(items) {
-          return items.access('dwsouth') ? 'available' : '';
+          return items.access('dwsouth') && items.has('mirror') && items.has('flippers') ? 'available' : '';
         },
       },
     },

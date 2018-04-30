@@ -564,7 +564,7 @@ window.item_randomizer = {
         x: '82.65%',
         y: '31.90%',
         state() {
-          return 'available';
+          return items.has('mushroom') ? 'available' : '';
         },
       },
     },

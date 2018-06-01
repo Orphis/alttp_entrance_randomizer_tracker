@@ -563,7 +563,7 @@ window.item_randomizer = {
       "Witch's Hut": {
         x: '82.65%',
         y: '31.90%',
-        state() {
+        state(items) {
           return items.has('mushroom') ? 'available' : '';
         },
       },

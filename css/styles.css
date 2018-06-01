@@ -400,6 +400,12 @@ footer {
   --item-scale-x: 0.5;
   --item-scale-y: 0.5;
 }
+.boss8medallion {
+  --item-x: 5.5;
+  --item-y: 5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
+}
 .boss8chest {
   --item-x: 5;
   --item-y: 6;
@@ -407,6 +413,12 @@ footer {
 .boss9 {
   --item-x: 6;
   --item-y: 5;
+}
+.boss9medallion {
+  --item-x: 6.5;
+  --item-y: 5;
+  --item-scale-x: 0.5;
+  --item-scale-y: 0.5;
 }
 .boss9reward {
   --item-x: 6.5;

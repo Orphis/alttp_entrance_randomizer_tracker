@@ -750,11 +750,7 @@ window.item_randomizer = {
         y: '81.22%',
         state(items) {
           if (!items.access('mire')) return '';
-          return items.has('sword') &&
-          items.has('bombos') &&
-          items.has('ether') &&
-          items.has('quake') &&
-          items.has('moonpearl')
+          return items.access('miredungeon') && (items.has('hookshot') || items.has('boots'))
             ? 'available'
             : 'visible';
         },

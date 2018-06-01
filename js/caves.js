@@ -1537,11 +1537,7 @@ window.caves = {
         y: '81.22%',
         state(items) {
           if (!items.access('mire')) return '';
-          return items.has('sword') &&
-          items.has('bombos') &&
-          items.has('ether') &&
-          items.has('quake') &&
-          items.has('moonpearl')
+          return items.access('miredungeon')
             ? 'available'
             : 'visible';
         },
@@ -1558,15 +1554,8 @@ window.caves = {
         x: '93.86%',
         y: '7.47%',
         state(items) {
-          if (!items.access('dmne')) return '';
-
           if (
-            items.has('sword') &&
-            items.has('hammer') &&
-            items.has('bombos') &&
-            items.has('ether') &&
-            items.has('quake') &&
-            items.has('moonpearl')
+            items.access('turtlerock')
           ) { return 'available'; }
 
           return items.access('dwdmne') ? 'visible' : '';

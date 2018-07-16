@@ -919,6 +919,18 @@ $(() => {
           ],
           type: 'bosses',
         };
+	if (i == 8 || i == 9)
+	{
+          this.items[`boss${i}medallion`] = {
+            values: [
+              'medallion-unknown',
+              'medallion-bombos',
+              'medallion-ether',
+              'medallion-quake',
+            ],
+            type: 'bosses',
+          };
+        }
         const dungeonChests = {
           values: [],
           type: 'bosses',
@@ -1002,7 +1014,7 @@ $(() => {
       }
       div.removeClass(item);
 
-      if (item.endsWith('reward') || item.endsWith('chest')) {
+      if (item.endsWith('reward') || item.endsWith('chest') || item.endsWith('medallion')) {
         div.addClass(item);
         div.addClass(itemState);
       } else if (itemState === 'none') {
@@ -1142,6 +1154,19 @@ $(() => {
           );
         case 'mire':
           return this.has('glove2') && this.has('flute');
+        case 'miredungeon':
+          const needed_medallion8 = this.safeGetItem('boss8medallion').substring(10);
+          return (
+            this.access('mire', allZones) &&
+            this.has('sword') &&
+            (
+              needed_medallion8 != 'unknown' && this.has(needed_medallion8) ||
+              this.has('bombos') &&
+              this.has('ether') &&
+              this.has('quake')
+            ) &&
+            this.has('moonpearl')
+          );
         case 'dwbumpexit':
           return this.state.mode === 'item' && this.has('cape') && this.access('dwwest', allZones);
         case 'dwdmisland':
@@ -1152,13 +1177,17 @@ $(() => {
             this.access('dwdmne')
           );
         case 'turtlerock':
+          const needed_medallion9 = this.safeGetItem('boss9medallion').substring(10);
           return (
-            this.access('dmne', allZones) &&
+            this.access('dwdmne', allZones) &&
             this.has('hammer') &&
             this.has('sword') &&
-            this.has('bombos') &&
-            this.has('ether') &&
-            this.has('quake') &&
+            (
+              needed_medallion9 != 'unknown' && this.has(needed_medallion9) ||
+              this.has('bombos') &&
+              this.has('ether') &&
+              this.has('quake')
+            ) &&
             this.has('moonpearl')
           );
         case 'dwdmledge':
